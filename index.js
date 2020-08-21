@@ -24,6 +24,10 @@ resultsDiv.style.display = "none";
 // resultsHeader.style.display = "none";
 errorHeader.style.display = "none";
 
+let URL = "";
+let searchType = "";
+let currentPage = 0;
+let lastPage = 0;
 
 // Get the results after the search
 function getResults(e){
@@ -39,17 +43,21 @@ function getResults(e){
   // moreDiv.style.display = "none";
   // moreLink.style.display = "none";
 
-  let URL = "";
+  currentPage = 0;
+  lastPage = 0;
 
   switch (e.srcElement.id) {
     case "btnCharacters":
       URL = charactersURL;
+      searchType = "characters";
         break;
     case "btnLocations":
       URL = locationsURL;
+      searchType = "locations";
         break;
     case "btnEpisodes":
       URL = episodesURL;
+      searchType = "episodes";
         break;
     default:
       URL = baseURL;
@@ -99,6 +107,15 @@ function displayCharacters(jsonData){
     resultsDiv.style.display = 'flex';
     // moreDiv.style.display = 'flex';
     // moreLink.style.display = 'flex';
+
+    currentPage++;
+    lastPage = jsonData.info.pages;
+    // console.log("current", currentPage, "last", lastPage);
+
+    if (currentPage > 1) {
+      let moreRowDiv = document.getElementById("moreRowDiv");
+      moreRowDiv.parentNode.removeChild(moreRowDiv);
+    };
 
     let resultsContainerDiv = document.createElement("div");
     resultsContainerDiv.className = "container";
@@ -155,7 +172,39 @@ function displayCharacters(jsonData){
           resultsRowDiv.appendChild(cardDiv);
     };
 
+    let moreA = document.createElement("a");
+    moreA.href = "#";
+    // moreA.innerText =  "more " + txtSearch.value + " wallpapers";
+    moreA.innerText =  "more";
+    moreA.className = "colorBlackLink";
+    // moreA.style = "text-align: right;";
+    moreA.addEventListener('click', getMoreResults); 
+  
+  
+    let moreRowDiv = document.createElement("div");
+    moreRowDiv.className = "row justify-content-end p-4"; // "row clearfix";
+    moreRowDiv.id = "moreRowDiv";
+  
+    // let moreColOneDiv = document.createElement("div");
+    // moreColOneDiv.className = "col-md-11";
+  
+    let moreColTwoDiv = document.createElement("div");
+    // moreColTwoDiv.className = "col-md-4";
+    moreColTwoDiv.className = "col-md-auto text-right";
+  
+    moreColTwoDiv.appendChild(moreA);
+  
+    // moreRowDiv.appendChild(moreColOneDiv);
+    moreRowDiv.appendChild(moreColTwoDiv);
+    //resultsDiv.appendChild(moreRowDiv);
+  
     resultsContainerDiv.appendChild(resultsRowDiv);
+    resultsContainerDiv.appendChild(moreRowDiv);
+  
+    if (currentPage >= lastPage) {
+      resultsContainerDiv.removeChild(moreRowDiv)
+    };
+
     resultsDiv.appendChild(resultsContainerDiv);
 
   };
@@ -173,6 +222,15 @@ function displayLocations(jsonData){
     resultsDiv.style.display = 'flex';
     // moreDiv.style.display = 'flex';
     // moreLink.style.display = 'flex';
+
+    currentPage++;
+    lastPage = jsonData.info.pages;
+    // console.log("current", currentPage, "last", lastPage);
+
+    if (currentPage > 1) {
+      let moreRowDiv = document.getElementById("moreRowDiv");
+      moreRowDiv.parentNode.removeChild(moreRowDiv);
+    };
 
     let resultsContainerDiv = document.createElement("div");
     resultsContainerDiv.className = "container";
@@ -231,7 +289,39 @@ function displayLocations(jsonData){
           resultsRowDiv.appendChild(cardDiv);
     };
 
+    let moreA = document.createElement("a");
+    moreA.href = "#";
+    // moreA.innerText =  "more " + txtSearch.value + " wallpapers";
+    moreA.innerText =  "more";
+    moreA.className = "colorBlackLink";
+    // moreA.style = "text-align: right;";
+    moreA.addEventListener('click', getMoreResults); 
+  
+  
+    let moreRowDiv = document.createElement("div");
+    moreRowDiv.className = "row justify-content-end p-4"; // "row clearfix";
+    moreRowDiv.id = "moreRowDiv";
+  
+    // let moreColOneDiv = document.createElement("div");
+    // moreColOneDiv.className = "col-md-11";
+  
+    let moreColTwoDiv = document.createElement("div");
+    // moreColTwoDiv.className = "col-md-4";
+    moreColTwoDiv.className = "col-md-auto text-right";
+  
+    moreColTwoDiv.appendChild(moreA);
+  
+    // moreRowDiv.appendChild(moreColOneDiv);
+    moreRowDiv.appendChild(moreColTwoDiv);
+    //resultsDiv.appendChild(moreRowDiv);
+  
     resultsContainerDiv.appendChild(resultsRowDiv);
+    resultsContainerDiv.appendChild(moreRowDiv);
+  
+    if (currentPage >= lastPage) {
+      resultsContainerDiv.removeChild(moreRowDiv)
+    };
+
     resultsDiv.appendChild(resultsContainerDiv);
 
   };
@@ -249,6 +339,15 @@ function displayEpisodes(jsonData){
     resultsDiv.style.display = 'flex';
     // moreDiv.style.display = 'flex';
     // moreLink.style.display = 'flex';
+
+    currentPage++;
+    lastPage = jsonData.info.pages;
+    // console.log("current", currentPage, "last", lastPage);
+
+    if (currentPage > 1) {
+      let moreRowDiv = document.getElementById("moreRowDiv");
+      moreRowDiv.parentNode.removeChild(moreRowDiv);
+    };
 
     let resultsContainerDiv = document.createElement("div");
     resultsContainerDiv.className = "container";
@@ -307,9 +406,82 @@ function displayEpisodes(jsonData){
       resultsRowDiv.appendChild(cardDiv);
 };
 
-    resultsContainerDiv.appendChild(resultsRowDiv);
+  let moreA = document.createElement("a");
+  moreA.href = "#";
+  // moreA.innerText =  "more " + txtSearch.value + " wallpapers";
+  moreA.innerText =  "more";
+  moreA.className = "colorBlackLink";
+  // moreA.style = "text-align: right;";
+  moreA.addEventListener('click', getMoreResults); 
+
+
+  let moreRowDiv = document.createElement("div");
+  moreRowDiv.className = "row justify-content-end p-4"; // "row clearfix";
+  moreRowDiv.id = "moreRowDiv";
+
+  // let moreColOneDiv = document.createElement("div");
+  // moreColOneDiv.className = "col-md-11";
+
+  let moreColTwoDiv = document.createElement("div");
+  // moreColTwoDiv.className = "col-md-4";
+  moreColTwoDiv.className = "col-md-auto text-right";
+
+  moreColTwoDiv.appendChild(moreA);
+
+  // moreRowDiv.appendChild(moreColOneDiv);
+  moreRowDiv.appendChild(moreColTwoDiv);
+  //resultsDiv.appendChild(moreRowDiv);
+
+  resultsContainerDiv.appendChild(resultsRowDiv);
+  resultsContainerDiv.appendChild(moreRowDiv);
+
+  if (currentPage >= lastPage) {
+    resultsContainerDiv.removeChild(moreRowDiv)
+  };
+
     resultsDiv.appendChild(resultsContainerDiv);
 
   };
 
+};
+
+
+function getMoreResults(e){
+  e.preventDefault();
+
+  nextPage = currentPage + 1;
+  // Search Pagination
+  URL = URL + "?page=" + nextPage;
+
+  console.log(URL);
+
+  fetch(URL)
+  .then(result => {
+      // console.log(result);
+      return result.json();
+  })
+  .then(jsonData => {
+      // console.log(jsonData);
+
+      switch (searchType) {
+        case "characters":
+            displayCharacters(jsonData);
+            break;
+        case "locations":
+            displayLocations(jsonData);
+            break;
+        case "episodes":
+            displayEpisodes(jsonData);
+            break;
+        default:
+          // URL = baseURL;
+      };
+
+  })
+  .catch(err => {
+      console.log(err)
+      errorHeader.innerText = err;
+      errorHeader.style.display = 'flex';
+  });
+  
 };
