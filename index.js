@@ -449,11 +449,21 @@ function displayEpisodes(jsonData){
 function getMoreResults(e){
   e.preventDefault();
 
+  // Removes ?page=# to the URL
+  if (URL.includes("?page=")) {
+    URL = URL.slice(0, -7)
+    // console.log(URL);
+  }
+
   nextPage = currentPage + 1;
   // Search Pagination
   URL = URL + "?page=" + nextPage;
 
+  // Keeps adding ?page= to the URL
+  // Fixed
   console.log(URL);
+
+ 
 
   fetch(URL)
   .then(result => {
