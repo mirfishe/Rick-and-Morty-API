@@ -448,6 +448,7 @@ function displayEpisodes(jsonData){
 
 function getMoreResults(e){
   e.preventDefault();
+  // console.log(e);
 
   // Removes ?page=# to the URL
   if (URL.includes("?page=")) {
