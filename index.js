@@ -12,7 +12,7 @@ btnCharacters.addEventListener('click', getResults);
 btnLocations.addEventListener('click', getResults); 
 btnEpisodes.addEventListener('click', getResults);
 
-const txtSearchCharacters = document.getElementById("txtSearchCharacters");
+const txtSearchName = document.getElementById("txtSearchName");
 const ddSearchStatus = document.getElementById("ddSearchStatus");
 const txtSearchSpecies = document.getElementById("txtSearchSpecies");
 const txtSearchType = document.getElementById("txtSearchType");
@@ -130,8 +130,8 @@ function searchCharacters(e){
   searchType = "characters";
 
 
-  if (txtSearchCharacters.value.length > 0) {
-    searchString += "&name=" + txtSearchCharacters.value.replace(' ', '%20');
+  if (txtSearchName.value.length > 0) {
+    searchString += "&name=" + txtSearchName.value.replace(' ', '%20');
   };
 
   if (ddSearchStatus.value !== "") {
