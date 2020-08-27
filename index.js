@@ -188,6 +188,10 @@ function displayCharacters(jsonData){
           let episodeArray = results[i].episode;
           let episodeP = document.createElement("p");
           episodeP.innerHTML = "Episode(s): ";
+
+          let episodeLink = document.createElement("a");
+          let episodeList = "";
+
           for (let j = 0; j < episodeArray.length; j++) {
             // episodeP.innerHTML += episodeArray[j];
             let urlLink = document.createElement("a");
@@ -201,11 +205,23 @@ function displayCharacters(jsonData){
               urlLink.innerHTML += ", ";
             };
 
+            episodeList += episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1);
+            if (j < episodeArray.length - 1) {
+              episodeList += ",";
+            };
+        
             episodeP.appendChild(urlLink);
             // if (j < episodeArray.length - 1) {
             //   episodeP.innerHTML += ", ";
             // };
           };
+
+          episodeLink.href = episodesURL + episodeList;
+          episodeLink.alt = episodesURL + episodeList;
+          episodeLink.innerHTML = episodesURL + episodeList;
+          // episodeLink.target = "_blank";
+          episodeLink.addEventListener('click', getMultipleEpisodes);
+
 
           cardBodyDiv.appendChild(nameP);
           cardBodyDiv.appendChild(nameLink);
@@ -217,6 +233,7 @@ function displayCharacters(jsonData){
           cardBodyDiv.appendChild(originP);
 
           cardBodyDiv.appendChild(episodeP);
+          cardBodyDiv.appendChild(episodeLink);
 
           cardDiv.appendChild(resultImg);
           cardDiv.appendChild(cardBodyDiv);
@@ -318,13 +335,8 @@ function displayLocations(jsonData){
           let residentsP = document.createElement("p");
           residentsP.innerHTML = "Resident(s): ";
 
-          // Create /character/[1,2,3] code here
           let residentsLink = document.createElement("a");
-          // residentsLink.href = residentsArray[j];
-          // residentsLink.alt = residentsArray[j];
-          // residentsLink.innerHTML = residentsArray[j];
-          // // residentsLink.target = "_blank";
-          // residentsLink.addEventListener('click', loadDetailsModal);
+          let residentList = "";
 
           for (let j = 0; j < residentsArray.length; j++) {
             // residentsP.innerHTML += residentsArray[j];
@@ -339,11 +351,23 @@ function displayLocations(jsonData){
               urlLink.innerHTML += ", ";
             };
 
+            residentList += residentsArray[j].substr(residentsArray[j].lastIndexOf('/') + 1);
+            if (j < residentsArray.length - 1) {
+              residentList += ",";
+            };
+
             residentsP.appendChild(urlLink);
             // if (j < residentsArray.length - 1) {
             //   residentsP.innerHTML += ", ";
             // };
           };
+
+          residentsLink.href = charactersURL + residentList;
+          residentsLink.alt = charactersURL + residentList;
+          residentsLink.innerHTML = charactersURL + residentList;
+          // residentsLink.target = "_blank";
+          residentsLink.addEventListener('click', getMultipleCharacters);
+
 
           cardBodyDiv.appendChild(nameP);
           cardBodyDiv.appendChild(nameLink);
@@ -451,6 +475,10 @@ function displayEpisodes(jsonData){
       let charactersArray = results[i].characters;
       let charactersP = document.createElement("p");
       charactersP.innerHTML = "Character(s): ";
+
+      let charactersLink = document.createElement("a");
+      let charactersList = "";
+
       for (let j = 0; j < charactersArray.length; j++) {
         // charactersP.innerHTML += charactersArray[j];
         let urlLink = document.createElement("a");
@@ -464,18 +492,30 @@ function displayEpisodes(jsonData){
           urlLink.innerHTML += ", ";
         };
 
+        charactersList += charactersArray[j].substr(charactersArray[j].lastIndexOf('/') + 1);
+        if (j < charactersArray.length - 1) {
+          charactersList += ",";
+        };
+
         charactersP.appendChild(urlLink);
         // if (j < charactersArray.length - 1) {
         //   characters.innerHTML += ", ";
         // };
       };
 
+      charactersLink.href = charactersURL + charactersList;
+      charactersLink.alt = charactersURL + charactersList;
+      charactersLink.innerHTML = charactersURL + charactersList;
+      // charactersLink.target = "_blank";
+      charactersLink.addEventListener('click', getMultipleCharacters);
+      
       cardBodyDiv.appendChild(nameP);
       cardBodyDiv.appendChild(nameLink);
       cardBodyDiv.appendChild(episodeP);
       cardBodyDiv.appendChild(air_dateP);
 
       cardBodyDiv.appendChild(charactersP);
+      cardBodyDiv.appendChild(charactersLink);
 
       cardDiv.appendChild(cardBodyDiv);
       resultsRowDiv.appendChild(cardDiv);
@@ -683,6 +723,10 @@ function displayCharactersModal(jsonData){
   let episodeArray = results.episode;
   let episodeP = document.createElement("p");
   episodeP.innerHTML = "Episode(s): ";
+
+  let episodeLink = document.createElement("a");
+  let episodeList = "";
+
   for (let j = 0; j < episodeArray.length; j++) {
     // episodeP.innerHTML += episodeArray[j];
     let urlLink = document.createElement("a");
@@ -696,11 +740,23 @@ function displayCharactersModal(jsonData){
       urlLink.innerHTML += ", ";
     };
 
+    episodeList += episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1);
+    if (j < episodeArray.length - 1) {
+      episodeList += ",";
+    };
+
     episodeP.appendChild(urlLink);
     // if (j < episodeArray.length - 1) {
     //   episodeP.innerHTML += ", ";
     // };
   };
+
+  episodeLink.href = episodesURL + episodeList;
+  episodeLink.alt = episodesURL + episodeList;
+  episodeLink.innerHTML = episodesURL + episodeList;
+  // episodeLink.target = "_blank";
+  episodeLink.addEventListener('click', getMultipleEpisodes);
+
 
   detailsModalBody.appendChild(resultImg);
   detailsModalBody.appendChild(nameLink);
@@ -712,7 +768,7 @@ function displayCharactersModal(jsonData){
   detailsModalBody.appendChild(originP);
 
   detailsModalBody.appendChild(episodeP);
-
+  detailsModalBody.appendChild(episodeLink);
 
   $('#detailsModal').modal("show");
 
@@ -747,6 +803,10 @@ function displayLocationsModal(jsonData){
   let residentsArray = results.residents;
   let residentsP = document.createElement("p");
   residentsP.innerHTML = "Resident(s): ";
+
+  let residentsLink = document.createElement("a");
+  let residentList = "";
+
   for (let j = 0; j < residentsArray.length; j++) {
     // residentsP.innerHTML += residentsArray[j];
     let urlLink = document.createElement("a");
@@ -760,17 +820,30 @@ function displayLocationsModal(jsonData){
       urlLink.innerHTML += ", ";
     };
 
+    residentList += residentsArray[j].substr(residentsArray[j].lastIndexOf('/') + 1);
+    if (j < residentsArray.length - 1) {
+      residentList += ",";
+    };
+
     residentsP.appendChild(urlLink);
     // if (j < residentsArray.length - 1) {
     //   residentsP.innerHTML += ", ";
     // };
   };
 
+  residentsLink.href = charactersURL + residentList;
+  residentsLink.alt = charactersURL + residentList;
+  residentsLink.innerHTML = charactersURL + residentList;
+  // residentsLink.target = "_blank";
+  residentsLink.addEventListener('click', getMultipleCharacters);
+
+
   detailsModalBody.appendChild(nameLink);
   detailsModalBody.appendChild(dimensionP);
   detailsModalBody.appendChild(typeP);
 
   detailsModalBody.appendChild(residentsP);
+  detailsModalBody.appendChild(residentsLink);
 
   $('#detailsModal').modal("show");
 
@@ -805,6 +878,10 @@ function displayEpisodesModal(jsonData){
       let charactersArray = results.characters;
       let charactersP = document.createElement("p");
       charactersP.innerHTML = "Character(s): ";
+
+      let charactersLink = document.createElement("a");
+      let charactersList = "";
+
       for (let j = 0; j < charactersArray.length; j++) {
         // charactersP.innerHTML += charactersArray[j];
         let urlLink = document.createElement("a");
@@ -818,18 +895,510 @@ function displayEpisodesModal(jsonData){
           urlLink.innerHTML += ", ";
         };
 
+        charactersList += charactersArray[j].substr(charactersArray[j].lastIndexOf('/') + 1);
+        if (j < charactersArray.length - 1) {
+          charactersList += ",";
+        };
+
         charactersP.appendChild(urlLink);
         // if (j < charactersArray.length - 1) {
         //   characters.innerHTML += ", ";
         // };
       };
 
+      charactersLink.href = charactersURL + charactersList;
+      charactersLink.alt = charactersURL + charactersList;
+      charactersLink.innerHTML = charactersURL + charactersList;
+      // charactersLink.target = "_blank";
+      charactersLink.addEventListener('click', getMultipleCharacters);
+
       detailsModalBody.appendChild(nameLink);
       detailsModalBody.appendChild(episodeP);
       detailsModalBody.appendChild(air_dateP);
 
       detailsModalBody.appendChild(charactersP);
+      detailsModalBody.appendChild(charactersLink);
 
       $('#detailsModal').modal("show");
+
+};
+
+function getMultipleCharacters(e){
+  e.preventDefault();
+  // console.log(e);
+
+  // txtSearch.value = e.srcElement.text.replace(',', '');
+  // txtExcludeSearch.value = "";
+
+  $('#detailsModal').modal("hide")
+
+  while (resultsDiv.firstChild) { // while the value is not null
+    resultsDiv.removeChild(resultsDiv.firstChild);
+  };
+
+  // resultsHeader.style.display = "none";
+  resultsDiv.style.display = "none";
+  errorHeader.style.display = "none";
+  // moreDiv.style.display = "none";
+  // moreLink.style.display = "none";
+
+
+  URL = e.srcElement.text;
+  searchType = "characters";
+
+  // getResults(e);
+
+  fetch(URL)
+  .then(result => {
+      // console.log(result);
+      return result.json();
+  })
+  .then(jsonData => {
+      // console.log(jsonData);
+      displayMultipleCharacters(jsonData);
+  })
+  .catch(err => {
+      console.log(err)
+      errorHeader.innerText = err;
+      errorHeader.style.display = 'flex';
+  });
+
+};
+
+function displayMultipleCharacters(jsonData){
+  console.log(jsonData);
+
+  let results = jsonData;
+  // console.log(results);
+
+  // Doesn't work if there is only one charcater or episode in the link's list
+
+  if (results.length > 0) {
+    // resultsHeader.style.display = 'flex';
+    resultsDiv.style.display = 'flex';
+    // moreDiv.style.display = 'flex';
+    // moreLink.style.display = 'flex';
+
+    let resultsContainerDiv = document.createElement("div");
+    resultsContainerDiv.className = "container";
+
+    let resultsRowDiv = document.createElement("div");
+    resultsRowDiv.className = "row justify-content-center";
+
+    for (let i = 0; i < results.length; i++) {
+          // console.log(results[i]);
+
+          let cardDiv = document.createElement("div");
+          cardDiv.className = "card";
+
+          let resultImg = document.createElement("img");
+          resultImg.src = results[i].image;
+
+          let cardBodyDiv = document.createElement("div");
+          cardBodyDiv.className = "card-body";
+
+          let nameP = document.createElement("p");
+          nameP.innerHTML = "<strong>" + results[i].name + "</strong>";
+          let nameLink = document.createElement("a");
+          nameLink.href = results[i].url;
+          nameLink.alt = results[i].name;
+          nameLink.innerHTML = results[i].name;
+          // nameLink.target = "_blank";
+          nameLink.addEventListener('click', loadDetailsModal);
+
+          let genderP = document.createElement("p");
+          genderP.innerHTML = "Gender: " + results[i].gender;
+
+          let speciesP = document.createElement("p");
+          speciesP.innerHTML = "Species: " + results[i].species;
+
+          let statusP = document.createElement("p");
+          statusP.innerHTML = "Status: " + results[i].status;
+
+          let typeP = document.createElement("p");
+          typeP.innerHTML = "Type: " + results[i].type;
+
+          let locationP = document.createElement("p");
+          locationP.innerHTML = "Location: "; // + results[i].location.name;
+          if (results[i].location.url !== "") {
+            let locationLink = document.createElement("a");
+            locationLink.href = results[i].location.url;
+            locationLink.alt = results[i].location.name;
+            locationLink.innerHTML = results[i].location.name
+            // locationLink.target = "_blank";
+            locationLink.addEventListener('click', loadDetailsModal);
+            locationP.appendChild(locationLink);
+          } else {
+            locationP.innerHTML += results[i].location.name;
+          };
+
+          let originP = document.createElement("p");
+          originP.innerHTML = "Origin: "; // + results[i].origin.name;
+          if (results[i].origin.url !== "") {
+            let originLink = document.createElement("a");
+            originLink.href = results[i].origin.url;
+            originLink.alt = results[i].origin.name;
+            originLink.innerHTML = results[i].origin.name
+            // locationLink.target = "_blank";
+            originLink.addEventListener('click', loadDetailsModal);
+            originP.appendChild(originLink);
+          } else {
+            originP.innerHTML += results[i].origin.name;
+          };
+
+
+          let episodeArray = results[i].episode;
+          let episodeP = document.createElement("p");
+          episodeP.innerHTML = "Episode(s): ";
+
+          let episodeLink = document.createElement("a");
+          let episodeList = "";
+
+          for (let j = 0; j < episodeArray.length; j++) {
+            // episodeP.innerHTML += episodeArray[j];
+            let urlLink = document.createElement("a");
+            urlLink.href = episodeArray[j];
+            urlLink.alt = episodeArray[j];
+            urlLink.innerHTML = episodeArray[j];
+            // urlLink.target = "_blank";
+            urlLink.addEventListener('click', loadDetailsModal);
+
+            if (j < episodeArray.length - 1) {
+              urlLink.innerHTML += ", ";
+            };
+
+            episodeList += episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1);
+            if (j < episodeArray.length - 1) {
+              episodeList += ",";
+            };
+        
+            episodeP.appendChild(urlLink);
+            // if (j < episodeArray.length - 1) {
+            //   episodeP.innerHTML += ", ";
+            // };
+          };
+
+          episodeLink.href = episodesURL + episodeList;
+          episodeLink.alt = episodesURL + episodeList;
+          episodeLink.innerHTML = episodesURL + episodeList;
+          // episodeLink.target = "_blank";
+          episodeLink.addEventListener('click', getMultipleEpisodes);
+
+
+          cardBodyDiv.appendChild(nameP);
+          cardBodyDiv.appendChild(nameLink);
+          cardBodyDiv.appendChild(genderP);
+          cardBodyDiv.appendChild(speciesP);
+          cardBodyDiv.appendChild(statusP);
+          cardBodyDiv.appendChild(typeP);
+          cardBodyDiv.appendChild(locationP);
+          cardBodyDiv.appendChild(originP);
+
+          cardBodyDiv.appendChild(episodeP);
+          cardBodyDiv.appendChild(episodeLink);
+
+          cardDiv.appendChild(resultImg);
+          cardDiv.appendChild(cardBodyDiv);
+          resultsRowDiv.appendChild(cardDiv);
+    };
+  
+    resultsContainerDiv.appendChild(resultsRowDiv);
+
+    resultsDiv.appendChild(resultsContainerDiv);
+
+  };
+
+};
+
+function getMultipleLocations(e){
+  // ###########
+  // UNTESTED
+  // ###########
+  e.preventDefault();
+  // console.log(e);
+
+  // txtSearch.value = e.srcElement.text.replace(',', '');
+  // txtExcludeSearch.value = "";
+
+  $('#detailsModal').modal("hide")
+
+  while (resultsDiv.firstChild) { // while the value is not null
+    resultsDiv.removeChild(resultsDiv.firstChild);
+  };
+
+  // resultsHeader.style.display = "none";
+  resultsDiv.style.display = "none";
+  errorHeader.style.display = "none";
+  // moreDiv.style.display = "none";
+  // moreLink.style.display = "none";
+
+
+  URL = e.srcElement.text;
+  searchType = "locations";
+
+  // getResults(e);
+
+  fetch(URL)
+  .then(result => {
+      // console.log(result);
+      return result.json();
+  })
+  .then(jsonData => {
+      // console.log(jsonData);
+      displayMultipleLocations(jsonData);
+  })
+  .catch(err => {
+      console.log(err)
+      errorHeader.innerText = err;
+      errorHeader.style.display = 'flex';
+  });
+
+};
+
+function displayMultipleLocations(jsonData){
+  // ###########
+  // UNTESTED
+  // ###########
+  console.log(jsonData);
+
+  let results = jsonData;
+  // console.log(results);
+
+  if (results.length > 0) {
+    // resultsHeader.style.display = 'flex';
+    resultsDiv.style.display = 'flex';
+    // moreDiv.style.display = 'flex';
+    // moreLink.style.display = 'flex';
+
+    let resultsContainerDiv = document.createElement("div");
+    resultsContainerDiv.className = "container";
+
+    let resultsRowDiv = document.createElement("div");
+    resultsRowDiv.className = "row justify-content-center";
+
+    for (let i = 0; i < results.length; i++) {
+          // console.log(results[i]);
+
+          let cardDiv = document.createElement("div");
+          cardDiv.className = "card";
+
+          let cardBodyDiv = document.createElement("div");
+          cardBodyDiv.className = "card-body";
+
+          let nameP = document.createElement("p");
+          nameP.innerHTML = "<strong>" + results[i].name + "</strong>";
+          let nameLink = document.createElement("a");
+          nameLink.href = results[i].url;
+          nameLink.alt = results[i].name;
+          nameLink.innerHTML = results[i].name;
+          // nameLink.target = "_blank";
+          nameLink.addEventListener('click', loadDetailsModal);
+
+          let dimensionP = document.createElement("p");
+          dimensionP.innerHTML = "Dimension: " + results[i].dimension;
+
+          let typeP = document.createElement("p");
+          typeP.innerHTML = "Type: " + results[i].type;
+
+
+          let residentsArray = results[i].residents;
+          let residentsP = document.createElement("p");
+          residentsP.innerHTML = "Resident(s): ";
+
+          let residentsLink = document.createElement("a");
+          let residentList = "";
+
+          for (let j = 0; j < residentsArray.length; j++) {
+            // residentsP.innerHTML += residentsArray[j];
+            let urlLink = document.createElement("a");
+            urlLink.href = residentsArray[j];
+            urlLink.alt = residentsArray[j];
+            urlLink.innerHTML = residentsArray[j];
+            // urlLink.target = "_blank";
+            urlLink.addEventListener('click', loadDetailsModal);
+
+            if (j < residentsArray.length - 1) {
+              urlLink.innerHTML += ", ";
+            };
+
+            residentList += residentsArray[j].substr(residentsArray[j].lastIndexOf('/') + 1);
+            if (j < residentsArray.length - 1) {
+              residentList += ",";
+            };
+
+            residentsP.appendChild(urlLink);
+            // if (j < residentsArray.length - 1) {
+            //   residentsP.innerHTML += ", ";
+            // };
+          };
+
+          residentsLink.href = charactersURL + residentList;
+          residentsLink.alt = charactersURL + residentList;
+          residentsLink.innerHTML = charactersURL + residentList;
+          // residentsLink.target = "_blank";
+          residentsLink.addEventListener('click', getMultipleCharacters);
+
+
+          cardBodyDiv.appendChild(nameP);
+          cardBodyDiv.appendChild(nameLink);
+          cardBodyDiv.appendChild(dimensionP);
+          cardBodyDiv.appendChild(typeP);
+
+          cardBodyDiv.appendChild(residentsP);
+          cardBodyDiv.appendChild(residentsLink);
+
+          cardDiv.appendChild(cardBodyDiv);
+          resultsRowDiv.appendChild(cardDiv);
+    };
+
+    resultsContainerDiv.appendChild(resultsRowDiv);
+
+    resultsDiv.appendChild(resultsContainerDiv);
+
+  };
+
+};
+
+function getMultipleEpisodes(e){
+  e.preventDefault();
+  // console.log(e);
+
+  // txtSearch.value = e.srcElement.text.replace(',', '');
+  // txtExcludeSearch.value = "";
+
+  $('#detailsModal').modal("hide")
+
+  while (resultsDiv.firstChild) { // while the value is not null
+    resultsDiv.removeChild(resultsDiv.firstChild);
+  };
+
+  // resultsHeader.style.display = "none";
+  resultsDiv.style.display = "none";
+  errorHeader.style.display = "none";
+  // moreDiv.style.display = "none";
+  // moreLink.style.display = "none";
+
+
+  URL = e.srcElement.text;
+  searchType = "episodes";
+
+  // getResults(e);
+
+  fetch(URL)
+  .then(result => {
+      // console.log(result);
+      return result.json();
+  })
+  .then(jsonData => {
+      // console.log(jsonData);
+      displayMultipleLEpisodes(jsonData);
+  })
+  .catch(err => {
+      console.log(err)
+      errorHeader.innerText = err;
+      errorHeader.style.display = 'flex';
+  });
+
+};
+
+function displayMultipleLEpisodes(jsonData){
+  console.log(jsonData);
+
+  let results = jsonData;
+  // console.log(results);
+
+  // Doesn't work if there is only one charcater or episode in the link's list
+
+  if (results.length > 0) {
+    // resultsHeader.style.display = 'flex';
+    resultsDiv.style.display = 'flex';
+    // moreDiv.style.display = 'flex';
+    // moreLink.style.display = 'flex';
+
+    let resultsContainerDiv = document.createElement("div");
+    resultsContainerDiv.className = "container";
+
+    let resultsRowDiv = document.createElement("div");
+    resultsRowDiv.className = "row justify-content-center";
+
+    for (let i = 0; i < results.length; i++) {
+      // console.log(results[i]);
+
+      let cardDiv = document.createElement("div");
+      cardDiv.className = "card";
+
+      let cardBodyDiv = document.createElement("div");
+      cardBodyDiv.className = "card-body";
+
+      let nameP = document.createElement("p");
+      nameP.innerHTML = "<strong>" + results[i].name + "</strong>";
+      let nameLink = document.createElement("a");
+      nameLink.href = results[i].url;
+      nameLink.alt = results[i].name;
+      nameLink.innerHTML = results[i].name;
+      // nameLink.target = "_blank";
+      nameLink.addEventListener('click', loadDetailsModal);
+
+      let episodeP = document.createElement("p");
+      episodeP.innerHTML = "Episode: " + results[i].episode;
+
+      let air_dateP = document.createElement("p");
+      air_dateP.innerHTML = "Air Date: " + results[i].air_date;
+
+
+      let charactersArray = results[i].characters;
+      let charactersP = document.createElement("p");
+      charactersP.innerHTML = "Character(s): ";
+
+      let charactersLink = document.createElement("a");
+      let charactersList = "";
+
+      for (let j = 0; j < charactersArray.length; j++) {
+        // charactersP.innerHTML += charactersArray[j];
+        let urlLink = document.createElement("a");
+        urlLink.href = charactersArray[j];
+        urlLink.alt = charactersArray[j];
+        urlLink.innerHTML = charactersArray[j];
+        // urlLink.target = "_blank";
+        urlLink.addEventListener('click', loadDetailsModal);
+
+        if (j < charactersArray.length - 1) {
+          urlLink.innerHTML += ", ";
+        };
+
+        charactersList += charactersArray[j].substr(charactersArray[j].lastIndexOf('/') + 1);
+        if (j < charactersArray.length - 1) {
+          charactersList += ",";
+        };
+
+        charactersP.appendChild(urlLink);
+        // if (j < charactersArray.length - 1) {
+        //   characters.innerHTML += ", ";
+        // };
+      };
+
+      charactersLink.href = charactersURL + charactersList;
+      charactersLink.alt = charactersURL + charactersList;
+      charactersLink.innerHTML = charactersURL + charactersList;
+      // charactersLink.target = "_blank";
+      charactersLink.addEventListener('click', getMultipleCharacters);
+      
+      cardBodyDiv.appendChild(nameP);
+      cardBodyDiv.appendChild(nameLink);
+      cardBodyDiv.appendChild(episodeP);
+      cardBodyDiv.appendChild(air_dateP);
+
+      cardBodyDiv.appendChild(charactersP);
+      cardBodyDiv.appendChild(charactersLink);
+      
+      cardDiv.appendChild(cardBodyDiv);
+      resultsRowDiv.appendChild(cardDiv);
+};
+
+    resultsContainerDiv.appendChild(resultsRowDiv);
+
+    resultsDiv.appendChild(resultsContainerDiv);
+
+  };
 
 };
