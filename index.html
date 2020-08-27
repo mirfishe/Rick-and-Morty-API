@@ -43,6 +43,33 @@
             <div class="row justify-content-center">
                   <form id="frmSearch">
 
+                    <div class="form-inline">
+                      <!-- <label for="txtSearch" class="col-form-label-sm m-2 p-2">Search</label> -->
+                      <input type="text" class="form-control" id="txtSearchCharacters" placeholder="Search Characters">
+
+                      <label for="ddSearchStatus" class="col-form-label-sm m-2 p-2">Status</label>
+                      <select class="form-control m-2 p-2" id="ddSearchStatus">
+                        <option value="alive">Alive</option>
+                        <option value="dead">Dead</option>
+                        <option value="unknown">Unknown</option>
+                      </select>
+
+                      <input type="text" class="form-control" id="txtSearchSpecies" placeholder="Search Species">
+
+                      <input type="text" class="form-control" id="txtSearchType" placeholder="Search Type">
+
+                      <label for="ddSearchGender" class="col-form-label-sm m-2 p-2">Gender</label>
+                      <select class="form-control m-2 p-2" id="ddSearchGender">
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
+                        <option value="genderless">Genderless</option>
+                        <option value="unknown">Unknown</option>
+                      </select>
+
+                      <button class="btn-secondary ml-4 m-2 p-2" id="btnSearch">Search</button>
+                      
+                  </div>
+
                   <div class="form-inline">
 
                     <button class="btn-secondary ml-4 m-2 p-2" id="btnCharacters">Characters</button>

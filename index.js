@@ -12,6 +12,16 @@ btnCharacters.addEventListener('click', getResults);
 btnLocations.addEventListener('click', getResults); 
 btnEpisodes.addEventListener('click', getResults);
 
+const txtSearchCharacters = document.getElementById("txtSearchCharacters");
+const ddSearchStatus = document.getElementById("ddSearchStatus");
+const txtSearchSpecies = document.getElementById("txtSearchSpecies");
+const txtSearchType = document.getElementById("txtSearchType");
+const ddSearchGender = document.getElementById("ddSearchGender");
+
+const btnSearch = document.getElementById("btnSearch");
+const searchForm = document.getElementById("frmSearch");
+searchForm.addEventListener('submit', searchCharacters); 
+
 
 const errorHeader = document.getElementById("errorHeader");
 // const resultsHeader = document.getElementById("h2Results");
@@ -94,7 +104,75 @@ function getResults(e){
 
 };
 
+// Get the results after the search
+function searchCharacters(e){
+  e.preventDefault();
+  // console.log(e);
 
+  while (resultsDiv.firstChild) { // while the value is not null
+    resultsDiv.removeChild(resultsDiv.firstChild);
+  };
+
+  // resultsHeader.style.display = "none";
+  resultsDiv.style.display = "none";
+  errorHeader.style.display = "none";
+  // moreDiv.style.display = "none";
+  // moreLink.style.display = "none";
+
+  URL = "";
+  searchString = "";
+  
+  currentPage = 0;
+  lastPage = 0;
+
+
+  URL = charactersURL;
+  searchType = "characters";
+
+
+  if (txtSearchCharacters.value.length > 0) {
+    searchString += "&name=" + txtSearchCharacters.value.replace(' ', '%20');
+  };
+
+  if (ddSearchStatus.value !== "") {
+    searchString += "&status=" + ddSearchStatus.value;
+  };
+
+  if (txtSearchSpecies.value.length > 0) {
+    searchString += "&species=" + txtSearchSpecies.value.replace(' ', '%20');
+  };
+
+  if (txtSearchType.value.length > 0) {
+    searchString += "&type=" + txtSearchType.value.replace(' ', '%20');
+  };
+
+  if (ddSearchGender.value !== "") {
+    searchString += "&gender=" + ddSearchGender.value;
+  };
+
+  if (searchString !== "") {
+    console.log(searchString);
+    URL += "?" + searchString;
+  };
+
+  console.log(URL);
+
+  fetch(URL)
+  .then(result => {
+      // console.log(result);
+      return result.json();
+  })
+  .then(jsonData => {
+      // console.log(jsonData);
+      displayCharacters(jsonData);
+  })
+  .catch(err => {
+      console.log(err)
+      errorHeader.innerText = err;
+      errorHeader.style.display = 'flex';
+  });
+
+};
 
 function displayCharacters(jsonData){
   console.log(jsonData);
@@ -220,7 +298,11 @@ function displayCharacters(jsonData){
           episodeLink.alt = episodesURL + episodeList;
           episodeLink.innerHTML = episodesURL + episodeList;
           // episodeLink.target = "_blank";
-          episodeLink.addEventListener('click', getMultipleEpisodes);
+          if (episodeArray.length > 1) {
+            episodeLink.addEventListener('click', getMultipleEpisodes);
+          } else {
+            episodeLink.addEventListener('click', loadDetailsModal);
+          };
 
 
           cardBodyDiv.appendChild(nameP);
@@ -366,7 +448,11 @@ function displayLocations(jsonData){
           residentsLink.alt = charactersURL + residentList;
           residentsLink.innerHTML = charactersURL + residentList;
           // residentsLink.target = "_blank";
-          residentsLink.addEventListener('click', getMultipleCharacters);
+          if (residentsArray.length > 1) {
+            residentsLink.addEventListener('click', getMultipleCharacters);
+          } else {
+            residentsLink.addEventListener('click', loadDetailsModal);
+          };
 
 
           cardBodyDiv.appendChild(nameP);
@@ -507,7 +593,11 @@ function displayEpisodes(jsonData){
       charactersLink.alt = charactersURL + charactersList;
       charactersLink.innerHTML = charactersURL + charactersList;
       // charactersLink.target = "_blank";
-      charactersLink.addEventListener('click', getMultipleCharacters);
+      if (charactersArray.length > 1) {
+        charactersLink.addEventListener('click', getMultipleCharacters);
+      } else {
+        charactersLink.addEventListener('click', loadDetailsModal);
+      };
       
       cardBodyDiv.appendChild(nameP);
       cardBodyDiv.appendChild(nameLink);
@@ -755,7 +845,11 @@ function displayCharactersModal(jsonData){
   episodeLink.alt = episodesURL + episodeList;
   episodeLink.innerHTML = episodesURL + episodeList;
   // episodeLink.target = "_blank";
-  episodeLink.addEventListener('click', getMultipleEpisodes);
+  if (episodeArray.length > 1) {
+    episodeLink.addEventListener('click', getMultipleEpisodes);
+  } else {
+    episodeLink.addEventListener('click', loadDetailsModal);
+  };
 
 
   detailsModalBody.appendChild(resultImg);
@@ -835,7 +929,11 @@ function displayLocationsModal(jsonData){
   residentsLink.alt = charactersURL + residentList;
   residentsLink.innerHTML = charactersURL + residentList;
   // residentsLink.target = "_blank";
-  residentsLink.addEventListener('click', getMultipleCharacters);
+  if (residentsArray.length > 1) {
+    residentsLink.addEventListener('click', getMultipleCharacters);
+  } else {
+    residentsLink.addEventListener('click', loadDetailsModal);
+  };
 
 
   detailsModalBody.appendChild(nameLink);
@@ -910,7 +1008,11 @@ function displayEpisodesModal(jsonData){
       charactersLink.alt = charactersURL + charactersList;
       charactersLink.innerHTML = charactersURL + charactersList;
       // charactersLink.target = "_blank";
-      charactersLink.addEventListener('click', getMultipleCharacters);
+      if (charactersArray.length > 1) {
+        charactersLink.addEventListener('click', getMultipleCharacters);
+      } else {
+        charactersLink.addEventListener('click', loadDetailsModal);
+      };
 
       detailsModalBody.appendChild(nameLink);
       detailsModalBody.appendChild(episodeP);
@@ -970,8 +1072,6 @@ function displayMultipleCharacters(jsonData){
 
   let results = jsonData;
   // console.log(results);
-
-  // Doesn't work if there is only one charcater or episode in the link's list
 
   if (results.length > 0) {
     // resultsHeader.style.display = 'flex';
@@ -1082,7 +1182,11 @@ function displayMultipleCharacters(jsonData){
           episodeLink.alt = episodesURL + episodeList;
           episodeLink.innerHTML = episodesURL + episodeList;
           // episodeLink.target = "_blank";
-          episodeLink.addEventListener('click', getMultipleEpisodes);
+          if (episodeArray.length > 1) {
+            episodeLink.addEventListener('click', getMultipleEpisodes);
+          } else {
+            episodeLink.addEventListener('click', loadDetailsModal);
+          };
 
 
           cardBodyDiv.appendChild(nameP);
@@ -1236,7 +1340,11 @@ function displayMultipleLocations(jsonData){
           residentsLink.alt = charactersURL + residentList;
           residentsLink.innerHTML = charactersURL + residentList;
           // residentsLink.target = "_blank";
-          residentsLink.addEventListener('click', getMultipleCharacters);
+          if (residentsArray.length > 1) {
+            residentsLink.addEventListener('click', getMultipleCharacters);
+          } else {
+            residentsLink.addEventListener('click', loadDetailsModal);
+          };
 
 
           cardBodyDiv.appendChild(nameP);
@@ -1306,8 +1414,6 @@ function displayMultipleLEpisodes(jsonData){
 
   let results = jsonData;
   // console.log(results);
-
-  // Doesn't work if there is only one charcater or episode in the link's list
 
   if (results.length > 0) {
     // resultsHeader.style.display = 'flex';
@@ -1381,7 +1487,11 @@ function displayMultipleLEpisodes(jsonData){
       charactersLink.alt = charactersURL + charactersList;
       charactersLink.innerHTML = charactersURL + charactersList;
       // charactersLink.target = "_blank";
-      charactersLink.addEventListener('click', getMultipleCharacters);
+      if (charactersArray.length > 1) {
+        charactersLink.addEventListener('click', getMultipleCharacters);
+      } else {
+        charactersLink.addEventListener('click', loadDetailsModal);
+      };
       
       cardBodyDiv.appendChild(nameP);
       cardBodyDiv.appendChild(nameLink);
