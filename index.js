@@ -12,15 +12,27 @@ btnCharacters.addEventListener('click', getResults);
 btnLocations.addEventListener('click', getResults); 
 btnEpisodes.addEventListener('click', getResults);
 
-const txtSearchName = document.getElementById("txtSearchName");
+const txtSearchCharacterName = document.getElementById("txtSearchCharacterName");
 const ddSearchStatus = document.getElementById("ddSearchStatus");
 const txtSearchSpecies = document.getElementById("txtSearchSpecies");
-const txtSearchType = document.getElementById("txtSearchType");
+const txtSearchCharacterType = document.getElementById("txtSearchCharacterType");
 const ddSearchGender = document.getElementById("ddSearchGender");
+const btnSearchCharacters = document.getElementById("btnSearchCharacters");
+btnSearchCharacters.addEventListener('click', searchCharacters); 
 
-const btnSearch = document.getElementById("btnSearch");
+const txtSearchLocationName = document.getElementById("txtSearchLocationName");
+const txtSearchLocationType = document.getElementById("txtSearchLocationType");
+const txtDimension = document.getElementById("txtDimension");
+const btnSearchLocations = document.getElementById("btnSearchLocations");
+btnSearchLocations.addEventListener('click', searchLocations); 
+
+const txtSearchEpisodeName = document.getElementById("txtSearchEpisodeName");
+const txtEpisode = document.getElementById("txtEpisode");
+const btnSearchEpisodes = document.getElementById("btnSearchEpisodes");
+btnSearchEpisodes.addEventListener('click', searchEpisodes); 
+
 const searchForm = document.getElementById("frmSearch");
-searchForm.addEventListener('submit', searchCharacters); 
+// searchForm.addEventListener('submit', searchCharacters); 
 
 
 const errorHeader = document.getElementById("errorHeader");
@@ -130,8 +142,8 @@ function searchCharacters(e){
   searchType = "characters";
 
 
-  if (txtSearchName.value.length > 0) {
-    searchString += "&name=" + txtSearchName.value.replace(' ', '%20');
+  if (txtSearchCharacterName.value.length > 0) {
+    searchString += "&name=" + txtSearchCharacterName.value.replace(' ', '%20');
   };
 
   if (ddSearchStatus.value !== "") {
@@ -142,8 +154,8 @@ function searchCharacters(e){
     searchString += "&species=" + txtSearchSpecies.value.replace(' ', '%20');
   };
 
-  if (txtSearchType.value.length > 0) {
-    searchString += "&type=" + txtSearchType.value.replace(' ', '%20');
+  if (txtSearchCharacterType.value.length > 0) {
+    searchString += "&type=" + txtSearchCharacterType.value.replace(' ', '%20');
   };
 
   if (ddSearchGender.value !== "") {
@@ -155,7 +167,7 @@ function searchCharacters(e){
     URL += "?" + searchString;
   };
 
-  console.log(URL);
+  // console.log(URL);
 
   fetch(URL)
   .then(result => {
@@ -165,6 +177,126 @@ function searchCharacters(e){
   .then(jsonData => {
       // console.log(jsonData);
       displayCharacters(jsonData);
+  })
+  .catch(err => {
+      console.log(err)
+      errorHeader.innerText = err;
+      errorHeader.style.display = 'flex';
+  });
+
+};
+
+// Get the results after the search
+function searchLocations(e){
+  e.preventDefault();
+  // console.log(e);
+
+  while (resultsDiv.firstChild) { // while the value is not null
+    resultsDiv.removeChild(resultsDiv.firstChild);
+  };
+
+  // resultsHeader.style.display = "none";
+  resultsDiv.style.display = "none";
+  errorHeader.style.display = "none";
+  // moreDiv.style.display = "none";
+  // moreLink.style.display = "none";
+
+  URL = "";
+  searchString = "";
+  
+  currentPage = 0;
+  lastPage = 0;
+
+
+  URL = locationsURL;
+  searchType = "locations";
+
+
+  if (txtSearchLocationName.value.length > 0) {
+    searchString += "&name=" + txtSearchLocationName.value.replace(' ', '%20');
+  };
+
+  if (txtSearchLocationType.value.length > 0) {
+    searchString += "&type=" + txtSearchLocationType.value.replace(' ', '%20');
+  };
+
+  if (txtDimension.value.length > 0) {
+    searchString += "&type=" + txtDimension.value.replace(' ', '%20');
+  };
+
+  if (searchString !== "") {
+    console.log(searchString);
+    URL += "?" + searchString;
+  };
+
+  // console.log(URL);
+
+  fetch(URL)
+  .then(result => {
+      // console.log(result);
+      return result.json();
+  })
+  .then(jsonData => {
+      // console.log(jsonData);
+      displayLocations(jsonData);
+  })
+  .catch(err => {
+      console.log(err)
+      errorHeader.innerText = err;
+      errorHeader.style.display = 'flex';
+  });
+
+};
+
+// Get the results after the search
+function searchEpisodes(e){
+  e.preventDefault();
+  // console.log(e);
+
+  while (resultsDiv.firstChild) { // while the value is not null
+    resultsDiv.removeChild(resultsDiv.firstChild);
+  };
+
+  // resultsHeader.style.display = "none";
+  resultsDiv.style.display = "none";
+  errorHeader.style.display = "none";
+  // moreDiv.style.display = "none";
+  // moreLink.style.display = "none";
+
+  URL = "";
+  searchString = "";
+  
+  currentPage = 0;
+  lastPage = 0;
+
+
+  URL = episodesURL;
+  searchType = "episodes";
+
+
+  if (txtSearchEpisodeName.value.length > 0) {
+    searchString += "&name=" + txtSearchEpisodeName.value.replace(' ', '%20');
+  };
+
+  if (txtEpisode.value.length > 0) {
+    searchString += "&episode=" + txtEpisode.value.replace(' ', '%20');
+  };
+
+  if (searchString !== "") {
+    console.log(searchString);
+    URL += "?" + searchString;
+  };
+
+  // console.log(URL);
+
+  fetch(URL)
+  .then(result => {
+      // console.log(result);
+      return result.json();
+  })
+  .then(jsonData => {
+      // console.log(jsonData);
+      displayEpisodes(jsonData);
   })
   .catch(err => {
       console.log(err)
