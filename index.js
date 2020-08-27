@@ -163,7 +163,7 @@ function searchCharacters(e){
   };
 
   if (searchString !== "") {
-    console.log(searchString);
+    // console.log(searchString);
     URL += "?" + searchString;
   };
 
@@ -225,7 +225,7 @@ function searchLocations(e){
   };
 
   if (searchString !== "") {
-    console.log(searchString);
+    // console.log(searchString);
     URL += "?" + searchString;
   };
 
@@ -283,7 +283,7 @@ function searchEpisodes(e){
   };
 
   if (searchString !== "") {
-    console.log(searchString);
+    // console.log(searchString);
     URL += "?" + searchString;
   };
 
@@ -356,15 +356,39 @@ function displayCharacters(jsonData){
 
           let genderP = document.createElement("p");
           genderP.innerHTML = "Gender: " + results[i].gender;
+          let genderLink = document.createElement("a");
+          genderLink.href = results[i].gender;
+          genderLink.alt = results[i].gender;
+          genderLink.innerHTML = results[i].gender;
+          // genderLink.target = "_blank";
+          genderLink.addEventListener('click', searchByCharacterGender);
 
           let speciesP = document.createElement("p");
           speciesP.innerHTML = "Species: " + results[i].species;
+          let speciesLink = document.createElement("a");
+          speciesLink.href = results[i].species;
+          speciesLink.alt = results[i].species;
+          speciesLink.innerHTML = results[i].species;
+          // speciesLink.target = "_blank";
+          speciesLink.addEventListener('click', searchByCharacterSpecies);
 
           let statusP = document.createElement("p");
           statusP.innerHTML = "Status: " + results[i].status;
+          let statusLink = document.createElement("a");
+          statusLink.href = results[i].status;
+          statusLink.alt = results[i].status;
+          statusLink.innerHTML = results[i].status;
+          // statusLink.target = "_blank";
+          statusLink.addEventListener('click', searchByCharacterStatus);
 
           let typeP = document.createElement("p");
           typeP.innerHTML = "Type: " + results[i].type;
+          let typeLink = document.createElement("a");
+          typeLink.href = results[i].type;
+          typeLink.alt = results[i].type;
+          typeLink.innerHTML = results[i].type;
+          // typeLink.target = "_blank";
+          typeLink.addEventListener('click', searchByCharacterType);
 
           let locationP = document.createElement("p");
           locationP.innerHTML = "Location: "; // + results[i].location.name;
@@ -440,9 +464,13 @@ function displayCharacters(jsonData){
           cardBodyDiv.appendChild(nameP);
           cardBodyDiv.appendChild(nameLink);
           cardBodyDiv.appendChild(genderP);
+          cardBodyDiv.appendChild(genderLink);
           cardBodyDiv.appendChild(speciesP);
+          cardBodyDiv.appendChild(speciesLink);
           cardBodyDiv.appendChild(statusP);
+          cardBodyDiv.appendChild(statusLink);
           cardBodyDiv.appendChild(typeP);
+          cardBodyDiv.appendChild(typeLink);
           cardBodyDiv.appendChild(locationP);
           cardBodyDiv.appendChild(originP);
 
@@ -540,10 +568,21 @@ function displayLocations(jsonData){
 
           let dimensionP = document.createElement("p");
           dimensionP.innerHTML = "Dimension: " + results[i].dimension;
+          let dimensionLink = document.createElement("a");
+          dimensionLink.href = results[i].dimension;
+          dimensionLink.alt = results[i].dimension;
+          dimensionLink.innerHTML = results[i].dimension;
+          // dimensionLink.target = "_blank";
+          dimensionLink.addEventListener('click', searchByDimension);
 
           let typeP = document.createElement("p");
           typeP.innerHTML = "Type: " + results[i].type;
-
+          let typeLink = document.createElement("a");
+          typeLink.href = results[i].type;
+          typeLink.alt = results[i].type;
+          typeLink.innerHTML = results[i].type;
+          // typeLink.target = "_blank";
+          typeLink.addEventListener('click', searchByLocationType);
 
           let residentsArray = results[i].residents;
           let residentsP = document.createElement("p");
@@ -590,7 +629,9 @@ function displayLocations(jsonData){
           cardBodyDiv.appendChild(nameP);
           cardBodyDiv.appendChild(nameLink);
           cardBodyDiv.appendChild(dimensionP);
+          cardBodyDiv.appendChild(dimensionLink);
           cardBodyDiv.appendChild(typeP);
+          cardBodyDiv.appendChild(typeLink);
 
           cardBodyDiv.appendChild(residentsP);
           cardBodyDiv.appendChild(residentsLink);
@@ -903,15 +944,39 @@ function displayCharactersModal(jsonData){
 
   let genderP = document.createElement("p");
   genderP.innerHTML = "Gender: " + results.gender;
+  let genderLink = document.createElement("a");
+  genderLink.href = results.gender;
+  genderLink.alt = results.gender;
+  genderLink.innerHTML = results.gender;
+  // genderLink.target = "_blank";
+  genderLink.addEventListener('click', searchByCharacterGender);
 
   let speciesP = document.createElement("p");
   speciesP.innerHTML = "Species: " + results.species;
+  let speciesLink = document.createElement("a");
+  speciesLink.href = results.species;
+  speciesLink.alt = results.species;
+  speciesLink.innerHTML = results.species;
+  // speciesLink.target = "_blank";
+  speciesLink.addEventListener('click', searchByCharacterSpecies);
 
   let statusP = document.createElement("p");
   statusP.innerHTML = "Status: " + results.status;
+  let statusLink = document.createElement("a");
+  statusLink.href = results.status;
+  statusLink.alt = results.status;
+  statusLink.innerHTML = results.status;
+  // statusLink.target = "_blank";
+  statusLink.addEventListener('click', searchByCharacterStatus);
 
   let typeP = document.createElement("p");
   typeP.innerHTML = "Type: " + results.type;
+  let typeLink = document.createElement("a");
+  typeLink.href = results.type;
+  typeLink.alt = results.type;
+  typeLink.innerHTML = results.type;
+  // typeLink.target = "_blank";
+  typeLink.addEventListener('click', searchByCharacterType);
 
   let locationP = document.createElement("p");
   locationP.innerHTML = "Location: "; // + results.location.name;
@@ -987,9 +1052,13 @@ function displayCharactersModal(jsonData){
   detailsModalBody.appendChild(resultImg);
   detailsModalBody.appendChild(nameLink);
   detailsModalBody.appendChild(genderP);
+  detailsModalBody.appendChild(genderLink);
   detailsModalBody.appendChild(speciesP);
+  detailsModalBody.appendChild(speciesLink);
   detailsModalBody.appendChild(statusP);
+  detailsModalBody.appendChild(statusLink);
   detailsModalBody.appendChild(typeP);
+  detailsModalBody.appendChild(typeLink);
   detailsModalBody.appendChild(locationP);
   detailsModalBody.appendChild(originP);
 
@@ -1021,10 +1090,21 @@ function displayLocationsModal(jsonData){
 
   let dimensionP = document.createElement("p");
   dimensionP.innerHTML = "Dimension: " + results.dimension;
+  let dimensionLink = document.createElement("a");
+  dimensionLink.href = results.dimension;
+  dimensionLink.alt = results.dimension;
+  dimensionLink.innerHTML = results.dimension;
+  // dimensionLink.target = "_blank";
+  dimensionLink.addEventListener('click', searchByDimension);
 
   let typeP = document.createElement("p");
   typeP.innerHTML = "Type: " + results.type;
-
+  let typeLink = document.createElement("a");
+  typeLink.href = results.type;
+  typeLink.alt = results.type;
+  typeLink.innerHTML = results.type;
+  // typeLink.target = "_blank";
+  typeLink.addEventListener('click', searchByLocationType);
 
   let residentsArray = results.residents;
   let residentsP = document.createElement("p");
@@ -1070,7 +1150,9 @@ function displayLocationsModal(jsonData){
 
   detailsModalBody.appendChild(nameLink);
   detailsModalBody.appendChild(dimensionP);
+  detailsModalBody.appendChild(dimensionLink);
   detailsModalBody.appendChild(typeP);
+  detailsModalBody.appendChild(typeLink);
 
   detailsModalBody.appendChild(residentsP);
   detailsModalBody.appendChild(residentsLink);
@@ -1240,15 +1322,39 @@ function displayMultipleCharacters(jsonData){
 
           let genderP = document.createElement("p");
           genderP.innerHTML = "Gender: " + results[i].gender;
+          let genderLink = document.createElement("a");
+          genderLink.href = results[i].gender;
+          genderLink.alt = results[i].gender;
+          genderLink.innerHTML = results[i].gender;
+          // genderLink.target = "_blank";
+          genderLink.addEventListener('click', searchByCharacterGender);
 
           let speciesP = document.createElement("p");
           speciesP.innerHTML = "Species: " + results[i].species;
+          let speciesLink = document.createElement("a");
+          speciesLink.href = results[i].species;
+          speciesLink.alt = results[i].species;
+          speciesLink.innerHTML = results[i].species;
+          // speciesLink.target = "_blank";
+          speciesLink.addEventListener('click', searchByCharacterSpecies);
 
           let statusP = document.createElement("p");
           statusP.innerHTML = "Status: " + results[i].status;
+          let statusLink = document.createElement("a");
+          statusLink.href = results[i].status;
+          statusLink.alt = results[i].status;
+          statusLink.innerHTML = results[i].status;
+          // statusLink.target = "_blank";
+          statusLink.addEventListener('click', searchByCharacterStatus);
 
           let typeP = document.createElement("p");
           typeP.innerHTML = "Type: " + results[i].type;
+          let typeLink = document.createElement("a");
+          typeLink.href = results[i].type;
+          typeLink.alt = results[i].type;
+          typeLink.innerHTML = results[i].type;
+          // typeLink.target = "_blank";
+          typeLink.addEventListener('click', searchByCharacterType);
 
           let locationP = document.createElement("p");
           locationP.innerHTML = "Location: "; // + results[i].location.name;
@@ -1324,9 +1430,13 @@ function displayMultipleCharacters(jsonData){
           cardBodyDiv.appendChild(nameP);
           cardBodyDiv.appendChild(nameLink);
           cardBodyDiv.appendChild(genderP);
+          cardBodyDiv.appendChild(genderLink);
           cardBodyDiv.appendChild(speciesP);
+          cardBodyDiv.appendChild(speciesLink);
           cardBodyDiv.appendChild(statusP);
+          cardBodyDiv.appendChild(statusLink);
           cardBodyDiv.appendChild(typeP);
+          cardBodyDiv.appendChild(typeLink);
           cardBodyDiv.appendChild(locationP);
           cardBodyDiv.appendChild(originP);
 
@@ -1432,9 +1542,21 @@ function displayMultipleLocations(jsonData){
 
           let dimensionP = document.createElement("p");
           dimensionP.innerHTML = "Dimension: " + results[i].dimension;
+          let dimensionLink = document.createElement("a");
+          dimensionLink.href = results[i].dimension;
+          dimensionLink.alt = results[i].dimension;
+          dimensionLink.innerHTML = results[i].dimension;
+          // dimensionLink.target = "_blank";
+          dimensionLink.addEventListener('click', searchByDimension);
 
           let typeP = document.createElement("p");
           typeP.innerHTML = "Type: " + results[i].type;
+          let typeLink = document.createElement("a");
+          typeLink.href = results[i].type;
+          typeLink.alt = results[i].type;
+          typeLink.innerHTML = results[i].type;
+          // typeLink.target = "_blank";
+          typeLink.addEventListener('click', searchByLocationsType);
 
 
           let residentsArray = results[i].residents;
@@ -1482,7 +1604,9 @@ function displayMultipleLocations(jsonData){
           cardBodyDiv.appendChild(nameP);
           cardBodyDiv.appendChild(nameLink);
           cardBodyDiv.appendChild(dimensionP);
+          cardBodyDiv.appendChild(dimensionLink);
           cardBodyDiv.appendChild(typeP);
+          cardBodyDiv.appendChild(typeLink);
 
           cardBodyDiv.appendChild(residentsP);
           cardBodyDiv.appendChild(residentsLink);
@@ -1642,5 +1766,104 @@ function displayMultipleLEpisodes(jsonData){
     resultsDiv.appendChild(resultsContainerDiv);
 
   };
+
+};
+
+function searchByCharacterStatus(e){
+  e.preventDefault();
+  // console.log(e);
+
+  txtSearchCharacterName.value = "";
+  ddSearchStatus.value = e.srcElement.text.toLowerCase();
+  txtSearchSpecies.value = "";
+  txtSearchCharacterType.value = "";
+  ddSearchGender.value = "";
+
+
+  $('#detailsModal').modal("hide")
+
+  searchCharacters(e);
+
+};
+
+function searchByCharacterSpecies(e){
+  e.preventDefault();
+  // console.log(e);
+
+  txtSearchCharacterName.value = "";
+  ddSearchStatus.value = "";
+  txtSearchSpecies.value = e.srcElement.text.replace(',', '');
+  txtSearchCharacterType.value = "";
+  ddSearchGender.value = "";
+
+
+  $('#detailsModal').modal("hide")
+
+  searchCharacters(e);
+
+};
+
+function searchByCharacterType(e){
+  e.preventDefault();
+  // console.log(e);
+
+  txtSearchCharacterName.value = "";
+  ddSearchStatus.value = "";
+  txtSearchSpecies.value = "";
+  txtSearchCharacterType.value = e.srcElement.text.replace(',', '');
+  ddSearchGender.value = "";
+
+
+  $('#detailsModal').modal("hide")
+
+  searchCharacters(e);
+
+};
+
+function searchByCharacterGender(e){
+  e.preventDefault();
+  // console.log(e);
+
+  txtSearchCharacterName.value = "";
+  ddSearchStatus.value = "";
+  txtSearchSpecies.value = "";
+  txtSearchCharacterType.value = "";
+  ddSearchGender.value = e.srcElement.text.toLowerCase();
+
+
+  $('#detailsModal').modal("hide")
+
+  searchCharacters(e);
+
+};
+
+function searchByLocationType(e){
+  e.preventDefault();
+  // console.log(e);
+
+  txtSearchLocationName.value = "";
+  txtSearchLocationType.value = e.srcElement.text.replace(',', '');
+  txtDimension.value = "";
+
+
+  $('#detailsModal').modal("hide")
+
+  searchLocations(e);
+
+};
+
+
+function searchByDimension(e){
+  e.preventDefault();
+  // console.log(e);
+
+  txtSearchLocationName.value = "";
+  txtSearchLocationType.value = "";
+  txtDimension.value = e.srcElement.text.replace(',', '');
+
+
+  $('#detailsModal').modal("hide")
+
+  searchLocations(e);
 
 };
