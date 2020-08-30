@@ -12,6 +12,18 @@ btnCharacters.addEventListener('click', getResults);
 btnLocations.addEventListener('click', getResults); 
 btnEpisodes.addEventListener('click', getResults);
 
+const hdrSearchCharacters = document.getElementById("hdrSearchCharacters");
+const hdrSearchLocations = document.getElementById("hdrSearchLocations");
+const hdrSearchEpisodes = document.getElementById("hdrSearchEpisodes");
+
+hdrSearchCharacters.addEventListener('click', toggleForms);
+hdrSearchLocations.addEventListener('click', toggleForms); 
+hdrSearchEpisodes.addEventListener('click', toggleForms);
+
+// const collapseCharacters = document.getElementById("collapseCharacters");
+// const collapseLocations = document.getElementById("collapseLocations");
+// const collapseEpisodes = document.getElementById("collapseEpisodes");
+
 const txtSearchCharacterName = document.getElementById("txtSearchCharacterName");
 const ddSearchStatus = document.getElementById("ddSearchStatus");
 const txtSearchSpecies = document.getElementById("txtSearchSpecies");
@@ -50,6 +62,21 @@ let URL = "";
 let searchType = "";
 let currentPage = 0;
 let lastPage = 0;
+
+function toggleForms(e){
+  e.preventDefault();
+
+  while (resultsDiv.firstChild) { // while the value is not null
+    resultsDiv.removeChild(resultsDiv.firstChild);
+  };
+  
+  $('#collapseCharacters').collapse('hide');
+  $('#collapseLocations').collapse('hide');
+  $('#collapseEpisodes').collapse('hide');
+
+  // e.srcElement.id.collapse('show');
+
+};
 
 // Get the results after the search
 function getResults(e){
