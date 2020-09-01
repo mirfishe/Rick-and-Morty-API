@@ -27,14 +27,18 @@ hdrSearchEpisodes.addEventListener('click', toggleForms);
 const txtSearchCharacterName = document.getElementById("txtSearchCharacterName");
 const ddSearchStatus = document.getElementById("ddSearchStatus");
 const txtSearchSpecies = document.getElementById("txtSearchSpecies");
+const ddSearchSpecies = document.getElementById("ddSearchSpecies");
 const txtSearchCharacterType = document.getElementById("txtSearchCharacterType");
+const ddSearchCharacterType = document.getElementById("ddSearchCharacterType");
 const ddSearchGender = document.getElementById("ddSearchGender");
 const btnSearchCharacters = document.getElementById("btnSearchCharacters");
 btnSearchCharacters.addEventListener('click', searchCharacters); 
 
 const txtSearchLocationName = document.getElementById("txtSearchLocationName");
 const txtSearchLocationType = document.getElementById("txtSearchLocationType");
+const ddSearchLocationType = document.getElementById("ddSearchLocationType");
 const txtDimension = document.getElementById("txtDimension");
+const ddSearchDimension = document.getElementById("ddSearchDimension");
 const btnSearchLocations = document.getElementById("btnSearchLocations");
 btnSearchLocations.addEventListener('click', searchLocations); 
 
@@ -74,6 +78,9 @@ let arrEpisodes = [];
 let arrSearchSpecies = [];
 let arrSearchCharacterTypes = [];
 let arrSearchLocationTypes = [];
+let arrSearchDimensions = [];
+
+loadAllLookupArrays();
 
 function toggleForms(e){
   e.preventDefault();
@@ -81,7 +88,111 @@ function toggleForms(e){
   while (resultsDiv.firstChild) { // while the value is not null
     resultsDiv.removeChild(resultsDiv.firstChild);
   };
+
+  // Remove old items from drop down boxes
+  while (ddSearchSpecies.firstChild) { // while the value is not null
+    ddSearchSpecies.removeChild(ddSearchSpecies.firstChild);
+  };
+  // Add first element back to drop down box
+  let optSearchSpecies = document.createElement("option");
+  optSearchSpecies.value = "";
+  optSearchSpecies.text = "Select Species";
+  ddSearchSpecies.add(optSearchSpecies);
+  // Sort the array
+  arrSearchSpecies.sort((a, b) => {
+    if (a > b) {
+        return 1;
+    } else {
+        return -1;
+    };
+  });
+  // Add items to drop down boxes
+  for (let i = 0; i < arrSearchSpecies.length; i++) {
+    // console.log(arrSearchSpecies[i]);
+    let opt = document.createElement("option");
+    opt.value = arrSearchSpecies[i];
+    opt.text = arrSearchSpecies[i];
+    ddSearchSpecies.add(opt);
+  };
   
+  // Remove old items from drop down boxes
+  while (ddSearchCharacterType.firstChild) { // while the value is not null
+    ddSearchCharacterType.removeChild(ddSearchCharacterType.firstChild);
+  };
+  // Add first element back to drop down box
+  let optSearchCharacterType = document.createElement("option");
+  optSearchCharacterType.value = "";
+  optSearchCharacterType.text = "Select Type";
+  ddSearchCharacterType.add(optSearchCharacterType);
+  // Sort the array
+  arrSearchCharacterTypes.sort((a, b) => {
+    if (a > b) {
+        return 1;
+    } else {
+        return -1;
+    };
+  });
+  // Add items to drop down boxes
+  for (let i = 0; i < arrSearchCharacterTypes.length; i++) {
+    // console.log(arrSearchSpecies[i]);
+    let opt = document.createElement("option");
+    opt.value = arrSearchCharacterTypes[i];
+    opt.text = arrSearchCharacterTypes[i];
+    ddSearchCharacterType.add(opt);
+  };
+
+  // Remove old items from drop down boxes
+  while (ddSearchLocationType.firstChild) { // while the value is not null
+    ddSearchLocationType.removeChild(ddSearchLocationType.firstChild);
+  };
+  // Add first element back to drop down box
+  let optSearchLocationType = document.createElement("option");
+  optSearchLocationType.value = "";
+  optSearchLocationType.text = "Select Type";
+  ddSearchLocationType.add(optSearchLocationType);
+  // Sort the array
+  arrSearchLocationTypes.sort((a, b) => {
+    if (a > b) {
+        return 1;
+    } else {
+        return -1;
+    };
+  });
+  // Add items to drop down boxes
+  for (let i = 0; i < arrSearchLocationTypes.length; i++) {
+    // console.log(arrSearchSpecies[i]);
+    let opt = document.createElement("option");
+    opt.value = arrSearchLocationTypes[i];
+    opt.text = arrSearchLocationTypes[i];
+    ddSearchLocationType.add(opt);
+  };
+
+  // Remove old items from drop down boxes
+  while (ddSearchDimension.firstChild) { // while the value is not null
+    ddSearchDimension.removeChild(ddSearchDimension.firstChild);
+  };
+  // Add first element back to drop down box
+  let optSearchDimension = document.createElement("option");
+  optSearchDimension.value = "";
+  optSearchDimension.text = "Select Dimension";
+  ddSearchDimension.add(optSearchDimension);
+  // Sort the array
+  arrSearchDimensions.sort((a, b) => {
+    if (a > b) {
+        return 1;
+    } else {
+        return -1;
+    };
+  });
+  // Add items to drop down boxes
+  for (let i = 0; i < arrSearchDimensions.length; i++) {
+    // console.log(arrSearchSpecies[i]);
+    let opt = document.createElement("option");
+    opt.value = arrSearchDimensions[i];
+    opt.text = arrSearchDimensions[i];
+    ddSearchDimension.add(opt);
+  };
+
   $('#collapseCharacters').collapse('hide');
   $('#collapseLocations').collapse('hide');
   $('#collapseEpisodes').collapse('hide');
@@ -93,6 +204,8 @@ function toggleForms(e){
 // Get the results after the search
 function getResults(e){
   e.preventDefault();
+
+  toggleForms(e);
 
   while (resultsDiv.firstChild) { // while the value is not null
     resultsDiv.removeChild(resultsDiv.firstChild);
@@ -193,8 +306,16 @@ function searchCharacters(e){
     searchString += "&species=" + txtSearchSpecies.value.replace(' ', '%20');
   };
 
+  if (ddSearchSpecies.value !== "") {
+    searchString += "&species=" + ddSearchSpecies.value.replace(' ', '%20');
+  };
+
   if (txtSearchCharacterType.value.length > 0) {
     searchString += "&type=" + txtSearchCharacterType.value.replace(' ', '%20');
+  };
+
+  if (ddSearchCharacterType.value !== "") {
+    searchString += "&type=" + ddSearchCharacterType.value.replace(' ', '%20');
   };
 
   if (ddSearchGender.value !== "") {
@@ -259,8 +380,16 @@ function searchLocations(e){
     searchString += "&type=" + txtSearchLocationType.value.replace(' ', '%20');
   };
 
+  if (ddSearchLocationType.value !== "") {
+    searchString += "&type=" + ddSearchLocationType.value.replace(' ', '%20');
+  };
+
   if (txtDimension.value.length > 0) {
-    searchString += "&type=" + txtDimension.value.replace(' ', '%20');
+    searchString += "&dimension=" + txtDimension.value.replace(' ', '%20');
+  };
+
+  if (ddSearchDimension.value !== "") {
+    searchString += "&dimension=" + ddSearchDimension.value.replace(' ', '%20');
   };
 
   if (searchString !== "") {
@@ -346,7 +475,7 @@ function searchEpisodes(e){
 };
 
 function displayCharacters(jsonData){
-  console.log(jsonData);
+  // console.log(jsonData);
 
   let results = jsonData.results;
   // console.log(results);
@@ -580,7 +709,9 @@ function displayCharacters(jsonData){
           cardBodyDiv.appendChild(originP);
 
           cardBodyDiv.appendChild(episodeP);
-          episodeP.appendChild(episodeLink);
+          if (episodeArray.length > 0) {
+            episodeP.appendChild(episodeLink);
+          };
 
           cardDiv.appendChild(resultImg);
           cardDiv.appendChild(cardBodyDiv);
@@ -630,16 +761,16 @@ function displayCharacters(jsonData){
     resultsDiv.appendChild(resultsContainerDiv);
 
     // View lookup arrays
-    console.log(arrCharacters);
-    console.log(arrSearchSpecies);
-    console.log(arrSearchCharacterTypes);
+    // console.log(arrCharacters);
+    // console.log(arrSearchSpecies);
+    // console.log(arrSearchCharacterTypes);
 
   };
 
 };
 
 function displayLocations(jsonData){
-  console.log(jsonData);
+  // console.log(jsonData);
 
   let results = jsonData.results;
   // console.log(results);
@@ -675,6 +806,16 @@ function displayLocations(jsonData){
             arrLocations.push({id: results[i].id, name: results[i].name, url: results[i].url});
           };
 
+          if (results[i].type !== "") {
+            if (arrSearchLocationTypes.indexOf(results[i].type) === -1) {
+              arrSearchLocationTypes.push(results[i].type);
+            };
+          };
+          if (results[i].dimension !== "") {
+            if (arrSearchDimensions.indexOf(results[i].dimension) === -1) {
+              arrSearchDimensions.push(results[i].dimension);
+            };
+          };
 
           let cardDiv = document.createElement("div");
           cardDiv.className = "card m-2 p-2";
@@ -768,7 +909,9 @@ function displayLocations(jsonData){
           typeP.appendChild(typeLink);
 
           cardBodyDiv.appendChild(residentsP);
-          residentsP.appendChild(residentsLink);
+          if (residentsArray.length > 0) {
+            residentsP.appendChild(residentsLink);
+          };
 
           cardDiv.appendChild(cardBodyDiv);
           resultsRowDiv.appendChild(cardDiv);
@@ -817,14 +960,15 @@ function displayLocations(jsonData){
     resultsDiv.appendChild(resultsContainerDiv);
 
     // View lookup arrays
-    console.log(arrLocations);
+    // console.log(arrLocations);
+    // console.log(arrSearchLocationTypes);
 
   };
 
 };
 
 function displayEpisodes(jsonData){
-  console.log(jsonData);
+  // console.log(jsonData);
 
   let results = jsonData.results;
   // console.log(results);
@@ -939,7 +1083,9 @@ function displayEpisodes(jsonData){
       cardBodyDiv.appendChild(air_dateP);
 
       cardBodyDiv.appendChild(charactersP);
-      charactersP.appendChild(charactersLink);
+      if (charactersArray.length > 0) {
+        charactersP.appendChild(charactersLink);
+      };
 
       cardDiv.appendChild(cardBodyDiv);
       resultsRowDiv.appendChild(cardDiv);
@@ -988,7 +1134,7 @@ function displayEpisodes(jsonData){
     resultsDiv.appendChild(resultsContainerDiv);
 
     // View lookup arrays
-    console.log(arrEpisodes);
+    // console.log(arrEpisodes);
 
   };
 
@@ -1011,7 +1157,7 @@ function getMoreResults(e){
 
   // Keeps adding ?page= to the URL
   // Fixed
-  console.log(URL);
+  // console.log(URL);
 
  
 
@@ -1049,7 +1195,7 @@ function getMoreResults(e){
 function loadDetailsModal(e){
   e.preventDefault();
 
-  console.log(e);
+  // console.log(e);
   let detailURL = e.srcElement.href;
 
   let detailCategory = detailURL;
@@ -1058,16 +1204,16 @@ function loadDetailsModal(e){
   // detailCategory = detailCategory.replace("http://rickandmortyapi.com/api/", "");
   // detailCategory = detailCategory.substr(0,detailURL.lastIndexOf('/'));
   detailCategory = detailCategory.substr(0,detailCategory.indexOf('/'));
-  console.log("detailCategory", detailCategory);
+  // console.log("detailCategory", detailCategory);
 
 
   fetch(detailURL)
   .then(result => {
-      console.log(result);
+      // console.log(result);
       return result.json();
   })
   .then(jsonData => {
-      console.log(jsonData);
+      // console.log(jsonData);
 
       switch (detailCategory) {
         case "character":
@@ -1092,7 +1238,7 @@ function loadDetailsModal(e){
 };
 
 function displayCharactersModal(jsonData){
-  console.log(jsonData);
+  // console.log(jsonData);
 
   while (detailsModalBody.firstChild) { // while the value is not null
     detailsModalBody.removeChild(detailsModalBody.firstChild);
@@ -1226,6 +1372,31 @@ function displayCharactersModal(jsonData){
     urlLink.href = episodeArray[j];
     urlLink.alt = episodeArray[j];
     urlLink.innerHTML = episodeArray[j];
+    // Use lookup arrays
+    // // https://stackoverflow.com/questions/13964155/get-javascript-object-from-array-of-objects-by-value-of-property
+    // // https://stackoverflow.com/questions/52460473/find-object-with-specific-value-in-array/52460509
+    // // console.log("index of episode match", arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1)), "index of item in array", episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1));
+    // let indexOfEpisodeName = arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1));
+    // console.log("indexOfEpisodeName", indexOfEpisodeName);
+    // console.log("episodeName", arrEpisodes[indexOfEpisodeName].name);
+    // // console.log("id from episode URL", episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1), "index of match", arrEpisodes[arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1))], "name of match", arrEpisodes[arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1))].name);
+    // // if (arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1)) == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1)) {
+    // if (arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1))) {
+    //   // console.log("id from episode link", episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1), "index of match", arrEpisodes[arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1))].name);
+    //   console.log("episode name", arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1)).name)
+    //   // urlLink.innerHTML = arrEpisodes[arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1))].name;
+    // } else {
+    //   urlLink.innerHTML = episodeArray[j];
+    // };
+
+    for (let k = 0; k < arrEpisodes.length; k++) {
+      if (episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1) == arrEpisodes[k].id) {
+        // console.log("episode name", arrEpisodes[k].name, "it's a match");
+        urlLink.innerHTML = arrEpisodes[k].name;
+        break;
+      };
+    };
+
     // urlLink.target = "_blank";
     urlLink.addEventListener('click', loadDetailsModal);
 
@@ -1263,26 +1434,32 @@ function displayCharactersModal(jsonData){
   speciesP.appendChild(speciesLink);
   detailsModalBody.appendChild(statusP);
   statusP.appendChild(statusLink);
-  detailsModalBody.appendChild(typeP);
-  typeP.appendChild(typeLink);
+
+  if (results.type != "") {
+    detailsModalBody.appendChild(typeP);
+    typeP.appendChild(typeLink);
+  };
+
   detailsModalBody.appendChild(locationP);
   detailsModalBody.appendChild(originP);
 
-  detailsModalBody.appendChild(episodeLink);
+  if (episodeArray.length > 0) {
+    detailsModalBody.appendChild(episodeLink);
+  };
   detailsModalBody.appendChild(episodeP);
 
   $('#detailsModal').modal("show");
 
 
   // View lookup arrays
-  console.log(arrCharacters);
-  console.log(arrSearchSpecies);
-  console.log(arrSearchCharacterTypes);
+  // console.log(arrCharacters);
+  // console.log(arrSearchSpecies);
+  // console.log(arrSearchCharacterTypes);
 
 };
 
 function displayLocationsModal(jsonData){
-  console.log(jsonData);
+  // console.log(jsonData);
 
   while (detailsModalBody.firstChild) { // while the value is not null
     detailsModalBody.removeChild(detailsModalBody.firstChild);
@@ -1297,7 +1474,17 @@ function displayLocationsModal(jsonData){
   if (arrIDs.indexOf(results.id) === -1) {
     arrLocations.push({id: results.id, name: results.name, url: results.url});
   };
-
+          
+  if (results.type !== "") {
+    if (arrSearchLocationTypes.indexOf(results.type) === -1) {
+      arrSearchLocationTypes.push(results.type);
+    };
+  };
+  if (results.dimension !== "") {
+    if (arrSearchDimensions.indexOf(results.dimension) === -1) {
+      arrSearchDimensions.push(results.dimension);
+    };
+  };
 
   detailsModalTitle.innerHTML = "<strong>" + results.name + "</strong>";
 
@@ -1383,19 +1570,23 @@ function displayLocationsModal(jsonData){
   detailsModalBody.appendChild(typeP);
   typeP.appendChild(typeLink);
 
-  detailsModalBody.appendChild(residentsLink);
+  if (residentsArray.length > 0) {
+    detailsModalBody.appendChild(residentsLink);
+  };
   detailsModalBody.appendChild(residentsP);
 
   $('#detailsModal').modal("show");
 
 
-  // View lookup arrays
-  console.log(arrLocations);
+    // View lookup arrays
+    // console.log(arrLocations);
+    // console.log(arrSearchLocationTypes);
+    // console.log(arrSearchDimensions);
 
 };
 
 function displayEpisodesModal(jsonData){
-  console.log(jsonData);
+  // console.log(jsonData);
 
   while (detailsModalBody.firstChild) { // while the value is not null
     detailsModalBody.removeChild(detailsModalBody.firstChild);
@@ -1488,13 +1679,13 @@ function displayEpisodesModal(jsonData){
       $('#detailsModal').modal("show");
 
     // View lookup arrays
-    console.log(arrEpisodes);
+    // console.log(arrEpisodes);
 
 };
 
 function getMultipleCharacters(e){
   e.preventDefault();
-  console.log(e);
+  // console.log(e);
 
   // txtSearch.value = e.srcElement.text.replace(',', '');
   // txtExcludeSearch.value = "";
@@ -1535,7 +1726,7 @@ function getMultipleCharacters(e){
 };
 
 function displayMultipleCharacters(jsonData){
-  console.log(jsonData);
+  // console.log(jsonData);
 
   let results = jsonData;
   // console.log(results);
@@ -1735,7 +1926,9 @@ function displayMultipleCharacters(jsonData){
           cardBodyDiv.appendChild(originP);
 
           cardBodyDiv.appendChild(episodeP);
-          episodeP.appendChild(episodeLink);
+          if (episodeArray.length > 0) {
+            episodeP.appendChild(episodeLink);
+          };
 
           cardDiv.appendChild(resultImg);
           cardDiv.appendChild(cardBodyDiv);
@@ -1747,9 +1940,9 @@ function displayMultipleCharacters(jsonData){
     resultsDiv.appendChild(resultsContainerDiv);
 
     // View lookup arrays
-    console.log(arrCharacters);
-    console.log(arrSearchSpecies);
-    console.log(arrSearchCharacterTypes);
+    // console.log(arrCharacters);
+    // console.log(arrSearchSpecies);
+    // console.log(arrSearchCharacterTypes);
 
   };
 
@@ -1816,6 +2009,16 @@ function displayMultipleLocations(jsonData){
     arrLocations.push({id: results[i].id, name: results[i].name, url: results[i].url});
   };
 
+  if (results[i].type !== "") {
+    if (arrSearchLocationTypes.indexOf(results[i].type) === -1) {
+      arrSearchLocationTypes.push(results[i].type);
+    };
+  };
+  if (results[i].dimension !== "") {
+    if (arrSearchDimensions.indexOf(results[i].dimension) === -1) {
+      arrSearchDimensions.push(results[i].dimension);
+    };
+  };
 
   if (results.length > 0) {
     // resultsHeader.style.display = 'flex';
@@ -1925,7 +2128,9 @@ function displayMultipleLocations(jsonData){
           typeP.appendChild(typeLink);
 
           cardBodyDiv.appendChild(residentsP);
-          residentsP.appendChild(residentsLink);
+          if (residentsArray.length > 0) {
+            residentsP.appendChild(residentsLink);
+          };
 
           cardDiv.appendChild(cardBodyDiv);
           resultsRowDiv.appendChild(cardDiv);
@@ -1937,6 +2142,8 @@ function displayMultipleLocations(jsonData){
 
     // View lookup arrays
     console.log(arrLocations);
+    console.log(arrSearchLocationTypes);
+    console.log(arrSearchDimensions);
 
   };
 
@@ -1985,7 +2192,7 @@ function getMultipleEpisodes(e){
 };
 
 function displayMultipleLEpisodes(jsonData){
-  console.log(jsonData);
+  // console.log(jsonData);
 
   let results = jsonData;
   // console.log(results);
@@ -2091,7 +2298,9 @@ function displayMultipleLEpisodes(jsonData){
       cardBodyDiv.appendChild(air_dateP);
 
       cardBodyDiv.appendChild(charactersP);
-      charactersP.appendChild(charactersLink);
+      if (charactersArray.length > 0) {
+        charactersP.appendChild(charactersLink);
+      };
       
       cardDiv.appendChild(cardBodyDiv);
       resultsRowDiv.appendChild(cardDiv);
@@ -2102,7 +2311,7 @@ function displayMultipleLEpisodes(jsonData){
     resultsDiv.appendChild(resultsContainerDiv);
 
     // View lookup arrays
-    console.log(arrEpisodes);
+    // console.log(arrEpisodes);
     
   };
 
@@ -2204,5 +2413,231 @@ function searchByDimension(e){
   $('#detailsModal').modal("hide")
 
   searchLocations(e);
+
+};
+
+
+function loadAllLookupArrays(){
+
+// Create characters URL of all possible character IDs?
+// Fetch that and read results
+// current total number of characters + to get the correct index value(?)
+// used a number higher than the current total number of characters and it worked
+let totalNumberOfCharacters = 700 + 1;
+let charactersIDList = "";
+
+for (let i = 1; i < totalNumberOfCharacters; i++) {
+  charactersIDList += i;
+    if (i < totalNumberOfCharacters - 1) {
+      charactersIDList += ",";
+    };
+};
+
+// console.log("charactersIDList", charactersIDList);
+// console.log("charactersURL", charactersURL + charactersIDList);
+
+
+fetch(charactersURL + charactersIDList)
+.then(result => {
+    // console.log(result);
+    return result.json();
+})
+.then(jsonData => {
+  // console.log(jsonData);
+  let results = jsonData;
+  
+// Build lookup arrays
+for (let i = 0; i < results.length; i++) {
+  let arrIDs =  arrCharacters.map((value)=>{ return value.id;});
+  if (arrIDs.indexOf(results[i].id) === -1) {
+    arrCharacters.push({id: results[i].id, name: results[i].name, url: results[i].url});
+  };
+  if (results[i].species !== "") {
+    if (arrSearchSpecies.indexOf(results[i].species) === -1) {
+      arrSearchSpecies.push(results[i].species);
+    };
+  };
+  if (results[i].type !== "") {
+    if (arrSearchCharacterTypes.indexOf(results[i].type) === -1) {
+      arrSearchCharacterTypes.push(results[i].type);
+    };
+  };
+};
+
+// View lookup arrays
+// console.log(arrCharacters);
+// console.log(arrSearchSpecies);
+// console.log(arrSearchCharacterTypes);
+
+})
+.catch(err => {
+    console.log(err)
+    errorHeader.innerText = err;
+    errorHeader.style.display = 'flex';
+});
+
+
+
+
+// Create locations URL of all possible location IDs?
+// Fetch that and read results
+// current total number of locations + to get the correct index value(?)
+// used a number higher than the current total number of locations and it worked
+let totalNumberOfLocations = 50 + 1;
+let locationIDList = "";
+
+for (let i = 1; i < totalNumberOfLocations; i++) {
+  locationIDList += i;
+    if (i < totalNumberOfLocations - 1) {
+      locationIDList += ",";
+    };
+};
+
+// console.log("locationIDList", locationIDList);
+// console.log("locationsURL", locationsURL + locationIDList);
+
+
+fetch(locationsURL + locationIDList)
+.then(result => {
+    // console.log(result);
+    return result.json();
+})
+.then(jsonData => {
+  // console.log(jsonData);
+  let results = jsonData;
+
+// Build lookup arrays
+for (let i = 0; i < results.length; i++) {
+  let arrIDs =  arrLocations.map((value)=>{ return value.id;});
+  if (arrIDs.indexOf(results[i].id) === -1) {
+    arrLocations.push({id: results[i].id, name: results[i].name, url: results[i].url});
+  };
+
+  if (results[i].type !== "") {
+    if (arrSearchLocationTypes.indexOf(results[i].type) === -1) {
+      arrSearchLocationTypes.push(results[i].type);
+    };
+  };
+  if (results[i].dimension !== "") {
+    if (arrSearchDimensions.indexOf(results[i].dimension) === -1) {
+      arrSearchDimensions.push(results[i].dimension);
+    };
+  };
+};
+
+// View lookup arrays
+// console.log(arrLocations);
+// console.log(arrSearchLocationTypes);
+// console.log(arrSearchDimensions);
+
+})
+.catch(err => {
+    console.log(err)
+    errorHeader.innerText = err;
+    errorHeader.style.display = 'flex';
+});
+
+
+
+
+// Create episode URL of all possible episode IDs?
+// Fetch that and read results
+// current total number of episodes + to get the correct index value(?)
+// used a number higher than the current total number of episodes and it worked
+let totalNumberOfEpisodes = 50 + 1;
+let episodeIDList = "";
+
+for (let i = 1; i < totalNumberOfEpisodes; i++) {
+  episodeIDList += i;
+    if (i < totalNumberOfEpisodes - 1) {
+      episodeIDList += ",";
+    };
+};
+
+// console.log("episodeIDList", episodeIDList);
+// console.log("episodesURL", episodesURL + episodeIDList);
+
+
+fetch(episodesURL + episodeIDList)
+.then(result => {
+    // console.log(result);
+    return result.json();
+})
+.then(jsonData => {
+  // console.log(jsonData);
+  let results = jsonData;
+
+// Build lookup arrays
+for (let i = 0; i < results.length; i++) {
+  let arrIDs =  arrEpisodes.map((value)=>{ return value.id;});
+  if (arrIDs.indexOf(results[i].id) === -1) {
+    arrEpisodes.push({id: results[i].id, name: results[i].name, url: results[i].url});
+  };
+};
+
+// View lookup arrays
+// console.log(arrEpisodes);
+
+})
+.catch(err => {
+    console.log(err)
+    errorHeader.innerText = err;
+    errorHeader.style.display = 'flex';
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Fetch all episodes
+// Fetch all characters search from each episode
+// In results set, load the arrays
+
+// Fetch all locations?
+// In results set, load the arrays?
+
+// let episodeID = 1;
+// lookupURL = episodesURL + episodeID;
+
+// fetch(lookupURL)
+// .then(result => {
+//     console.log(result);
+//     return result.json();
+// })
+// .then(jsonData => {
+//   console.log(jsonData);
+//   let results = jsonData;
+
+//   let charactersArray = results.characters;
+//   let charactersList = "";
+
+//   for (let i = 0; i < charactersArray.length; i++) {
+//     charactersList += charactersArray[i].substr(charactersArray[i].lastIndexOf('/') + 1);
+//     if (i < charactersArray.length - 1) {
+//       charactersList += ",";
+//     };
+//   };
+
+//   console.log("charactersList", charactersList);
+//   console.log("charactersURL", charactersURL + charactersList);
+
+// })
+// .catch(err => {
+//     console.log(err)
+//     errorHeader.innerText = err;
+//     errorHeader.style.display = 'flex';
+// });
+
 
 };
