@@ -60,10 +60,12 @@ errorHeader.style.display = "none";
 
 let URL = "";
 let searchType = "";
+let searchString = "";
 let currentPage = 0;
 let lastPage = 0;
 
-// Search results don't need a more link because they aren't paginated
+// Search results don't need a more link because they aren't paginated?
+// Search results do have pagination on them but there is an error in the pagination code?
 // Build lookup arrays
 let arrCharacters = [];
 let arrLocations = [];
@@ -409,7 +411,7 @@ function displayCharacters(jsonData){
 
 
           let cardDiv = document.createElement("div");
-          cardDiv.className = "card";
+          cardDiv.className = "card m-2 p-2";
 
           let resultImg = document.createElement("img");
           resultImg.src = results[i].image;
@@ -418,7 +420,7 @@ function displayCharacters(jsonData){
           cardBodyDiv.className = "card-body";
 
           let nameP = document.createElement("p");
-          nameP.innerHTML = "<strong>" + results[i].name + "</strong>";
+          // nameP.innerHTML = "<strong>" + results[i].name + "</strong>";
           let nameLink = document.createElement("a");
           nameLink.href = results[i].url;
           nameLink.alt = results[i].name;
@@ -427,7 +429,7 @@ function displayCharacters(jsonData){
           nameLink.addEventListener('click', loadDetailsModal);
 
           let genderP = document.createElement("p");
-          genderP.innerHTML = "Gender: " + results[i].gender;
+          genderP.innerHTML = "Gender: "; // + results[i].gender;
           let genderLink = document.createElement("a");
           genderLink.href = results[i].gender;
           genderLink.alt = results[i].gender;
@@ -436,7 +438,7 @@ function displayCharacters(jsonData){
           genderLink.addEventListener('click', searchByCharacterGender);
 
           let speciesP = document.createElement("p");
-          speciesP.innerHTML = "Species: " + results[i].species;
+          speciesP.innerHTML = "Species: "; // + results[i].species;
           let speciesLink = document.createElement("a");
           speciesLink.href = results[i].species;
           speciesLink.alt = results[i].species;
@@ -445,7 +447,7 @@ function displayCharacters(jsonData){
           speciesLink.addEventListener('click', searchByCharacterSpecies);
 
           let statusP = document.createElement("p");
-          statusP.innerHTML = "Status: " + results[i].status;
+          statusP.innerHTML = "Status: "; // + results[i].status;
           let statusLink = document.createElement("a");
           statusLink.href = results[i].status;
           statusLink.alt = results[i].status;
@@ -454,13 +456,15 @@ function displayCharacters(jsonData){
           statusLink.addEventListener('click', searchByCharacterStatus);
 
           let typeP = document.createElement("p");
-          typeP.innerHTML = "Type: " + results[i].type;
           let typeLink = document.createElement("a");
-          typeLink.href = results[i].type;
-          typeLink.alt = results[i].type;
-          typeLink.innerHTML = results[i].type;
-          // typeLink.target = "_blank";
-          typeLink.addEventListener('click', searchByCharacterType);
+          if (results[i].type != "") {
+            typeP.innerHTML = "Type: "; // + results[i].type;
+            typeLink.href = results[i].type;
+            typeLink.alt = results[i].type;
+            typeLink.innerHTML = results[i].type;
+            // typeLink.target = "_blank";
+            typeLink.addEventListener('click', searchByCharacterType);
+          };
 
           let locationP = document.createElement("p");
           locationP.innerHTML = "Location: "; // + results[i].location.name;
@@ -499,11 +503,36 @@ function displayCharacters(jsonData){
           let episodeList = "";
 
           for (let j = 0; j < episodeArray.length; j++) {
-            // episodeP.innerHTML += episodeArray[j];
+
             let urlLink = document.createElement("a");
             urlLink.href = episodeArray[j];
             urlLink.alt = episodeArray[j];
             urlLink.innerHTML = episodeArray[j];
+            // Use lookup arrays
+            // // https://stackoverflow.com/questions/13964155/get-javascript-object-from-array-of-objects-by-value-of-property
+            // // https://stackoverflow.com/questions/52460473/find-object-with-specific-value-in-array/52460509
+            // // console.log("index of episode match", arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1)), "index of item in array", episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1));
+            // let indexOfEpisodeName = arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1));
+            // console.log("indexOfEpisodeName", indexOfEpisodeName);
+            // console.log("episodeName", arrEpisodes[indexOfEpisodeName].name);
+            // // console.log("id from episode URL", episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1), "index of match", arrEpisodes[arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1))], "name of match", arrEpisodes[arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1))].name);
+            // // if (arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1)) == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1)) {
+            // if (arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1))) {
+            //   // console.log("id from episode link", episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1), "index of match", arrEpisodes[arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1))].name);
+            //   console.log("episode name", arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1)).name)
+            //   // urlLink.innerHTML = arrEpisodes[arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1))].name;
+            // } else {
+            //   urlLink.innerHTML = episodeArray[j];
+            // };
+
+            for (let k = 0; k < arrEpisodes.length; k++) {
+              if (episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1) == arrEpisodes[k].id) {
+                // console.log("episode name", arrEpisodes[k].name, "it's a match");
+                urlLink.innerHTML = arrEpisodes[k].name;
+                break;
+              };
+            };
+
             // urlLink.target = "_blank";
             urlLink.addEventListener('click', loadDetailsModal);
 
@@ -516,7 +545,7 @@ function displayCharacters(jsonData){
               episodeList += ",";
             };
         
-            episodeP.appendChild(urlLink);
+            // episodeP.appendChild(urlLink);
             // if (j < episodeArray.length - 1) {
             //   episodeP.innerHTML += ", ";
             // };
@@ -524,7 +553,7 @@ function displayCharacters(jsonData){
 
           episodeLink.href = episodesURL + episodeList;
           episodeLink.alt = episodesURL + episodeList;
-          episodeLink.innerHTML = episodesURL + episodeList;
+          episodeLink.innerHTML = "All Episode(s)"; // episodesURL + episodeList;
           // episodeLink.target = "_blank";
           if (episodeArray.length > 1) {
             episodeLink.addEventListener('click', getMultipleEpisodes);
@@ -534,20 +563,24 @@ function displayCharacters(jsonData){
 
 
           cardBodyDiv.appendChild(nameP);
-          cardBodyDiv.appendChild(nameLink);
+          nameP.appendChild(nameLink);
           cardBodyDiv.appendChild(genderP);
-          cardBodyDiv.appendChild(genderLink);
+          genderP.appendChild(genderLink);
           cardBodyDiv.appendChild(speciesP);
-          cardBodyDiv.appendChild(speciesLink);
+          speciesP.appendChild(speciesLink);
           cardBodyDiv.appendChild(statusP);
-          cardBodyDiv.appendChild(statusLink);
-          cardBodyDiv.appendChild(typeP);
-          cardBodyDiv.appendChild(typeLink);
+          statusP.appendChild(statusLink);
+
+          if (results[i].type != "") {
+            cardBodyDiv.appendChild(typeP);
+            typeP.appendChild(typeLink);
+          };
+
           cardBodyDiv.appendChild(locationP);
           cardBodyDiv.appendChild(originP);
 
           cardBodyDiv.appendChild(episodeP);
-          cardBodyDiv.appendChild(episodeLink);
+          episodeP.appendChild(episodeLink);
 
           cardDiv.appendChild(resultImg);
           cardDiv.appendChild(cardBodyDiv);
@@ -586,6 +619,13 @@ function displayCharacters(jsonData){
     if (currentPage >= lastPage) {
       resultsContainerDiv.removeChild(moreRowDiv)
     };
+
+    // Search results do have pagination on them but there is an error in the pagination code
+    // console.log(searchType);
+    // console.log(searchString);
+    // if (searchString !== "") {
+    //   resultsContainerDiv.removeChild(moreRowDiv)
+    // };
 
     resultsDiv.appendChild(resultsContainerDiv);
 
@@ -637,13 +677,13 @@ function displayLocations(jsonData){
 
 
           let cardDiv = document.createElement("div");
-          cardDiv.className = "card";
+          cardDiv.className = "card m-2 p-2";
 
           let cardBodyDiv = document.createElement("div");
           cardBodyDiv.className = "card-body";
 
           let nameP = document.createElement("p");
-          nameP.innerHTML = "<strong>" + results[i].name + "</strong>";
+          // nameP.innerHTML = "<strong>" + results[i].name + "</strong>";
           let nameLink = document.createElement("a");
           nameLink.href = results[i].url;
           nameLink.alt = results[i].name;
@@ -652,7 +692,7 @@ function displayLocations(jsonData){
           nameLink.addEventListener('click', loadDetailsModal);
 
           let dimensionP = document.createElement("p");
-          dimensionP.innerHTML = "Dimension: " + results[i].dimension;
+          dimensionP.innerHTML = "Dimension: "; // + results[i].dimension;
           let dimensionLink = document.createElement("a");
           dimensionLink.href = results[i].dimension;
           dimensionLink.alt = results[i].dimension;
@@ -661,7 +701,7 @@ function displayLocations(jsonData){
           dimensionLink.addEventListener('click', searchByDimension);
 
           let typeP = document.createElement("p");
-          typeP.innerHTML = "Type: " + results[i].type;
+          typeP.innerHTML = "Type: "; // + results[i].type;
           let typeLink = document.createElement("a");
           typeLink.href = results[i].type;
           typeLink.alt = results[i].type;
@@ -682,6 +722,15 @@ function displayLocations(jsonData){
             urlLink.href = residentsArray[j];
             urlLink.alt = residentsArray[j];
             urlLink.innerHTML = residentsArray[j];
+
+            for (let k = 0; k < arrCharacters.length; k++) {
+              if (residentsArray[j].substr(residentsArray[j].lastIndexOf('/') + 1) == arrCharacters[k].id) {
+                // console.log("character name", arrCharacters[k].name, "it's a match");
+                urlLink.innerHTML = arrCharacters[k].name;
+                break;
+              };
+            };
+
             // urlLink.target = "_blank";
             urlLink.addEventListener('click', loadDetailsModal);
 
@@ -694,7 +743,7 @@ function displayLocations(jsonData){
               residentList += ",";
             };
 
-            residentsP.appendChild(urlLink);
+            // residentsP.appendChild(urlLink);
             // if (j < residentsArray.length - 1) {
             //   residentsP.innerHTML += ", ";
             // };
@@ -702,7 +751,7 @@ function displayLocations(jsonData){
 
           residentsLink.href = charactersURL + residentList;
           residentsLink.alt = charactersURL + residentList;
-          residentsLink.innerHTML = charactersURL + residentList;
+          residentsLink.innerHTML = "All Resident(s)"; // charactersURL + residentList;
           // residentsLink.target = "_blank";
           if (residentsArray.length > 1) {
             residentsLink.addEventListener('click', getMultipleCharacters);
@@ -714,12 +763,12 @@ function displayLocations(jsonData){
           cardBodyDiv.appendChild(nameP);
           cardBodyDiv.appendChild(nameLink);
           cardBodyDiv.appendChild(dimensionP);
-          cardBodyDiv.appendChild(dimensionLink);
+          dimensionP.appendChild(dimensionLink);
           cardBodyDiv.appendChild(typeP);
-          cardBodyDiv.appendChild(typeLink);
+          typeP.appendChild(typeLink);
 
           cardBodyDiv.appendChild(residentsP);
-          cardBodyDiv.appendChild(residentsLink);
+          residentsP.appendChild(residentsLink);
 
           cardDiv.appendChild(cardBodyDiv);
           resultsRowDiv.appendChild(cardDiv);
@@ -757,6 +806,13 @@ function displayLocations(jsonData){
     if (currentPage >= lastPage) {
       resultsContainerDiv.removeChild(moreRowDiv)
     };
+
+    // Search results do have pagination on them but there is an error in the pagination code
+    // console.log(searchType);
+    // console.log(searchString);
+    // if (searchType !== "") {
+    //   resultsContainerDiv.removeChild(moreRowDiv)
+    // };
 
     resultsDiv.appendChild(resultsContainerDiv);
 
@@ -806,13 +862,13 @@ function displayEpisodes(jsonData){
 
 
       let cardDiv = document.createElement("div");
-      cardDiv.className = "card";
+      cardDiv.className = "card m-2 p-2";
 
       let cardBodyDiv = document.createElement("div");
       cardBodyDiv.className = "card-body";
 
       let nameP = document.createElement("p");
-      nameP.innerHTML = "<strong>" + results[i].name + "</strong>";
+      // nameP.innerHTML = "<strong>" + results[i].name + "</strong>";
       let nameLink = document.createElement("a");
       nameLink.href = results[i].url;
       nameLink.alt = results[i].name;
@@ -840,6 +896,15 @@ function displayEpisodes(jsonData){
         urlLink.href = charactersArray[j];
         urlLink.alt = charactersArray[j];
         urlLink.innerHTML = charactersArray[j];
+
+        for (let k = 0; k < arrCharacters.length; k++) {
+          if (charactersArray[j].substr(charactersArray[j].lastIndexOf('/') + 1) == arrCharacters[k].id) {
+            // console.log("character name", arrCharacters[k].name, "it's a match");
+            urlLink.innerHTML = arrCharacters[k].name;
+            break;
+          };
+        };
+
         // urlLink.target = "_blank";
         urlLink.addEventListener('click', loadDetailsModal);
 
@@ -852,7 +917,7 @@ function displayEpisodes(jsonData){
           charactersList += ",";
         };
 
-        charactersP.appendChild(urlLink);
+        // charactersP.appendChild(urlLink);
         // if (j < charactersArray.length - 1) {
         //   characters.innerHTML += ", ";
         // };
@@ -860,7 +925,7 @@ function displayEpisodes(jsonData){
 
       charactersLink.href = charactersURL + charactersList;
       charactersLink.alt = charactersURL + charactersList;
-      charactersLink.innerHTML = charactersURL + charactersList;
+      charactersLink.innerHTML = "All Character(s)"; // charactersURL + charactersList;
       // charactersLink.target = "_blank";
       if (charactersArray.length > 1) {
         charactersLink.addEventListener('click', getMultipleCharacters);
@@ -874,7 +939,7 @@ function displayEpisodes(jsonData){
       cardBodyDiv.appendChild(air_dateP);
 
       cardBodyDiv.appendChild(charactersP);
-      cardBodyDiv.appendChild(charactersLink);
+      charactersP.appendChild(charactersLink);
 
       cardDiv.appendChild(cardBodyDiv);
       resultsRowDiv.appendChild(cardDiv);
@@ -913,6 +978,13 @@ function displayEpisodes(jsonData){
     resultsContainerDiv.removeChild(moreRowDiv)
   };
 
+  // Search results do have pagination on them but there is an error in the pagination code
+  // console.log(searchType);
+  // console.log(searchString);
+  // if (searchType !== "") {
+  //   resultsContainerDiv.removeChild(moreRowDiv)
+  // };
+  
     resultsDiv.appendChild(resultsContainerDiv);
 
     // View lookup arrays
@@ -1052,14 +1124,14 @@ function displayCharactersModal(jsonData){
           // let copiedarrCharacters = Array.from(new Set(id.map(a => a.id))).map(id => { return id.find(a => a.id === id) });
           // console.log(copiedarrCharacters);
 
-  if (results[i].species !== "") {
-    if (arrSearchSpecies.indexOf(results[i].species) === -1) {
-      arrSearchSpecies.push(results[i].species);
+  if (results.species !== "") {
+    if (arrSearchSpecies.indexOf(results.species) === -1) {
+      arrSearchSpecies.push(results.species);
     };
   };
-  if (results[i].type !== "") {
-    if (arrSearchCharacterTypes.indexOf(results[i].type) === -1) {
-      arrSearchCharacterTypes.push(results[i].type);
+  if (results.type !== "") {
+    if (arrSearchCharacterTypes.indexOf(results.type) === -1) {
+      arrSearchCharacterTypes.push(results.type);
     };
   };
 
@@ -1077,7 +1149,7 @@ function displayCharactersModal(jsonData){
   nameLink.addEventListener('click', loadDetailsModal);
 
   let genderP = document.createElement("p");
-  genderP.innerHTML = "Gender: " + results.gender;
+  genderP.innerHTML = "Gender: "; // + results.gender;
   let genderLink = document.createElement("a");
   genderLink.href = results.gender;
   genderLink.alt = results.gender;
@@ -1086,7 +1158,7 @@ function displayCharactersModal(jsonData){
   genderLink.addEventListener('click', searchByCharacterGender);
 
   let speciesP = document.createElement("p");
-  speciesP.innerHTML = "Species: " + results.species;
+  speciesP.innerHTML = "Species: "; // + results.species;
   let speciesLink = document.createElement("a");
   speciesLink.href = results.species;
   speciesLink.alt = results.species;
@@ -1095,7 +1167,7 @@ function displayCharactersModal(jsonData){
   speciesLink.addEventListener('click', searchByCharacterSpecies);
 
   let statusP = document.createElement("p");
-  statusP.innerHTML = "Status: " + results.status;
+  statusP.innerHTML = "Status: "; // + results.status;
   let statusLink = document.createElement("a");
   statusLink.href = results.status;
   statusLink.alt = results.status;
@@ -1104,7 +1176,7 @@ function displayCharactersModal(jsonData){
   statusLink.addEventListener('click', searchByCharacterStatus);
 
   let typeP = document.createElement("p");
-  typeP.innerHTML = "Type: " + results.type;
+  typeP.innerHTML = "Type: "; // + results.type;
   let typeLink = document.createElement("a");
   typeLink.href = results.type;
   typeLink.alt = results.type;
@@ -1174,7 +1246,7 @@ function displayCharactersModal(jsonData){
 
   episodeLink.href = episodesURL + episodeList;
   episodeLink.alt = episodesURL + episodeList;
-  episodeLink.innerHTML = episodesURL + episodeList;
+  episodeLink.innerHTML = "All Episode(s)"; // episodesURL + episodeList;
   // episodeLink.target = "_blank";
   if (episodeArray.length > 1) {
     episodeLink.addEventListener('click', getMultipleEpisodes);
@@ -1184,20 +1256,20 @@ function displayCharactersModal(jsonData){
 
 
   detailsModalBody.appendChild(resultImg);
-  detailsModalBody.appendChild(nameLink);
+  // detailsModalBody.appendChild(nameLink);
   detailsModalBody.appendChild(genderP);
-  detailsModalBody.appendChild(genderLink);
+  genderP.appendChild(genderLink);
   detailsModalBody.appendChild(speciesP);
-  detailsModalBody.appendChild(speciesLink);
+  speciesP.appendChild(speciesLink);
   detailsModalBody.appendChild(statusP);
-  detailsModalBody.appendChild(statusLink);
+  statusP.appendChild(statusLink);
   detailsModalBody.appendChild(typeP);
-  detailsModalBody.appendChild(typeLink);
+  typeP.appendChild(typeLink);
   detailsModalBody.appendChild(locationP);
   detailsModalBody.appendChild(originP);
 
-  detailsModalBody.appendChild(episodeP);
   detailsModalBody.appendChild(episodeLink);
+  detailsModalBody.appendChild(episodeP);
 
   $('#detailsModal').modal("show");
 
@@ -1222,8 +1294,8 @@ function displayLocationsModal(jsonData){
   // Build lookup arrays
   // https://truetocode.com/check-for-duplicates-in-array-of-javascript-objects/
   let arrIDs =  arrLocations.map((value)=>{ return value.id;});
-  if (arrIDs.indexOf(results[i].id) === -1) {
-    arrLocations.push({id: results[i].id, name: results[i].name, url: results[i].url});
+  if (arrIDs.indexOf(results.id) === -1) {
+    arrLocations.push({id: results.id, name: results.name, url: results.url});
   };
 
 
@@ -1237,7 +1309,7 @@ function displayLocationsModal(jsonData){
   nameLink.addEventListener('click', loadDetailsModal);
 
   let dimensionP = document.createElement("p");
-  dimensionP.innerHTML = "Dimension: " + results.dimension;
+  dimensionP.innerHTML = "Dimension: "; // + results.dimension;
   let dimensionLink = document.createElement("a");
   dimensionLink.href = results.dimension;
   dimensionLink.alt = results.dimension;
@@ -1246,7 +1318,7 @@ function displayLocationsModal(jsonData){
   dimensionLink.addEventListener('click', searchByDimension);
 
   let typeP = document.createElement("p");
-  typeP.innerHTML = "Type: " + results.type;
+  typeP.innerHTML = "Type: "; // + results.type;
   let typeLink = document.createElement("a");
   typeLink.href = results.type;
   typeLink.alt = results.type;
@@ -1267,6 +1339,15 @@ function displayLocationsModal(jsonData){
     urlLink.href = residentsArray[j];
     urlLink.alt = residentsArray[j];
     urlLink.innerHTML = residentsArray[j];
+
+    for (let k = 0; k < arrCharacters.length; k++) {
+      if (residentsArray[j].substr(residentsArray[j].lastIndexOf('/') + 1) == arrCharacters[k].id) {
+        // console.log("character name", arrCharacters[k].name, "it's a match");
+        urlLink.innerHTML = arrCharacters[k].name;
+        break;
+      };
+    };
+
     // urlLink.target = "_blank";
     urlLink.addEventListener('click', loadDetailsModal);
 
@@ -1287,7 +1368,7 @@ function displayLocationsModal(jsonData){
 
   residentsLink.href = charactersURL + residentList;
   residentsLink.alt = charactersURL + residentList;
-  residentsLink.innerHTML = charactersURL + residentList;
+  residentsLink.innerHTML = "All Resident(s)"; // charactersURL + residentList;
   // residentsLink.target = "_blank";
   if (residentsArray.length > 1) {
     residentsLink.addEventListener('click', getMultipleCharacters);
@@ -1296,14 +1377,14 @@ function displayLocationsModal(jsonData){
   };
 
 
-  detailsModalBody.appendChild(nameLink);
+  // detailsModalBody.appendChild(nameLink);
   detailsModalBody.appendChild(dimensionP);
-  detailsModalBody.appendChild(dimensionLink);
+  dimensionP.appendChild(dimensionLink);
   detailsModalBody.appendChild(typeP);
-  detailsModalBody.appendChild(typeLink);
+  typeP.appendChild(typeLink);
 
-  detailsModalBody.appendChild(residentsP);
   detailsModalBody.appendChild(residentsLink);
+  detailsModalBody.appendChild(residentsP);
 
   $('#detailsModal').modal("show");
 
@@ -1326,8 +1407,8 @@ function displayEpisodesModal(jsonData){
   // Build lookup arrays
   // https://truetocode.com/check-for-duplicates-in-array-of-javascript-objects/
   let arrIDs =  arrEpisodes.map((value)=>{ return value.id;});
-  if (arrIDs.indexOf(results[i].id) === -1) {
-    arrEpisodes.push({id: results[i].id, name: results[i].name, url: results[i].url});
+  if (arrIDs.indexOf(results.id) === -1) {
+    arrEpisodes.push({id: results.id, name: results.name, url: results.url});
   };
 
 
@@ -1360,6 +1441,15 @@ function displayEpisodesModal(jsonData){
         urlLink.href = charactersArray[j];
         urlLink.alt = charactersArray[j];
         urlLink.innerHTML = charactersArray[j];
+
+        for (let k = 0; k < arrCharacters.length; k++) {
+          if (charactersArray[j].substr(charactersArray[j].lastIndexOf('/') + 1) == arrCharacters[k].id) {
+            // console.log("character name", arrCharacters[k].name, "it's a match");
+            urlLink.innerHTML = arrCharacters[k].name;
+            break;
+          };
+        };
+
         // urlLink.target = "_blank";
         urlLink.addEventListener('click', loadDetailsModal);
 
@@ -1380,7 +1470,7 @@ function displayEpisodesModal(jsonData){
 
       charactersLink.href = charactersURL + charactersList;
       charactersLink.alt = charactersURL + charactersList;
-      charactersLink.innerHTML = charactersURL + charactersList;
+      charactersLink.innerHTML = "All Character(s)"; // charactersURL + charactersList;
       // charactersLink.target = "_blank";
       if (charactersArray.length > 1) {
         charactersLink.addEventListener('click', getMultipleCharacters);
@@ -1388,12 +1478,12 @@ function displayEpisodesModal(jsonData){
         charactersLink.addEventListener('click', loadDetailsModal);
       };
 
-      detailsModalBody.appendChild(nameLink);
+      // detailsModalBody.appendChild(nameLink);
       detailsModalBody.appendChild(episodeP);
       detailsModalBody.appendChild(air_dateP);
 
-      detailsModalBody.appendChild(charactersP);
       detailsModalBody.appendChild(charactersLink);
+      detailsModalBody.appendChild(charactersP);
 
       $('#detailsModal').modal("show");
 
@@ -1404,7 +1494,7 @@ function displayEpisodesModal(jsonData){
 
 function getMultipleCharacters(e){
   e.preventDefault();
-  // console.log(e);
+  console.log(e);
 
   // txtSearch.value = e.srcElement.text.replace(',', '');
   // txtExcludeSearch.value = "";
@@ -1422,7 +1512,7 @@ function getMultipleCharacters(e){
   // moreLink.style.display = "none";
 
 
-  URL = e.srcElement.text;
+  URL = e.srcElement.href; // text;
   searchType = "characters";
 
   // getResults(e);
@@ -1501,7 +1591,7 @@ function displayMultipleCharacters(jsonData){
 
 
           let cardDiv = document.createElement("div");
-          cardDiv.className = "card";
+          cardDiv.className = "card m-2 p-2";
 
           let resultImg = document.createElement("img");
           resultImg.src = results[i].image;
@@ -1510,7 +1600,7 @@ function displayMultipleCharacters(jsonData){
           cardBodyDiv.className = "card-body";
 
           let nameP = document.createElement("p");
-          nameP.innerHTML = "<strong>" + results[i].name + "</strong>";
+          // nameP.innerHTML = "<strong>" + results[i].name + "</strong>";
           let nameLink = document.createElement("a");
           nameLink.href = results[i].url;
           nameLink.alt = results[i].name;
@@ -1519,7 +1609,7 @@ function displayMultipleCharacters(jsonData){
           nameLink.addEventListener('click', loadDetailsModal);
 
           let genderP = document.createElement("p");
-          genderP.innerHTML = "Gender: " + results[i].gender;
+          genderP.innerHTML = "Gender: "; // + results[i].gender;
           let genderLink = document.createElement("a");
           genderLink.href = results[i].gender;
           genderLink.alt = results[i].gender;
@@ -1528,7 +1618,7 @@ function displayMultipleCharacters(jsonData){
           genderLink.addEventListener('click', searchByCharacterGender);
 
           let speciesP = document.createElement("p");
-          speciesP.innerHTML = "Species: " + results[i].species;
+          speciesP.innerHTML = "Species: "; // + results[i].species;
           let speciesLink = document.createElement("a");
           speciesLink.href = results[i].species;
           speciesLink.alt = results[i].species;
@@ -1537,7 +1627,7 @@ function displayMultipleCharacters(jsonData){
           speciesLink.addEventListener('click', searchByCharacterSpecies);
 
           let statusP = document.createElement("p");
-          statusP.innerHTML = "Status: " + results[i].status;
+          statusP.innerHTML = "Status: "; // + results[i].status;
           let statusLink = document.createElement("a");
           statusLink.href = results[i].status;
           statusLink.alt = results[i].status;
@@ -1546,13 +1636,15 @@ function displayMultipleCharacters(jsonData){
           statusLink.addEventListener('click', searchByCharacterStatus);
 
           let typeP = document.createElement("p");
-          typeP.innerHTML = "Type: " + results[i].type;
           let typeLink = document.createElement("a");
-          typeLink.href = results[i].type;
-          typeLink.alt = results[i].type;
-          typeLink.innerHTML = results[i].type;
-          // typeLink.target = "_blank";
-          typeLink.addEventListener('click', searchByCharacterType);
+          if (results[i].type != "") {
+            typeP.innerHTML = "Type: "; // + results[i].type;
+            typeLink.href = results[i].type;
+            typeLink.alt = results[i].type;
+            typeLink.innerHTML = results[i].type;
+            // typeLink.target = "_blank";
+            typeLink.addEventListener('click', searchByCharacterType);
+          };
 
           let locationP = document.createElement("p");
           locationP.innerHTML = "Location: "; // + results[i].location.name;
@@ -1608,7 +1700,7 @@ function displayMultipleCharacters(jsonData){
               episodeList += ",";
             };
         
-            episodeP.appendChild(urlLink);
+            // episodeP.appendChild(urlLink);
             // if (j < episodeArray.length - 1) {
             //   episodeP.innerHTML += ", ";
             // };
@@ -1616,7 +1708,7 @@ function displayMultipleCharacters(jsonData){
 
           episodeLink.href = episodesURL + episodeList;
           episodeLink.alt = episodesURL + episodeList;
-          episodeLink.innerHTML = episodesURL + episodeList;
+          episodeLink.innerHTML = "All Episode(s)"; // episodesURL + episodeList;
           // episodeLink.target = "_blank";
           if (episodeArray.length > 1) {
             episodeLink.addEventListener('click', getMultipleEpisodes);
@@ -1628,18 +1720,22 @@ function displayMultipleCharacters(jsonData){
           cardBodyDiv.appendChild(nameP);
           cardBodyDiv.appendChild(nameLink);
           cardBodyDiv.appendChild(genderP);
-          cardBodyDiv.appendChild(genderLink);
+          genderP.appendChild(genderLink);
           cardBodyDiv.appendChild(speciesP);
-          cardBodyDiv.appendChild(speciesLink);
+          speciesP.appendChild(speciesLink);
           cardBodyDiv.appendChild(statusP);
-          cardBodyDiv.appendChild(statusLink);
-          cardBodyDiv.appendChild(typeP);
-          cardBodyDiv.appendChild(typeLink);
+          statusP.appendChild(statusLink);
+
+          if (results[i].type != "") {
+            cardBodyDiv.appendChild(typeP);
+            typeP.appendChild(typeLink);
+          };
+
           cardBodyDiv.appendChild(locationP);
           cardBodyDiv.appendChild(originP);
 
           cardBodyDiv.appendChild(episodeP);
-          cardBodyDiv.appendChild(episodeLink);
+          episodeP.appendChild(episodeLink);
 
           cardDiv.appendChild(resultImg);
           cardDiv.appendChild(cardBodyDiv);
@@ -1682,7 +1778,7 @@ function getMultipleLocations(e){
   // moreLink.style.display = "none";
 
 
-  URL = e.srcElement.text;
+  URL = e.srcElement.href; // text;
   searchType = "locations";
 
   // getResults(e);
@@ -1737,7 +1833,7 @@ function displayMultipleLocations(jsonData){
           // console.log(results[i]);
 
           let cardDiv = document.createElement("div");
-          cardDiv.className = "card";
+          cardDiv.className = "card m-2 p-2";
 
           let cardBodyDiv = document.createElement("div");
           cardBodyDiv.className = "card-body";
@@ -1752,7 +1848,7 @@ function displayMultipleLocations(jsonData){
           nameLink.addEventListener('click', loadDetailsModal);
 
           let dimensionP = document.createElement("p");
-          dimensionP.innerHTML = "Dimension: " + results[i].dimension;
+          dimensionP.innerHTML = "Dimension: "; // + results[i].dimension;
           let dimensionLink = document.createElement("a");
           dimensionLink.href = results[i].dimension;
           dimensionLink.alt = results[i].dimension;
@@ -1761,7 +1857,7 @@ function displayMultipleLocations(jsonData){
           dimensionLink.addEventListener('click', searchByDimension);
 
           let typeP = document.createElement("p");
-          typeP.innerHTML = "Type: " + results[i].type;
+          typeP.innerHTML = "Type: "; // + results[i].type;
           let typeLink = document.createElement("a");
           typeLink.href = results[i].type;
           typeLink.alt = results[i].type;
@@ -1783,6 +1879,15 @@ function displayMultipleLocations(jsonData){
             urlLink.href = residentsArray[j];
             urlLink.alt = residentsArray[j];
             urlLink.innerHTML = residentsArray[j];
+
+            for (let k = 0; k < arrCharacters.length; k++) {
+              if (residentsArray[j].substr(residentsArray[j].lastIndexOf('/') + 1) == arrCharacters[k].id) {
+                // console.log("character name", arrCharacters[k].name, "it's a match");
+                urlLink.innerHTML = arrCharacters[k].name;
+                break;
+              };
+            };
+            
             // urlLink.target = "_blank";
             urlLink.addEventListener('click', loadDetailsModal);
 
@@ -1795,7 +1900,7 @@ function displayMultipleLocations(jsonData){
               residentList += ",";
             };
 
-            residentsP.appendChild(urlLink);
+            // residentsP.appendChild(urlLink);
             // if (j < residentsArray.length - 1) {
             //   residentsP.innerHTML += ", ";
             // };
@@ -1803,7 +1908,7 @@ function displayMultipleLocations(jsonData){
 
           residentsLink.href = charactersURL + residentList;
           residentsLink.alt = charactersURL + residentList;
-          residentsLink.innerHTML = charactersURL + residentList;
+          residentsLink.innerHTML = "All Resident(s)"; // charactersURL + residentList;
           // residentsLink.target = "_blank";
           if (residentsArray.length > 1) {
             residentsLink.addEventListener('click', getMultipleCharacters);
@@ -1815,12 +1920,12 @@ function displayMultipleLocations(jsonData){
           cardBodyDiv.appendChild(nameP);
           cardBodyDiv.appendChild(nameLink);
           cardBodyDiv.appendChild(dimensionP);
-          cardBodyDiv.appendChild(dimensionLink);
+          dimensionP.appendChild(dimensionLink);
           cardBodyDiv.appendChild(typeP);
-          cardBodyDiv.appendChild(typeLink);
+          typeP.appendChild(typeLink);
 
           cardBodyDiv.appendChild(residentsP);
-          cardBodyDiv.appendChild(residentsLink);
+          residentsP.appendChild(residentsLink);
 
           cardDiv.appendChild(cardBodyDiv);
           resultsRowDiv.appendChild(cardDiv);
@@ -1857,7 +1962,7 @@ function getMultipleEpisodes(e){
   // moreLink.style.display = "none";
 
 
-  URL = e.srcElement.text;
+  URL = e.srcElement.href; // text;
   searchType = "episodes";
 
   // getResults(e);
@@ -1888,8 +1993,8 @@ function displayMultipleLEpisodes(jsonData){
   // Build lookup arrays
   // https://truetocode.com/check-for-duplicates-in-array-of-javascript-objects/
   let arrIDs =  arrEpisodes.map((value)=>{ return value.id;});
-  if (arrIDs.indexOf(results[i].id) === -1) {
-    arrEpisodes.push({id: results[i].id, name: results[i].name, url: results[i].url});
+  if (arrIDs.indexOf(results.id) === -1) {
+    arrEpisodes.push({id: results.id, name: results.name, url: results.url});
   };
 
 
@@ -1909,7 +2014,7 @@ function displayMultipleLEpisodes(jsonData){
       // console.log(results[i]);
 
       let cardDiv = document.createElement("div");
-      cardDiv.className = "card";
+      cardDiv.className = "card m-2 p-2";
 
       let cardBodyDiv = document.createElement("div");
       cardBodyDiv.className = "card-body";
@@ -1943,6 +2048,15 @@ function displayMultipleLEpisodes(jsonData){
         urlLink.href = charactersArray[j];
         urlLink.alt = charactersArray[j];
         urlLink.innerHTML = charactersArray[j];
+
+        for (let k = 0; k < arrCharacters.length; k++) {
+          if (charactersArray[j].substr(charactersArray[j].lastIndexOf('/') + 1) == arrCharacters[k].id) {
+            // console.log("character name", arrCharacters[k].name, "it's a match");
+            urlLink.innerHTML = arrCharacters[k].name;
+            break;
+          };
+        };
+        
         // urlLink.target = "_blank";
         urlLink.addEventListener('click', loadDetailsModal);
 
@@ -1955,7 +2069,7 @@ function displayMultipleLEpisodes(jsonData){
           charactersList += ",";
         };
 
-        charactersP.appendChild(urlLink);
+        // charactersP.appendChild(urlLink);
         // if (j < charactersArray.length - 1) {
         //   characters.innerHTML += ", ";
         // };
@@ -1963,7 +2077,7 @@ function displayMultipleLEpisodes(jsonData){
 
       charactersLink.href = charactersURL + charactersList;
       charactersLink.alt = charactersURL + charactersList;
-      charactersLink.innerHTML = charactersURL + charactersList;
+      charactersLink.innerHTML = "All Character(s)"; // charactersURL + charactersList;
       // charactersLink.target = "_blank";
       if (charactersArray.length > 1) {
         charactersLink.addEventListener('click', getMultipleCharacters);
@@ -1977,7 +2091,7 @@ function displayMultipleLEpisodes(jsonData){
       cardBodyDiv.appendChild(air_dateP);
 
       cardBodyDiv.appendChild(charactersP);
-      cardBodyDiv.appendChild(charactersLink);
+      charactersP.appendChild(charactersLink);
       
       cardDiv.appendChild(cardBodyDiv);
       resultsRowDiv.appendChild(cardDiv);
