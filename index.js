@@ -26,18 +26,18 @@ hdrSearchEpisodes.addEventListener('click', toggleForms);
 
 const txtSearchCharacterName = document.getElementById("txtSearchCharacterName");
 const ddSearchStatus = document.getElementById("ddSearchStatus");
-const txtSearchSpecies = document.getElementById("txtSearchSpecies");
+// const txtSearchSpecies = document.getElementById("txtSearchSpecies");
 const ddSearchSpecies = document.getElementById("ddSearchSpecies");
-const txtSearchCharacterType = document.getElementById("txtSearchCharacterType");
+// const txtSearchCharacterType = document.getElementById("txtSearchCharacterType");
 const ddSearchCharacterType = document.getElementById("ddSearchCharacterType");
 const ddSearchGender = document.getElementById("ddSearchGender");
 const btnSearchCharacters = document.getElementById("btnSearchCharacters");
 btnSearchCharacters.addEventListener('click', searchCharacters); 
 
 const txtSearchLocationName = document.getElementById("txtSearchLocationName");
-const txtSearchLocationType = document.getElementById("txtSearchLocationType");
+// const txtSearchLocationType = document.getElementById("txtSearchLocationType");
 const ddSearchLocationType = document.getElementById("ddSearchLocationType");
-const txtDimension = document.getElementById("txtDimension");
+// const txtDimension = document.getElementById("txtDimension");
 const ddSearchDimension = document.getElementById("ddSearchDimension");
 const btnSearchLocations = document.getElementById("btnSearchLocations");
 btnSearchLocations.addEventListener('click', searchLocations); 
@@ -70,6 +70,8 @@ let lastPage = 0;
 
 // Search results don't need a more link because they aren't paginated?
 // Search results do have pagination on them but there is an error in the pagination code?
+// Test getMultipleLocations, displayMultipleLocations
+
 // Build lookup arrays
 let arrCharacters = [];
 let arrLocations = [];
@@ -89,109 +91,109 @@ function toggleForms(e){
     resultsDiv.removeChild(resultsDiv.firstChild);
   };
 
-  // Remove old items from drop down boxes
-  while (ddSearchSpecies.firstChild) { // while the value is not null
-    ddSearchSpecies.removeChild(ddSearchSpecies.firstChild);
-  };
-  // Add first element back to drop down box
-  let optSearchSpecies = document.createElement("option");
-  optSearchSpecies.value = "";
-  optSearchSpecies.text = "Select Species";
-  ddSearchSpecies.add(optSearchSpecies);
-  // Sort the array
-  arrSearchSpecies.sort((a, b) => {
-    if (a > b) {
-        return 1;
-    } else {
-        return -1;
-    };
-  });
-  // Add items to drop down boxes
-  for (let i = 0; i < arrSearchSpecies.length; i++) {
-    // console.log(arrSearchSpecies[i]);
-    let opt = document.createElement("option");
-    opt.value = arrSearchSpecies[i];
-    opt.text = arrSearchSpecies[i];
-    ddSearchSpecies.add(opt);
-  };
+  // // Remove old items from drop down boxes
+  // while (ddSearchSpecies.firstChild) { // while the value is not null
+  //   ddSearchSpecies.removeChild(ddSearchSpecies.firstChild);
+  // };
+  // // Add first element back to drop down box
+  // let optSearchSpecies = document.createElement("option");
+  // optSearchSpecies.value = "";
+  // optSearchSpecies.text = "Select Species";
+  // ddSearchSpecies.add(optSearchSpecies);
+  // // Sort the array
+  // arrSearchSpecies.sort((a, b) => {
+  //   if (a > b) {
+  //       return 1;
+  //   } else {
+  //       return -1;
+  //   };
+  // });
+  // // Add items to drop down boxes
+  // for (let i = 0; i < arrSearchSpecies.length; i++) {
+  //   // console.log(arrSearchSpecies[i]);
+  //   let opt = document.createElement("option");
+  //   opt.value = arrSearchSpecies[i];
+  //   opt.text = arrSearchSpecies[i];
+  //   ddSearchSpecies.add(opt);
+  // };
   
-  // Remove old items from drop down boxes
-  while (ddSearchCharacterType.firstChild) { // while the value is not null
-    ddSearchCharacterType.removeChild(ddSearchCharacterType.firstChild);
-  };
-  // Add first element back to drop down box
-  let optSearchCharacterType = document.createElement("option");
-  optSearchCharacterType.value = "";
-  optSearchCharacterType.text = "Select Type";
-  ddSearchCharacterType.add(optSearchCharacterType);
-  // Sort the array
-  arrSearchCharacterTypes.sort((a, b) => {
-    if (a > b) {
-        return 1;
-    } else {
-        return -1;
-    };
-  });
-  // Add items to drop down boxes
-  for (let i = 0; i < arrSearchCharacterTypes.length; i++) {
-    // console.log(arrSearchSpecies[i]);
-    let opt = document.createElement("option");
-    opt.value = arrSearchCharacterTypes[i];
-    opt.text = arrSearchCharacterTypes[i];
-    ddSearchCharacterType.add(opt);
-  };
+  // // Remove old items from drop down boxes
+  // while (ddSearchCharacterType.firstChild) { // while the value is not null
+  //   ddSearchCharacterType.removeChild(ddSearchCharacterType.firstChild);
+  // };
+  // // Add first element back to drop down box
+  // let optSearchCharacterType = document.createElement("option");
+  // optSearchCharacterType.value = "";
+  // optSearchCharacterType.text = "Select Type";
+  // ddSearchCharacterType.add(optSearchCharacterType);
+  // // Sort the array
+  // arrSearchCharacterTypes.sort((a, b) => {
+  //   if (a > b) {
+  //       return 1;
+  //   } else {
+  //       return -1;
+  //   };
+  // });
+  // // Add items to drop down boxes
+  // for (let i = 0; i < arrSearchCharacterTypes.length; i++) {
+  //   // console.log(arrSearchSpecies[i]);
+  //   let opt = document.createElement("option");
+  //   opt.value = arrSearchCharacterTypes[i];
+  //   opt.text = arrSearchCharacterTypes[i];
+  //   ddSearchCharacterType.add(opt);
+  // };
 
-  // Remove old items from drop down boxes
-  while (ddSearchLocationType.firstChild) { // while the value is not null
-    ddSearchLocationType.removeChild(ddSearchLocationType.firstChild);
-  };
-  // Add first element back to drop down box
-  let optSearchLocationType = document.createElement("option");
-  optSearchLocationType.value = "";
-  optSearchLocationType.text = "Select Type";
-  ddSearchLocationType.add(optSearchLocationType);
-  // Sort the array
-  arrSearchLocationTypes.sort((a, b) => {
-    if (a > b) {
-        return 1;
-    } else {
-        return -1;
-    };
-  });
-  // Add items to drop down boxes
-  for (let i = 0; i < arrSearchLocationTypes.length; i++) {
-    // console.log(arrSearchSpecies[i]);
-    let opt = document.createElement("option");
-    opt.value = arrSearchLocationTypes[i];
-    opt.text = arrSearchLocationTypes[i];
-    ddSearchLocationType.add(opt);
-  };
+  // // Remove old items from drop down boxes
+  // while (ddSearchLocationType.firstChild) { // while the value is not null
+  //   ddSearchLocationType.removeChild(ddSearchLocationType.firstChild);
+  // };
+  // // Add first element back to drop down box
+  // let optSearchLocationType = document.createElement("option");
+  // optSearchLocationType.value = "";
+  // optSearchLocationType.text = "Select Type";
+  // ddSearchLocationType.add(optSearchLocationType);
+  // // Sort the array
+  // arrSearchLocationTypes.sort((a, b) => {
+  //   if (a > b) {
+  //       return 1;
+  //   } else {
+  //       return -1;
+  //   };
+  // });
+  // // Add items to drop down boxes
+  // for (let i = 0; i < arrSearchLocationTypes.length; i++) {
+  //   // console.log(arrSearchSpecies[i]);
+  //   let opt = document.createElement("option");
+  //   opt.value = arrSearchLocationTypes[i];
+  //   opt.text = arrSearchLocationTypes[i];
+  //   ddSearchLocationType.add(opt);
+  // };
 
-  // Remove old items from drop down boxes
-  while (ddSearchDimension.firstChild) { // while the value is not null
-    ddSearchDimension.removeChild(ddSearchDimension.firstChild);
-  };
-  // Add first element back to drop down box
-  let optSearchDimension = document.createElement("option");
-  optSearchDimension.value = "";
-  optSearchDimension.text = "Select Dimension";
-  ddSearchDimension.add(optSearchDimension);
-  // Sort the array
-  arrSearchDimensions.sort((a, b) => {
-    if (a > b) {
-        return 1;
-    } else {
-        return -1;
-    };
-  });
-  // Add items to drop down boxes
-  for (let i = 0; i < arrSearchDimensions.length; i++) {
-    // console.log(arrSearchSpecies[i]);
-    let opt = document.createElement("option");
-    opt.value = arrSearchDimensions[i];
-    opt.text = arrSearchDimensions[i];
-    ddSearchDimension.add(opt);
-  };
+  // // Remove old items from drop down boxes
+  // while (ddSearchDimension.firstChild) { // while the value is not null
+  //   ddSearchDimension.removeChild(ddSearchDimension.firstChild);
+  // };
+  // // Add first element back to drop down box
+  // let optSearchDimension = document.createElement("option");
+  // optSearchDimension.value = "";
+  // optSearchDimension.text = "Select Dimension";
+  // ddSearchDimension.add(optSearchDimension);
+  // // Sort the array
+  // arrSearchDimensions.sort((a, b) => {
+  //   if (a > b) {
+  //       return 1;
+  //   } else {
+  //       return -1;
+  //   };
+  // });
+  // // Add items to drop down boxes
+  // for (let i = 0; i < arrSearchDimensions.length; i++) {
+  //   // console.log(arrSearchSpecies[i]);
+  //   let opt = document.createElement("option");
+  //   opt.value = arrSearchDimensions[i];
+  //   opt.text = arrSearchDimensions[i];
+  //   ddSearchDimension.add(opt);
+  // };
 
   $('#collapseCharacters').collapse('hide');
   $('#collapseLocations').collapse('hide');
@@ -302,17 +304,17 @@ function searchCharacters(e){
     searchString += "&status=" + ddSearchStatus.value;
   };
 
-  if (txtSearchSpecies.value.length > 0) {
-    searchString += "&species=" + txtSearchSpecies.value.replace(' ', '%20');
-  };
+  // if (txtSearchSpecies.value.length > 0) {
+  //   searchString += "&species=" + txtSearchSpecies.value.replace(' ', '%20');
+  // };
 
   if (ddSearchSpecies.value !== "") {
     searchString += "&species=" + ddSearchSpecies.value.replace(' ', '%20');
   };
 
-  if (txtSearchCharacterType.value.length > 0) {
-    searchString += "&type=" + txtSearchCharacterType.value.replace(' ', '%20');
-  };
+  // if (txtSearchCharacterType.value.length > 0) {
+  //   searchString += "&type=" + txtSearchCharacterType.value.replace(' ', '%20');
+  // };
 
   if (ddSearchCharacterType.value !== "") {
     searchString += "&type=" + ddSearchCharacterType.value.replace(' ', '%20');
@@ -376,17 +378,17 @@ function searchLocations(e){
     searchString += "&name=" + txtSearchLocationName.value.replace(' ', '%20');
   };
 
-  if (txtSearchLocationType.value.length > 0) {
-    searchString += "&type=" + txtSearchLocationType.value.replace(' ', '%20');
-  };
+  // if (txtSearchLocationType.value.length > 0) {
+  //   searchString += "&type=" + txtSearchLocationType.value.replace(' ', '%20');
+  // };
 
   if (ddSearchLocationType.value !== "") {
     searchString += "&type=" + ddSearchLocationType.value.replace(' ', '%20');
   };
 
-  if (txtDimension.value.length > 0) {
-    searchString += "&dimension=" + txtDimension.value.replace(' ', '%20');
-  };
+  // if (txtDimension.value.length > 0) {
+  //   searchString += "&dimension=" + txtDimension.value.replace(' ', '%20');
+  // };
 
   if (ddSearchDimension.value !== "") {
     searchString += "&dimension=" + ddSearchDimension.value.replace(' ', '%20');
@@ -506,10 +508,10 @@ function displayCharacters(jsonData){
 
           // Build lookup arrays
           // https://truetocode.com/check-for-duplicates-in-array-of-javascript-objects/
-          let arrIDs =  arrCharacters.map((value)=>{ return value.id;});
-          if (arrIDs.indexOf(results[i].id) === -1) {
-            arrCharacters.push({id: results[i].id, name: results[i].name, url: results[i].url});
-          };
+          // let arrIDs =  arrCharacters.map((value)=>{ return value.id;});
+          // if (arrIDs.indexOf(results[i].id) === -1) {
+          //   arrCharacters.push({id: results[i].id, name: results[i].name, url: results[i].url});
+          // };
           // a.findIndex(t=>(t.place === v.place && t.name===v.name))===i) // https://stackoverflow.com/questions/2218999/remove-duplicates-from-an-array-of-objects-in-javascript
           // seen.hasOwnProperty(currentObject.name) // https://stackoverflow.com/questions/30735465/how-can-i-check-if-the-array-of-objects-have-duplicate-property-values
           //if (!arrCharacters.hasOwnProperty(results[i].id)) { // How's this work with an object?
@@ -527,16 +529,16 @@ function displayCharacters(jsonData){
           // let copiedarrCharacters = Array.from(new Set(id.map(a => a.id))).map(id => { return id.find(a => a.id === id) });
           // console.log(copiedarrCharacters);
 
-          if (results[i].species !== "") {
-            if (arrSearchSpecies.indexOf(results[i].species) === -1) {
-              arrSearchSpecies.push(results[i].species);
-            };
-          };
-          if (results[i].type !== "") {
-            if (arrSearchCharacterTypes.indexOf(results[i].type) === -1) {
-              arrSearchCharacterTypes.push(results[i].type);
-            };
-          };
+          // if (results[i].species !== "") {
+          //   if (arrSearchSpecies.indexOf(results[i].species) === -1) {
+          //     arrSearchSpecies.push(results[i].species);
+          //   };
+          // };
+          // if (results[i].type !== "") {
+          //   if (arrSearchCharacterTypes.indexOf(results[i].type) === -1) {
+          //     arrSearchCharacterTypes.push(results[i].type);
+          //   };
+          // };
 
 
           let cardDiv = document.createElement("div");
@@ -801,21 +803,21 @@ function displayLocations(jsonData){
 
           // Build lookup arrays
           // https://truetocode.com/check-for-duplicates-in-array-of-javascript-objects/
-          let arrIDs =  arrLocations.map((value)=>{ return value.id;});
-          if (arrIDs.indexOf(results[i].id) === -1) {
-            arrLocations.push({id: results[i].id, name: results[i].name, url: results[i].url});
-          };
+          // let arrIDs =  arrLocations.map((value)=>{ return value.id;});
+          // if (arrIDs.indexOf(results[i].id) === -1) {
+          //   arrLocations.push({id: results[i].id, name: results[i].name, url: results[i].url});
+          // };
 
-          if (results[i].type !== "") {
-            if (arrSearchLocationTypes.indexOf(results[i].type) === -1) {
-              arrSearchLocationTypes.push(results[i].type);
-            };
-          };
-          if (results[i].dimension !== "") {
-            if (arrSearchDimensions.indexOf(results[i].dimension) === -1) {
-              arrSearchDimensions.push(results[i].dimension);
-            };
-          };
+          // if (results[i].type !== "") {
+          //   if (arrSearchLocationTypes.indexOf(results[i].type) === -1) {
+          //     arrSearchLocationTypes.push(results[i].type);
+          //   };
+          // };
+          // if (results[i].dimension !== "") {
+          //   if (arrSearchDimensions.indexOf(results[i].dimension) === -1) {
+          //     arrSearchDimensions.push(results[i].dimension);
+          //   };
+          // };
 
           let cardDiv = document.createElement("div");
           cardDiv.className = "card m-2 p-2";
@@ -962,6 +964,7 @@ function displayLocations(jsonData){
     // View lookup arrays
     // console.log(arrLocations);
     // console.log(arrSearchLocationTypes);
+    // console.log(arrSearchDimensions);
 
   };
 
@@ -999,10 +1002,10 @@ function displayEpisodes(jsonData){
 
       // Build lookup arrays
       // https://truetocode.com/check-for-duplicates-in-array-of-javascript-objects/
-      let arrIDs =  arrEpisodes.map((value)=>{ return value.id;});
-      if (arrIDs.indexOf(results[i].id) === -1) {
-        arrEpisodes.push({id: results[i].id, name: results[i].name, url: results[i].url});
-      };
+      // let arrIDs =  arrEpisodes.map((value)=>{ return value.id;});
+      // if (arrIDs.indexOf(results[i].id) === -1) {
+      //   arrEpisodes.push({id: results[i].id, name: results[i].name, url: results[i].url});
+      // };
 
 
       let cardDiv = document.createElement("div");
@@ -1249,10 +1252,10 @@ function displayCharactersModal(jsonData){
 
           // Build lookup arrays
           // https://truetocode.com/check-for-duplicates-in-array-of-javascript-objects/
-          let arrIDs =  arrCharacters.map((value)=>{ return value.id;});
-          if (arrIDs.indexOf(results.id) === -1) {
-            arrCharacters.push({id: results.id, name: results.name, url: results.url});
-          };
+          // let arrIDs =  arrCharacters.map((value)=>{ return value.id;});
+          // if (arrIDs.indexOf(results.id) === -1) {
+          //   arrCharacters.push({id: results.id, name: results.name, url: results.url});
+          // };
           // a.findIndex(t=>(t.place === v.place && t.name===v.name))===i) // https://stackoverflow.com/questions/2218999/remove-duplicates-from-an-array-of-objects-in-javascript
           // seen.hasOwnProperty(currentObject.name) // https://stackoverflow.com/questions/30735465/how-can-i-check-if-the-array-of-objects-have-duplicate-property-values
           //if (!arrCharacters.hasOwnProperty(results[i].id)) { // How's this work with an object?
@@ -1270,16 +1273,16 @@ function displayCharactersModal(jsonData){
           // let copiedarrCharacters = Array.from(new Set(id.map(a => a.id))).map(id => { return id.find(a => a.id === id) });
           // console.log(copiedarrCharacters);
 
-  if (results.species !== "") {
-    if (arrSearchSpecies.indexOf(results.species) === -1) {
-      arrSearchSpecies.push(results.species);
-    };
-  };
-  if (results.type !== "") {
-    if (arrSearchCharacterTypes.indexOf(results.type) === -1) {
-      arrSearchCharacterTypes.push(results.type);
-    };
-  };
+  // if (results.species !== "") {
+  //   if (arrSearchSpecies.indexOf(results.species) === -1) {
+  //     arrSearchSpecies.push(results.species);
+  //   };
+  // };
+  // if (results.type !== "") {
+  //   if (arrSearchCharacterTypes.indexOf(results.type) === -1) {
+  //     arrSearchCharacterTypes.push(results.type);
+  //   };
+  // };
 
 
   detailsModalTitle.innerHTML = "<strong>" + results.name + "</strong>";
@@ -1470,21 +1473,21 @@ function displayLocationsModal(jsonData){
 
   // Build lookup arrays
   // https://truetocode.com/check-for-duplicates-in-array-of-javascript-objects/
-  let arrIDs =  arrLocations.map((value)=>{ return value.id;});
-  if (arrIDs.indexOf(results.id) === -1) {
-    arrLocations.push({id: results.id, name: results.name, url: results.url});
-  };
+  // let arrIDs =  arrLocations.map((value)=>{ return value.id;});
+  // if (arrIDs.indexOf(results.id) === -1) {
+  //   arrLocations.push({id: results.id, name: results.name, url: results.url});
+  // };
           
-  if (results.type !== "") {
-    if (arrSearchLocationTypes.indexOf(results.type) === -1) {
-      arrSearchLocationTypes.push(results.type);
-    };
-  };
-  if (results.dimension !== "") {
-    if (arrSearchDimensions.indexOf(results.dimension) === -1) {
-      arrSearchDimensions.push(results.dimension);
-    };
-  };
+  // if (results.type !== "") {
+  //   if (arrSearchLocationTypes.indexOf(results.type) === -1) {
+  //     arrSearchLocationTypes.push(results.type);
+  //   };
+  // };
+  // if (results.dimension !== "") {
+  //   if (arrSearchDimensions.indexOf(results.dimension) === -1) {
+  //     arrSearchDimensions.push(results.dimension);
+  //   };
+  // };
 
   detailsModalTitle.innerHTML = "<strong>" + results.name + "</strong>";
 
@@ -1597,10 +1600,10 @@ function displayEpisodesModal(jsonData){
 
   // Build lookup arrays
   // https://truetocode.com/check-for-duplicates-in-array-of-javascript-objects/
-  let arrIDs =  arrEpisodes.map((value)=>{ return value.id;});
-  if (arrIDs.indexOf(results.id) === -1) {
-    arrEpisodes.push({id: results.id, name: results.name, url: results.url});
-  };
+  // let arrIDs =  arrEpisodes.map((value)=>{ return value.id;});
+  // if (arrIDs.indexOf(results.id) === -1) {
+  //   arrEpisodes.push({id: results.id, name: results.name, url: results.url});
+  // };
 
 
   detailsModalTitle.innerHTML = "<strong>" + results.name + "</strong>";
@@ -1748,10 +1751,10 @@ function displayMultipleCharacters(jsonData){
 
           // Build lookup arrays
           // https://truetocode.com/check-for-duplicates-in-array-of-javascript-objects/
-          let arrIDs =  arrCharacters.map((value)=>{ return value.id;});
-          if (arrIDs.indexOf(results[i].id) === -1) {
-            arrCharacters.push({id: results[i].id, name: results[i].name, url: results[i].url});
-          };
+          // let arrIDs =  arrCharacters.map((value)=>{ return value.id;});
+          // if (arrIDs.indexOf(results[i].id) === -1) {
+          //   arrCharacters.push({id: results[i].id, name: results[i].name, url: results[i].url});
+          // };
           // a.findIndex(t=>(t.place === v.place && t.name===v.name))===i) // https://stackoverflow.com/questions/2218999/remove-duplicates-from-an-array-of-objects-in-javascript
           // seen.hasOwnProperty(currentObject.name) // https://stackoverflow.com/questions/30735465/how-can-i-check-if-the-array-of-objects-have-duplicate-property-values
           //if (!arrCharacters.hasOwnProperty(results[i].id)) { // How's this work with an object?
@@ -1769,16 +1772,16 @@ function displayMultipleCharacters(jsonData){
           // let copiedarrCharacters = Array.from(new Set(id.map(a => a.id))).map(id => { return id.find(a => a.id === id) });
           // console.log(copiedarrCharacters);
 
-          if (results[i].species !== "") {
-            if (arrSearchSpecies.indexOf(results[i].species) === -1) {
-              arrSearchSpecies.push(results[i].species);
-            };
-          };
-          if (results[i].type !== "") {
-            if (arrSearchCharacterTypes.indexOf(results[i].type) === -1) {
-              arrSearchCharacterTypes.push(results[i].type);
-            };
-          };
+          // if (results[i].species !== "") {
+          //   if (arrSearchSpecies.indexOf(results[i].species) === -1) {
+          //     arrSearchSpecies.push(results[i].species);
+          //   };
+          // };
+          // if (results[i].type !== "") {
+          //   if (arrSearchCharacterTypes.indexOf(results[i].type) === -1) {
+          //     arrSearchCharacterTypes.push(results[i].type);
+          //   };
+          // };
 
 
           let cardDiv = document.createElement("div");
@@ -2004,21 +2007,21 @@ function displayMultipleLocations(jsonData){
 
   // Build lookup arrays
   // https://truetocode.com/check-for-duplicates-in-array-of-javascript-objects/
-  let arrIDs =  arrLocations.map((value)=>{ return value.id;});
-  if (arrIDs.indexOf(results[i].id) === -1) {
-    arrLocations.push({id: results[i].id, name: results[i].name, url: results[i].url});
-  };
+  // let arrIDs =  arrLocations.map((value)=>{ return value.id;});
+  // if (arrIDs.indexOf(results[i].id) === -1) {
+  //   arrLocations.push({id: results[i].id, name: results[i].name, url: results[i].url});
+  // };
 
-  if (results[i].type !== "") {
-    if (arrSearchLocationTypes.indexOf(results[i].type) === -1) {
-      arrSearchLocationTypes.push(results[i].type);
-    };
-  };
-  if (results[i].dimension !== "") {
-    if (arrSearchDimensions.indexOf(results[i].dimension) === -1) {
-      arrSearchDimensions.push(results[i].dimension);
-    };
-  };
+  // if (results[i].type !== "") {
+  //   if (arrSearchLocationTypes.indexOf(results[i].type) === -1) {
+  //     arrSearchLocationTypes.push(results[i].type);
+  //   };
+  // };
+  // if (results[i].dimension !== "") {
+  //   if (arrSearchDimensions.indexOf(results[i].dimension) === -1) {
+  //     arrSearchDimensions.push(results[i].dimension);
+  //   };
+  // };
 
   if (results.length > 0) {
     // resultsHeader.style.display = 'flex';
@@ -2199,10 +2202,10 @@ function displayMultipleLEpisodes(jsonData){
 
   // Build lookup arrays
   // https://truetocode.com/check-for-duplicates-in-array-of-javascript-objects/
-  let arrIDs =  arrEpisodes.map((value)=>{ return value.id;});
-  if (arrIDs.indexOf(results.id) === -1) {
-    arrEpisodes.push({id: results.id, name: results.name, url: results.url});
-  };
+  // let arrIDs =  arrEpisodes.map((value)=>{ return value.id;});
+  // if (arrIDs.indexOf(results.id) === -1) {
+  //   arrEpisodes.push({id: results.id, name: results.name, url: results.url});
+  // };
 
 
   if (results.length > 0) {
@@ -2446,12 +2449,30 @@ fetch(charactersURL + charactersIDList)
   // console.log(jsonData);
   let results = jsonData;
   
-// Build lookup arrays
+  // Build lookup arrays
+  // https://truetocode.com/check-for-duplicates-in-array-of-javascript-objects/
 for (let i = 0; i < results.length; i++) {
   let arrIDs =  arrCharacters.map((value)=>{ return value.id;});
   if (arrIDs.indexOf(results[i].id) === -1) {
     arrCharacters.push({id: results[i].id, name: results[i].name, url: results[i].url});
   };
+  // a.findIndex(t=>(t.place === v.place && t.name===v.name))===i) // https://stackoverflow.com/questions/2218999/remove-duplicates-from-an-array-of-objects-in-javascript
+  // seen.hasOwnProperty(currentObject.name) // https://stackoverflow.com/questions/30735465/how-can-i-check-if-the-array-of-objects-have-duplicate-property-values
+  //if (!arrCharacters.hasOwnProperty(results[i].id)) { // How's this work with an object?
+  // if statement isn't working correcly
+  //  arrCharacters.push({id: results[i].id, name: results[i].name, url: results[i].url});
+  // };
+
+  // https://www.geeksforgeeks.org/how-to-remove-duplicates-from-an-array-of-objects-using-javascript/
+  // copiedarrCharacters = [...arrCharacters];
+  // arrCharacters = copiedarrCharacters.filter(function(item, index){
+  //   return copiedarrCharacters.indexOf(item) >= index;
+  // });
+
+  // https://dev.to/marinamosti/removing-duplicates-in-an-array-of-objects-in-js-with-sets-3fep
+  // let copiedarrCharacters = Array.from(new Set(id.map(a => a.id))).map(id => { return id.find(a => a.id === id) });
+  // console.log(copiedarrCharacters);
+
   if (results[i].species !== "") {
     if (arrSearchSpecies.indexOf(results[i].species) === -1) {
       arrSearchSpecies.push(results[i].species);
@@ -2468,6 +2489,58 @@ for (let i = 0; i < results.length; i++) {
 // console.log(arrCharacters);
 // console.log(arrSearchSpecies);
 // console.log(arrSearchCharacterTypes);
+
+  // Remove old items from drop down boxes
+  while (ddSearchSpecies.firstChild) { // while the value is not null
+    ddSearchSpecies.removeChild(ddSearchSpecies.firstChild);
+  };
+  // Add first element back to drop down box
+  let optSearchSpecies = document.createElement("option");
+  optSearchSpecies.value = "";
+  optSearchSpecies.text = "Select Species";
+  ddSearchSpecies.add(optSearchSpecies);
+  // Sort the array
+  arrSearchSpecies.sort((a, b) => {
+    if (a > b) {
+        return 1;
+    } else {
+        return -1;
+    };
+  });
+  // Add items to drop down boxes
+  for (let i = 0; i < arrSearchSpecies.length; i++) {
+    // console.log(arrSearchSpecies[i]);
+    let opt = document.createElement("option");
+    opt.value = arrSearchSpecies[i];
+    opt.text = arrSearchSpecies[i];
+    ddSearchSpecies.add(opt);
+  };
+
+  // Remove old items from drop down boxes
+  while (ddSearchCharacterType.firstChild) { // while the value is not null
+    ddSearchCharacterType.removeChild(ddSearchCharacterType.firstChild);
+  };
+  // Add first element back to drop down box
+  let optSearchCharacterType = document.createElement("option");
+  optSearchCharacterType.value = "";
+  optSearchCharacterType.text = "Select Type";
+  ddSearchCharacterType.add(optSearchCharacterType);
+  // Sort the array
+  arrSearchCharacterTypes.sort((a, b) => {
+    if (a > b) {
+        return 1;
+    } else {
+        return -1;
+    };
+  });
+  // Add items to drop down boxes
+  for (let i = 0; i < arrSearchCharacterTypes.length; i++) {
+    // console.log(arrSearchSpecies[i]);
+    let opt = document.createElement("option");
+    opt.value = arrSearchCharacterTypes[i];
+    opt.text = arrSearchCharacterTypes[i];
+    ddSearchCharacterType.add(opt);
+  };
 
 })
 .catch(err => {
@@ -2524,6 +2597,58 @@ for (let i = 0; i < results.length; i++) {
     };
   };
 };
+
+  // Remove old items from drop down boxes
+  while (ddSearchLocationType.firstChild) { // while the value is not null
+    ddSearchLocationType.removeChild(ddSearchLocationType.firstChild);
+  };
+  // Add first element back to drop down box
+  let optSearchLocationType = document.createElement("option");
+  optSearchLocationType.value = "";
+  optSearchLocationType.text = "Select Type";
+  ddSearchLocationType.add(optSearchLocationType);
+  // Sort the array
+  arrSearchLocationTypes.sort((a, b) => {
+    if (a > b) {
+        return 1;
+    } else {
+        return -1;
+    };
+  });
+  // Add items to drop down boxes
+  for (let i = 0; i < arrSearchLocationTypes.length; i++) {
+    // console.log(arrSearchSpecies[i]);
+    let opt = document.createElement("option");
+    opt.value = arrSearchLocationTypes[i];
+    opt.text = arrSearchLocationTypes[i];
+    ddSearchLocationType.add(opt);
+  };
+
+  // Remove old items from drop down boxes
+  while (ddSearchDimension.firstChild) { // while the value is not null
+    ddSearchDimension.removeChild(ddSearchDimension.firstChild);
+  };
+  // Add first element back to drop down box
+  let optSearchDimension = document.createElement("option");
+  optSearchDimension.value = "";
+  optSearchDimension.text = "Select Dimension";
+  ddSearchDimension.add(optSearchDimension);
+  // Sort the array
+  arrSearchDimensions.sort((a, b) => {
+    if (a > b) {
+        return 1;
+    } else {
+        return -1;
+    };
+  });
+  // Add items to drop down boxes
+  for (let i = 0; i < arrSearchDimensions.length; i++) {
+    // console.log(arrSearchSpecies[i]);
+    let opt = document.createElement("option");
+    opt.value = arrSearchDimensions[i];
+    opt.text = arrSearchDimensions[i];
+    ddSearchDimension.add(opt);
+  };
 
 // View lookup arrays
 // console.log(arrLocations);
