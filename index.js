@@ -3,22 +3,23 @@ const baseURL = "https://rickandmortyapi.com/api/";
 const charactersURL = "https://rickandmortyapi.com/api/character/";
 const locationsURL = "https://rickandmortyapi.com/api/location/";
 const episodesURL = "https://rickandmortyapi.com/api/episode/";
+const paginationURL = "?page="
 
 const btnCharacters = document.getElementById("btnCharacters");
 const btnLocations = document.getElementById("btnLocations");
 const btnEpisodes = document.getElementById("btnEpisodes");
 
-btnCharacters.addEventListener('click', getResults);
-btnLocations.addEventListener('click', getResults); 
-btnEpisodes.addEventListener('click', getResults);
+btnCharacters.addEventListener("click", getResults);
+btnLocations.addEventListener("click", getResults); 
+btnEpisodes.addEventListener("click", getResults);
 
 const hdrSearchCharacters = document.getElementById("hdrSearchCharacters");
 const hdrSearchLocations = document.getElementById("hdrSearchLocations");
 const hdrSearchEpisodes = document.getElementById("hdrSearchEpisodes");
 
-hdrSearchCharacters.addEventListener('click', toggleForms);
-hdrSearchLocations.addEventListener('click', toggleForms); 
-hdrSearchEpisodes.addEventListener('click', toggleForms);
+hdrSearchCharacters.addEventListener("click", toggleForms);
+hdrSearchLocations.addEventListener("click", toggleForms); 
+hdrSearchEpisodes.addEventListener("click", toggleForms);
 
 // const collapseCharacters = document.getElementById("collapseCharacters");
 // const collapseLocations = document.getElementById("collapseLocations");
@@ -32,7 +33,7 @@ const ddSearchSpecies = document.getElementById("ddSearchSpecies");
 const ddSearchCharacterType = document.getElementById("ddSearchCharacterType");
 const ddSearchGender = document.getElementById("ddSearchGender");
 const btnSearchCharacters = document.getElementById("btnSearchCharacters");
-btnSearchCharacters.addEventListener('click', searchCharacters); 
+btnSearchCharacters.addEventListener("click", searchCharacters); 
 
 const txtSearchLocationName = document.getElementById("txtSearchLocationName");
 // const txtSearchLocationType = document.getElementById("txtSearchLocationType");
@@ -40,15 +41,15 @@ const ddSearchLocationType = document.getElementById("ddSearchLocationType");
 // const txtDimension = document.getElementById("txtDimension");
 const ddSearchDimension = document.getElementById("ddSearchDimension");
 const btnSearchLocations = document.getElementById("btnSearchLocations");
-btnSearchLocations.addEventListener('click', searchLocations); 
+btnSearchLocations.addEventListener("click", searchLocations); 
 
 const txtSearchEpisodeName = document.getElementById("txtSearchEpisodeName");
 const txtEpisode = document.getElementById("txtEpisode");
 const btnSearchEpisodes = document.getElementById("btnSearchEpisodes");
-btnSearchEpisodes.addEventListener('click', searchEpisodes); 
+btnSearchEpisodes.addEventListener("click", searchEpisodes); 
 
 const searchForm = document.getElementById("frmSearch");
-// searchForm.addEventListener('submit', searchCharacters); 
+// searchForm.addEventListener("submit", searchCharacters); 
 
 
 const errorHeader = document.getElementById("errorHeader");
@@ -195,11 +196,11 @@ function toggleForms(e){
   //   ddSearchDimension.add(opt);
   // };
 
-  $('#collapseCharacters').collapse('hide');
-  $('#collapseLocations').collapse('hide');
-  $('#collapseEpisodes').collapse('hide');
+  $("#collapseCharacters").collapse("hide");
+  $("#collapseLocations").collapse("hide");
+  $("#collapseEpisodes").collapse("hide");
 
-  // e.srcElement.id.collapse('show');
+  // e.srcElement.id.collapse("show");
 
 };
 
@@ -265,7 +266,7 @@ function getResults(e){
   .catch(err => {
       console.log(err)
       errorHeader.innerText = err;
-      errorHeader.style.display = 'flex';
+      errorHeader.style.display = "flex";
   });
 
 };
@@ -297,7 +298,7 @@ function searchCharacters(e){
 
 
   if (txtSearchCharacterName.value.length > 0) {
-    searchString += "&name=" + txtSearchCharacterName.value.replace(' ', '%20');
+    searchString += "&name=" + txtSearchCharacterName.value.replace(" ", "%20");
   };
 
   if (ddSearchStatus.value !== "") {
@@ -305,19 +306,19 @@ function searchCharacters(e){
   };
 
   // if (txtSearchSpecies.value.length > 0) {
-  //   searchString += "&species=" + txtSearchSpecies.value.replace(' ', '%20');
+  //   searchString += "&species=" + txtSearchSpecies.value.replace(" ", "%20");
   // };
 
   if (ddSearchSpecies.value !== "") {
-    searchString += "&species=" + ddSearchSpecies.value.replace(' ', '%20');
+    searchString += "&species=" + ddSearchSpecies.value.replace(" ", "%20");
   };
 
   // if (txtSearchCharacterType.value.length > 0) {
-  //   searchString += "&type=" + txtSearchCharacterType.value.replace(' ', '%20');
+  //   searchString += "&type=" + txtSearchCharacterType.value.replace(" ", "%20");
   // };
 
   if (ddSearchCharacterType.value !== "") {
-    searchString += "&type=" + ddSearchCharacterType.value.replace(' ', '%20');
+    searchString += "&type=" + ddSearchCharacterType.value.replace(" ", "%20");
   };
 
   if (ddSearchGender.value !== "") {
@@ -343,7 +344,7 @@ function searchCharacters(e){
   .catch(err => {
       console.log(err)
       errorHeader.innerText = err;
-      errorHeader.style.display = 'flex';
+      errorHeader.style.display = "flex";
   });
 
 };
@@ -375,23 +376,23 @@ function searchLocations(e){
 
 
   if (txtSearchLocationName.value.length > 0) {
-    searchString += "&name=" + txtSearchLocationName.value.replace(' ', '%20');
+    searchString += "&name=" + txtSearchLocationName.value.replace(" ", "%20");
   };
 
   // if (txtSearchLocationType.value.length > 0) {
-  //   searchString += "&type=" + txtSearchLocationType.value.replace(' ', '%20');
+  //   searchString += "&type=" + txtSearchLocationType.value.replace(" ", "%20");
   // };
 
   if (ddSearchLocationType.value !== "") {
-    searchString += "&type=" + ddSearchLocationType.value.replace(' ', '%20');
+    searchString += "&type=" + ddSearchLocationType.value.replace(" ", "%20");
   };
 
   // if (txtDimension.value.length > 0) {
-  //   searchString += "&dimension=" + txtDimension.value.replace(' ', '%20');
+  //   searchString += "&dimension=" + txtDimension.value.replace(" ", "%20");
   // };
 
   if (ddSearchDimension.value !== "") {
-    searchString += "&dimension=" + ddSearchDimension.value.replace(' ', '%20');
+    searchString += "&dimension=" + ddSearchDimension.value.replace(" ", "%20");
   };
 
   if (searchString !== "") {
@@ -413,7 +414,7 @@ function searchLocations(e){
   .catch(err => {
       console.log(err)
       errorHeader.innerText = err;
-      errorHeader.style.display = 'flex';
+      errorHeader.style.display = "flex";
   });
 
 };
@@ -445,11 +446,11 @@ function searchEpisodes(e){
 
 
   if (txtSearchEpisodeName.value.length > 0) {
-    searchString += "&name=" + txtSearchEpisodeName.value.replace(' ', '%20');
+    searchString += "&name=" + txtSearchEpisodeName.value.replace(" ", "%20");
   };
 
   if (txtEpisode.value.length > 0) {
-    searchString += "&episode=" + txtEpisode.value.replace(' ', '%20');
+    searchString += "&episode=" + txtEpisode.value.replace(" ", "%20");
   };
 
   if (searchString !== "") {
@@ -471,7 +472,7 @@ function searchEpisodes(e){
   .catch(err => {
       console.log(err)
       errorHeader.innerText = err;
-      errorHeader.style.display = 'flex';
+      errorHeader.style.display = "flex";
   });
 
 };
@@ -483,10 +484,10 @@ function displayCharacters(jsonData){
   // console.log(results);
 
   if (results.length > 0) {
-    // resultsHeader.style.display = 'flex';
-    resultsDiv.style.display = 'flex';
-    // moreDiv.style.display = 'flex';
-    // moreLink.style.display = 'flex';
+    // resultsHeader.style.display = "flex";
+    resultsDiv.style.display = "flex";
+    // moreDiv.style.display = "flex";
+    // moreLink.style.display = "flex";
 
     currentPage++;
     lastPage = jsonData.info.pages;
@@ -557,7 +558,7 @@ function displayCharacters(jsonData){
           nameLink.alt = results[i].name;
           nameLink.innerHTML = results[i].name;
           // nameLink.target = "_blank";
-          nameLink.addEventListener('click', loadDetailsModal);
+          nameLink.addEventListener("click", loadDetailsModal);
 
           let genderP = document.createElement("p");
           genderP.innerHTML = "Gender: "; // + results[i].gender;
@@ -566,7 +567,7 @@ function displayCharacters(jsonData){
           genderLink.alt = results[i].gender;
           genderLink.innerHTML = results[i].gender;
           // genderLink.target = "_blank";
-          genderLink.addEventListener('click', searchByCharacterGender);
+          genderLink.addEventListener("click", searchByCharacterGender);
 
           let speciesP = document.createElement("p");
           speciesP.innerHTML = "Species: "; // + results[i].species;
@@ -575,7 +576,7 @@ function displayCharacters(jsonData){
           speciesLink.alt = results[i].species;
           speciesLink.innerHTML = results[i].species;
           // speciesLink.target = "_blank";
-          speciesLink.addEventListener('click', searchByCharacterSpecies);
+          speciesLink.addEventListener("click", searchByCharacterSpecies);
 
           let statusP = document.createElement("p");
           statusP.innerHTML = "Status: "; // + results[i].status;
@@ -584,7 +585,7 @@ function displayCharacters(jsonData){
           statusLink.alt = results[i].status;
           statusLink.innerHTML = results[i].status;
           // statusLink.target = "_blank";
-          statusLink.addEventListener('click', searchByCharacterStatus);
+          statusLink.addEventListener("click", searchByCharacterStatus);
 
           let typeP = document.createElement("p");
           let typeLink = document.createElement("a");
@@ -594,7 +595,7 @@ function displayCharacters(jsonData){
             typeLink.alt = results[i].type;
             typeLink.innerHTML = results[i].type;
             // typeLink.target = "_blank";
-            typeLink.addEventListener('click', searchByCharacterType);
+            typeLink.addEventListener("click", searchByCharacterType);
           };
 
           let locationP = document.createElement("p");
@@ -605,7 +606,7 @@ function displayCharacters(jsonData){
             locationLink.alt = results[i].location.name;
             locationLink.innerHTML = results[i].location.name
             // locationLink.target = "_blank";
-            locationLink.addEventListener('click', loadDetailsModal);
+            locationLink.addEventListener("click", loadDetailsModal);
             locationP.appendChild(locationLink);
           } else {
             locationP.innerHTML += results[i].location.name;
@@ -619,7 +620,7 @@ function displayCharacters(jsonData){
             originLink.alt = results[i].origin.name;
             originLink.innerHTML = results[i].origin.name
             // locationLink.target = "_blank";
-            originLink.addEventListener('click', loadDetailsModal);
+            originLink.addEventListener("click", loadDetailsModal);
             originP.appendChild(originLink);
           } else {
             originP.innerHTML += results[i].origin.name;
@@ -642,22 +643,22 @@ function displayCharacters(jsonData){
             // Use lookup arrays
             // // https://stackoverflow.com/questions/13964155/get-javascript-object-from-array-of-objects-by-value-of-property
             // // https://stackoverflow.com/questions/52460473/find-object-with-specific-value-in-array/52460509
-            // // console.log("index of episode match", arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1)), "index of item in array", episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1));
-            // let indexOfEpisodeName = arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1));
+            // // console.log("index of episode match", arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1)), "index of item in array", episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1));
+            // let indexOfEpisodeName = arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1));
             // console.log("indexOfEpisodeName", indexOfEpisodeName);
             // console.log("episodeName", arrEpisodes[indexOfEpisodeName].name);
-            // // console.log("id from episode URL", episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1), "index of match", arrEpisodes[arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1))], "name of match", arrEpisodes[arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1))].name);
-            // // if (arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1)) == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1)) {
-            // if (arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1))) {
-            //   // console.log("id from episode link", episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1), "index of match", arrEpisodes[arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1))].name);
-            //   console.log("episode name", arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1)).name)
-            //   // urlLink.innerHTML = arrEpisodes[arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1))].name;
+            // // console.log("id from episode URL", episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1), "index of match", arrEpisodes[arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1))], "name of match", arrEpisodes[arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1))].name);
+            // // if (arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1)) == episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1)) {
+            // if (arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1))) {
+            //   // console.log("id from episode link", episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1), "index of match", arrEpisodes[arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1))].name);
+            //   console.log("episode name", arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1)).name)
+            //   // urlLink.innerHTML = arrEpisodes[arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1))].name;
             // } else {
             //   urlLink.innerHTML = episodeArray[j];
             // };
 
             for (let k = 0; k < arrEpisodes.length; k++) {
-              if (episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1) == arrEpisodes[k].id) {
+              if (episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1) == arrEpisodes[k].id) {
                 // console.log("episode name", arrEpisodes[k].name, "it's a match");
                 urlLink.innerHTML = arrEpisodes[k].name;
                 break;
@@ -665,13 +666,13 @@ function displayCharacters(jsonData){
             };
 
             // urlLink.target = "_blank";
-            urlLink.addEventListener('click', loadDetailsModal);
+            urlLink.addEventListener("click", loadDetailsModal);
 
             if (j < episodeArray.length - 1) {
               urlLink.innerHTML += ", ";
             };
 
-            episodeList += episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1);
+            episodeList += episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1);
             if (j < episodeArray.length - 1) {
               episodeList += ",";
             };
@@ -687,9 +688,9 @@ function displayCharacters(jsonData){
           episodeLink.innerHTML = "All Episode(s)"; // episodesURL + episodeList;
           // episodeLink.target = "_blank";
           if (episodeArray.length > 1) {
-            episodeLink.addEventListener('click', getMultipleEpisodes);
+            episodeLink.addEventListener("click", getMultipleEpisodes);
           } else {
-            episodeLink.addEventListener('click', loadDetailsModal);
+            episodeLink.addEventListener("click", loadDetailsModal);
           };
 
 
@@ -726,7 +727,7 @@ function displayCharacters(jsonData){
     moreA.innerText =  "more";
     moreA.className = "colorBlackLink";
     // moreA.style = "text-align: right;";
-    moreA.addEventListener('click', getMoreResults); 
+    moreA.addEventListener("click", getMoreResults); 
   
   
     let moreRowDiv = document.createElement("div");
@@ -778,10 +779,10 @@ function displayLocations(jsonData){
   // console.log(results);
 
   if (results.length > 0) {
-    // resultsHeader.style.display = 'flex';
-    resultsDiv.style.display = 'flex';
-    // moreDiv.style.display = 'flex';
-    // moreLink.style.display = 'flex';
+    // resultsHeader.style.display = "flex";
+    resultsDiv.style.display = "flex";
+    // moreDiv.style.display = "flex";
+    // moreLink.style.display = "flex";
 
     currentPage++;
     lastPage = jsonData.info.pages;
@@ -832,7 +833,7 @@ function displayLocations(jsonData){
           nameLink.alt = results[i].name;
           nameLink.innerHTML = results[i].name;
           // nameLink.target = "_blank";
-          nameLink.addEventListener('click', loadDetailsModal);
+          nameLink.addEventListener("click", loadDetailsModal);
 
           let dimensionP = document.createElement("p");
           dimensionP.innerHTML = "Dimension: "; // + results[i].dimension;
@@ -841,7 +842,7 @@ function displayLocations(jsonData){
           dimensionLink.alt = results[i].dimension;
           dimensionLink.innerHTML = results[i].dimension;
           // dimensionLink.target = "_blank";
-          dimensionLink.addEventListener('click', searchByDimension);
+          dimensionLink.addEventListener("click", searchByDimension);
 
           let typeP = document.createElement("p");
           typeP.innerHTML = "Type: "; // + results[i].type;
@@ -850,7 +851,7 @@ function displayLocations(jsonData){
           typeLink.alt = results[i].type;
           typeLink.innerHTML = results[i].type;
           // typeLink.target = "_blank";
-          typeLink.addEventListener('click', searchByLocationType);
+          typeLink.addEventListener("click", searchByLocationType);
 
           let residentsArray = results[i].residents;
           let residentsP = document.createElement("p");
@@ -867,7 +868,7 @@ function displayLocations(jsonData){
             urlLink.innerHTML = residentsArray[j];
 
             for (let k = 0; k < arrCharacters.length; k++) {
-              if (residentsArray[j].substr(residentsArray[j].lastIndexOf('/') + 1) == arrCharacters[k].id) {
+              if (residentsArray[j].substr(residentsArray[j].lastIndexOf("/") + 1) == arrCharacters[k].id) {
                 // console.log("character name", arrCharacters[k].name, "it's a match");
                 urlLink.innerHTML = arrCharacters[k].name;
                 break;
@@ -875,13 +876,13 @@ function displayLocations(jsonData){
             };
 
             // urlLink.target = "_blank";
-            urlLink.addEventListener('click', loadDetailsModal);
+            urlLink.addEventListener("click", loadDetailsModal);
 
             if (j < residentsArray.length - 1) {
               urlLink.innerHTML += ", ";
             };
 
-            residentList += residentsArray[j].substr(residentsArray[j].lastIndexOf('/') + 1);
+            residentList += residentsArray[j].substr(residentsArray[j].lastIndexOf("/") + 1);
             if (j < residentsArray.length - 1) {
               residentList += ",";
             };
@@ -897,9 +898,9 @@ function displayLocations(jsonData){
           residentsLink.innerHTML = "All Resident(s)"; // charactersURL + residentList;
           // residentsLink.target = "_blank";
           if (residentsArray.length > 1) {
-            residentsLink.addEventListener('click', getMultipleCharacters);
+            residentsLink.addEventListener("click", getMultipleCharacters);
           } else {
-            residentsLink.addEventListener('click', loadDetailsModal);
+            residentsLink.addEventListener("click", loadDetailsModal);
           };
 
 
@@ -925,7 +926,7 @@ function displayLocations(jsonData){
     moreA.innerText =  "more";
     moreA.className = "colorBlackLink";
     // moreA.style = "text-align: right;";
-    moreA.addEventListener('click', getMoreResults); 
+    moreA.addEventListener("click", getMoreResults); 
   
   
     let moreRowDiv = document.createElement("div");
@@ -977,10 +978,10 @@ function displayEpisodes(jsonData){
   // console.log(results);
 
   if (results.length > 0) {
-    // resultsHeader.style.display = 'flex';
-    resultsDiv.style.display = 'flex';
-    // moreDiv.style.display = 'flex';
-    // moreLink.style.display = 'flex';
+    // resultsHeader.style.display = "flex";
+    resultsDiv.style.display = "flex";
+    // moreDiv.style.display = "flex";
+    // moreLink.style.display = "flex";
 
     currentPage++;
     lastPage = jsonData.info.pages;
@@ -1021,7 +1022,7 @@ function displayEpisodes(jsonData){
       nameLink.alt = results[i].name;
       nameLink.innerHTML = results[i].name;
       // nameLink.target = "_blank";
-      nameLink.addEventListener('click', loadDetailsModal);
+      nameLink.addEventListener("click", loadDetailsModal);
 
       let episodeP = document.createElement("p");
       episodeP.innerHTML = "Episode: " + results[i].episode;
@@ -1045,7 +1046,7 @@ function displayEpisodes(jsonData){
         urlLink.innerHTML = charactersArray[j];
 
         for (let k = 0; k < arrCharacters.length; k++) {
-          if (charactersArray[j].substr(charactersArray[j].lastIndexOf('/') + 1) == arrCharacters[k].id) {
+          if (charactersArray[j].substr(charactersArray[j].lastIndexOf("/") + 1) == arrCharacters[k].id) {
             // console.log("character name", arrCharacters[k].name, "it's a match");
             urlLink.innerHTML = arrCharacters[k].name;
             break;
@@ -1053,13 +1054,13 @@ function displayEpisodes(jsonData){
         };
 
         // urlLink.target = "_blank";
-        urlLink.addEventListener('click', loadDetailsModal);
+        urlLink.addEventListener("click", loadDetailsModal);
 
         if (j < charactersArray.length - 1) {
           urlLink.innerHTML += ", ";
         };
 
-        charactersList += charactersArray[j].substr(charactersArray[j].lastIndexOf('/') + 1);
+        charactersList += charactersArray[j].substr(charactersArray[j].lastIndexOf("/") + 1);
         if (j < charactersArray.length - 1) {
           charactersList += ",";
         };
@@ -1075,9 +1076,9 @@ function displayEpisodes(jsonData){
       charactersLink.innerHTML = "All Character(s)"; // charactersURL + charactersList;
       // charactersLink.target = "_blank";
       if (charactersArray.length > 1) {
-        charactersLink.addEventListener('click', getMultipleCharacters);
+        charactersLink.addEventListener("click", getMultipleCharacters);
       } else {
-        charactersLink.addEventListener('click', loadDetailsModal);
+        charactersLink.addEventListener("click", loadDetailsModal);
       };
       
       cardBodyDiv.appendChild(nameP);
@@ -1100,7 +1101,7 @@ function displayEpisodes(jsonData){
   moreA.innerText =  "more";
   moreA.className = "colorBlackLink";
   // moreA.style = "text-align: right;";
-  moreA.addEventListener('click', getMoreResults); 
+  moreA.addEventListener("click", getMoreResults); 
 
 
   let moreRowDiv = document.createElement("div");
@@ -1149,14 +1150,14 @@ function getMoreResults(e){
   // console.log(e);
 
   // Removes ?page=# to the URL
-  if (URL.includes("?page=")) {
+  if (URL.includes(paginationURL)) {
     URL = URL.slice(0, -7)
     // console.log(URL);
   }
 
   nextPage = currentPage + 1;
   // Search Pagination
-  URL = URL + "?page=" + nextPage;
+  URL = URL + paginationURL + nextPage;
 
   // Keeps adding ?page= to the URL
   // Fixed
@@ -1190,7 +1191,7 @@ function getMoreResults(e){
   .catch(err => {
       console.log(err)
       errorHeader.innerText = err;
-      errorHeader.style.display = 'flex';
+      errorHeader.style.display = "flex";
   });
   
 };
@@ -1205,8 +1206,8 @@ function loadDetailsModal(e){
   detailCategory = detailCategory.replace("http://", "https://");
   detailCategory = detailCategory.replace(baseURL, "");
   // detailCategory = detailCategory.replace("http://rickandmortyapi.com/api/", "");
-  // detailCategory = detailCategory.substr(0,detailURL.lastIndexOf('/'));
-  detailCategory = detailCategory.substr(0,detailCategory.indexOf('/'));
+  // detailCategory = detailCategory.substr(0,detailURL.lastIndexOf("/"));
+  detailCategory = detailCategory.substr(0,detailCategory.indexOf("/"));
   // console.log("detailCategory", detailCategory);
 
 
@@ -1235,7 +1236,7 @@ function loadDetailsModal(e){
   .catch(err => {
       console.log(err)
       errorHeader.innerText = err;
-      errorHeader.style.display = 'flex';
+      errorHeader.style.display = "flex";
   });
 
 };
@@ -1295,7 +1296,7 @@ function displayCharactersModal(jsonData){
   nameLink.alt = results.name;
   nameLink.innerHTML = results.name;
   // nameLink.target = "_blank";
-  nameLink.addEventListener('click', loadDetailsModal);
+  nameLink.addEventListener("click", loadDetailsModal);
 
   let genderP = document.createElement("p");
   genderP.innerHTML = "Gender: "; // + results.gender;
@@ -1304,7 +1305,7 @@ function displayCharactersModal(jsonData){
   genderLink.alt = results.gender;
   genderLink.innerHTML = results.gender;
   // genderLink.target = "_blank";
-  genderLink.addEventListener('click', searchByCharacterGender);
+  genderLink.addEventListener("click", searchByCharacterGender);
 
   let speciesP = document.createElement("p");
   speciesP.innerHTML = "Species: "; // + results.species;
@@ -1313,7 +1314,7 @@ function displayCharactersModal(jsonData){
   speciesLink.alt = results.species;
   speciesLink.innerHTML = results.species;
   // speciesLink.target = "_blank";
-  speciesLink.addEventListener('click', searchByCharacterSpecies);
+  speciesLink.addEventListener("click", searchByCharacterSpecies);
 
   let statusP = document.createElement("p");
   statusP.innerHTML = "Status: "; // + results.status;
@@ -1322,7 +1323,7 @@ function displayCharactersModal(jsonData){
   statusLink.alt = results.status;
   statusLink.innerHTML = results.status;
   // statusLink.target = "_blank";
-  statusLink.addEventListener('click', searchByCharacterStatus);
+  statusLink.addEventListener("click", searchByCharacterStatus);
 
   let typeP = document.createElement("p");
   typeP.innerHTML = "Type: "; // + results.type;
@@ -1331,7 +1332,7 @@ function displayCharactersModal(jsonData){
   typeLink.alt = results.type;
   typeLink.innerHTML = results.type;
   // typeLink.target = "_blank";
-  typeLink.addEventListener('click', searchByCharacterType);
+  typeLink.addEventListener("click", searchByCharacterType);
 
   let locationP = document.createElement("p");
   locationP.innerHTML = "Location: "; // + results.location.name;
@@ -1341,7 +1342,7 @@ function displayCharactersModal(jsonData){
     locationLink.alt = results.location.name;
     locationLink.innerHTML = results.location.name
     // locationLink.target = "_blank";
-    locationLink.addEventListener('click', loadDetailsModal);
+    locationLink.addEventListener("click", loadDetailsModal);
     locationP.appendChild(locationLink);
   } else {
     locationP.innerHTML += results.location.name;
@@ -1355,7 +1356,7 @@ function displayCharactersModal(jsonData){
     originLink.alt = results.origin.name;
     originLink.innerHTML = results.origin.name
     // locationLink.target = "_blank";
-    originLink.addEventListener('click', loadDetailsModal);
+    originLink.addEventListener("click", loadDetailsModal);
     originP.appendChild(originLink);
   } else {
     originP.innerHTML += results.origin.name;
@@ -1378,22 +1379,22 @@ function displayCharactersModal(jsonData){
     // Use lookup arrays
     // // https://stackoverflow.com/questions/13964155/get-javascript-object-from-array-of-objects-by-value-of-property
     // // https://stackoverflow.com/questions/52460473/find-object-with-specific-value-in-array/52460509
-    // // console.log("index of episode match", arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1)), "index of item in array", episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1));
-    // let indexOfEpisodeName = arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1));
+    // // console.log("index of episode match", arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1)), "index of item in array", episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1));
+    // let indexOfEpisodeName = arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1));
     // console.log("indexOfEpisodeName", indexOfEpisodeName);
     // console.log("episodeName", arrEpisodes[indexOfEpisodeName].name);
-    // // console.log("id from episode URL", episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1), "index of match", arrEpisodes[arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1))], "name of match", arrEpisodes[arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1))].name);
-    // // if (arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1)) == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1)) {
-    // if (arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1))) {
-    //   // console.log("id from episode link", episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1), "index of match", arrEpisodes[arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1))].name);
-    //   console.log("episode name", arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1)).name)
-    //   // urlLink.innerHTML = arrEpisodes[arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1))].name;
+    // // console.log("id from episode URL", episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1), "index of match", arrEpisodes[arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1))], "name of match", arrEpisodes[arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1))].name);
+    // // if (arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1)) == episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1)) {
+    // if (arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1))) {
+    //   // console.log("id from episode link", episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1), "index of match", arrEpisodes[arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1))].name);
+    //   console.log("episode name", arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1)).name)
+    //   // urlLink.innerHTML = arrEpisodes[arrEpisodes.findIndex(episode => episode.id == episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1))].name;
     // } else {
     //   urlLink.innerHTML = episodeArray[j];
     // };
 
     for (let k = 0; k < arrEpisodes.length; k++) {
-      if (episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1) == arrEpisodes[k].id) {
+      if (episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1) == arrEpisodes[k].id) {
         // console.log("episode name", arrEpisodes[k].name, "it's a match");
         urlLink.innerHTML = arrEpisodes[k].name;
         break;
@@ -1401,13 +1402,13 @@ function displayCharactersModal(jsonData){
     };
 
     // urlLink.target = "_blank";
-    urlLink.addEventListener('click', loadDetailsModal);
+    urlLink.addEventListener("click", loadDetailsModal);
 
     if (j < episodeArray.length - 1) {
       urlLink.innerHTML += ", ";
     };
 
-    episodeList += episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1);
+    episodeList += episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1);
     if (j < episodeArray.length - 1) {
       episodeList += ",";
     };
@@ -1423,9 +1424,9 @@ function displayCharactersModal(jsonData){
   episodeLink.innerHTML = "All Episode(s)"; // episodesURL + episodeList;
   // episodeLink.target = "_blank";
   if (episodeArray.length > 1) {
-    episodeLink.addEventListener('click', getMultipleEpisodes);
+    episodeLink.addEventListener("click", getMultipleEpisodes);
   } else {
-    episodeLink.addEventListener('click', loadDetailsModal);
+    episodeLink.addEventListener("click", loadDetailsModal);
   };
 
 
@@ -1451,7 +1452,7 @@ function displayCharactersModal(jsonData){
   };
   detailsModalBody.appendChild(episodeP);
 
-  $('#detailsModal').modal("show");
+  $("#detailsModal").modal("show");
 
 
   // View lookup arrays
@@ -1496,7 +1497,7 @@ function displayLocationsModal(jsonData){
   nameLink.alt = results.name;
   nameLink.innerHTML = results.name;
   // nameLink.target = "_blank";
-  nameLink.addEventListener('click', loadDetailsModal);
+  nameLink.addEventListener("click", loadDetailsModal);
 
   let dimensionP = document.createElement("p");
   dimensionP.innerHTML = "Dimension: "; // + results.dimension;
@@ -1505,7 +1506,7 @@ function displayLocationsModal(jsonData){
   dimensionLink.alt = results.dimension;
   dimensionLink.innerHTML = results.dimension;
   // dimensionLink.target = "_blank";
-  dimensionLink.addEventListener('click', searchByDimension);
+  dimensionLink.addEventListener("click", searchByDimension);
 
   let typeP = document.createElement("p");
   typeP.innerHTML = "Type: "; // + results.type;
@@ -1514,7 +1515,7 @@ function displayLocationsModal(jsonData){
   typeLink.alt = results.type;
   typeLink.innerHTML = results.type;
   // typeLink.target = "_blank";
-  typeLink.addEventListener('click', searchByLocationType);
+  typeLink.addEventListener("click", searchByLocationType);
 
   let residentsArray = results.residents;
   let residentsP = document.createElement("p");
@@ -1531,7 +1532,7 @@ function displayLocationsModal(jsonData){
     urlLink.innerHTML = residentsArray[j];
 
     for (let k = 0; k < arrCharacters.length; k++) {
-      if (residentsArray[j].substr(residentsArray[j].lastIndexOf('/') + 1) == arrCharacters[k].id) {
+      if (residentsArray[j].substr(residentsArray[j].lastIndexOf("/") + 1) == arrCharacters[k].id) {
         // console.log("character name", arrCharacters[k].name, "it's a match");
         urlLink.innerHTML = arrCharacters[k].name;
         break;
@@ -1539,13 +1540,13 @@ function displayLocationsModal(jsonData){
     };
 
     // urlLink.target = "_blank";
-    urlLink.addEventListener('click', loadDetailsModal);
+    urlLink.addEventListener("click", loadDetailsModal);
 
     if (j < residentsArray.length - 1) {
       urlLink.innerHTML += ", ";
     };
 
-    residentList += residentsArray[j].substr(residentsArray[j].lastIndexOf('/') + 1);
+    residentList += residentsArray[j].substr(residentsArray[j].lastIndexOf("/") + 1);
     if (j < residentsArray.length - 1) {
       residentList += ",";
     };
@@ -1561,9 +1562,9 @@ function displayLocationsModal(jsonData){
   residentsLink.innerHTML = "All Resident(s)"; // charactersURL + residentList;
   // residentsLink.target = "_blank";
   if (residentsArray.length > 1) {
-    residentsLink.addEventListener('click', getMultipleCharacters);
+    residentsLink.addEventListener("click", getMultipleCharacters);
   } else {
-    residentsLink.addEventListener('click', loadDetailsModal);
+    residentsLink.addEventListener("click", loadDetailsModal);
   };
 
 
@@ -1578,7 +1579,7 @@ function displayLocationsModal(jsonData){
   };
   detailsModalBody.appendChild(residentsP);
 
-  $('#detailsModal').modal("show");
+  $("#detailsModal").modal("show");
 
 
     // View lookup arrays
@@ -1613,7 +1614,7 @@ function displayEpisodesModal(jsonData){
       nameLink.alt = results.name;
       nameLink.innerHTML = results.name;
       // nameLink.target = "_blank";
-      nameLink.addEventListener('click', loadDetailsModal);
+      nameLink.addEventListener("click", loadDetailsModal);
 
       let episodeP = document.createElement("p");
       episodeP.innerHTML = "Episode: " + results.episode;
@@ -1637,7 +1638,7 @@ function displayEpisodesModal(jsonData){
         urlLink.innerHTML = charactersArray[j];
 
         for (let k = 0; k < arrCharacters.length; k++) {
-          if (charactersArray[j].substr(charactersArray[j].lastIndexOf('/') + 1) == arrCharacters[k].id) {
+          if (charactersArray[j].substr(charactersArray[j].lastIndexOf("/") + 1) == arrCharacters[k].id) {
             // console.log("character name", arrCharacters[k].name, "it's a match");
             urlLink.innerHTML = arrCharacters[k].name;
             break;
@@ -1645,13 +1646,13 @@ function displayEpisodesModal(jsonData){
         };
 
         // urlLink.target = "_blank";
-        urlLink.addEventListener('click', loadDetailsModal);
+        urlLink.addEventListener("click", loadDetailsModal);
 
         if (j < charactersArray.length - 1) {
           urlLink.innerHTML += ", ";
         };
 
-        charactersList += charactersArray[j].substr(charactersArray[j].lastIndexOf('/') + 1);
+        charactersList += charactersArray[j].substr(charactersArray[j].lastIndexOf("/") + 1);
         if (j < charactersArray.length - 1) {
           charactersList += ",";
         };
@@ -1667,9 +1668,9 @@ function displayEpisodesModal(jsonData){
       charactersLink.innerHTML = "All Character(s)"; // charactersURL + charactersList;
       // charactersLink.target = "_blank";
       if (charactersArray.length > 1) {
-        charactersLink.addEventListener('click', getMultipleCharacters);
+        charactersLink.addEventListener("click", getMultipleCharacters);
       } else {
-        charactersLink.addEventListener('click', loadDetailsModal);
+        charactersLink.addEventListener("click", loadDetailsModal);
       };
 
       // detailsModalBody.appendChild(nameLink);
@@ -1679,7 +1680,7 @@ function displayEpisodesModal(jsonData){
       detailsModalBody.appendChild(charactersLink);
       detailsModalBody.appendChild(charactersP);
 
-      $('#detailsModal').modal("show");
+      $("#detailsModal").modal("show");
 
     // View lookup arrays
     // console.log(arrEpisodes);
@@ -1690,10 +1691,10 @@ function getMultipleCharacters(e){
   e.preventDefault();
   // console.log(e);
 
-  // txtSearch.value = e.srcElement.text.replace(',', '');
+  // txtSearch.value = e.srcElement.text.replace(",", "");
   // txtExcludeSearch.value = "";
 
-  $('#detailsModal').modal("hide")
+  $("#detailsModal").modal("hide")
 
   while (resultsDiv.firstChild) { // while the value is not null
     resultsDiv.removeChild(resultsDiv.firstChild);
@@ -1723,7 +1724,7 @@ function getMultipleCharacters(e){
   .catch(err => {
       console.log(err)
       errorHeader.innerText = err;
-      errorHeader.style.display = 'flex';
+      errorHeader.style.display = "flex";
   });
 
 };
@@ -1735,10 +1736,10 @@ function displayMultipleCharacters(jsonData){
   // console.log(results);
 
   if (results.length > 0) {
-    // resultsHeader.style.display = 'flex';
-    resultsDiv.style.display = 'flex';
-    // moreDiv.style.display = 'flex';
-    // moreLink.style.display = 'flex';
+    // resultsHeader.style.display = "flex";
+    resultsDiv.style.display = "flex";
+    // moreDiv.style.display = "flex";
+    // moreLink.style.display = "flex";
 
     let resultsContainerDiv = document.createElement("div");
     resultsContainerDiv.className = "container";
@@ -1800,7 +1801,7 @@ function displayMultipleCharacters(jsonData){
           nameLink.alt = results[i].name;
           nameLink.innerHTML = results[i].name;
           // nameLink.target = "_blank";
-          nameLink.addEventListener('click', loadDetailsModal);
+          nameLink.addEventListener("click", loadDetailsModal);
 
           let genderP = document.createElement("p");
           genderP.innerHTML = "Gender: "; // + results[i].gender;
@@ -1809,7 +1810,7 @@ function displayMultipleCharacters(jsonData){
           genderLink.alt = results[i].gender;
           genderLink.innerHTML = results[i].gender;
           // genderLink.target = "_blank";
-          genderLink.addEventListener('click', searchByCharacterGender);
+          genderLink.addEventListener("click", searchByCharacterGender);
 
           let speciesP = document.createElement("p");
           speciesP.innerHTML = "Species: "; // + results[i].species;
@@ -1818,7 +1819,7 @@ function displayMultipleCharacters(jsonData){
           speciesLink.alt = results[i].species;
           speciesLink.innerHTML = results[i].species;
           // speciesLink.target = "_blank";
-          speciesLink.addEventListener('click', searchByCharacterSpecies);
+          speciesLink.addEventListener("click", searchByCharacterSpecies);
 
           let statusP = document.createElement("p");
           statusP.innerHTML = "Status: "; // + results[i].status;
@@ -1827,7 +1828,7 @@ function displayMultipleCharacters(jsonData){
           statusLink.alt = results[i].status;
           statusLink.innerHTML = results[i].status;
           // statusLink.target = "_blank";
-          statusLink.addEventListener('click', searchByCharacterStatus);
+          statusLink.addEventListener("click", searchByCharacterStatus);
 
           let typeP = document.createElement("p");
           let typeLink = document.createElement("a");
@@ -1837,7 +1838,7 @@ function displayMultipleCharacters(jsonData){
             typeLink.alt = results[i].type;
             typeLink.innerHTML = results[i].type;
             // typeLink.target = "_blank";
-            typeLink.addEventListener('click', searchByCharacterType);
+            typeLink.addEventListener("click", searchByCharacterType);
           };
 
           let locationP = document.createElement("p");
@@ -1848,7 +1849,7 @@ function displayMultipleCharacters(jsonData){
             locationLink.alt = results[i].location.name;
             locationLink.innerHTML = results[i].location.name
             // locationLink.target = "_blank";
-            locationLink.addEventListener('click', loadDetailsModal);
+            locationLink.addEventListener("click", loadDetailsModal);
             locationP.appendChild(locationLink);
           } else {
             locationP.innerHTML += results[i].location.name;
@@ -1862,7 +1863,7 @@ function displayMultipleCharacters(jsonData){
             originLink.alt = results[i].origin.name;
             originLink.innerHTML = results[i].origin.name
             // locationLink.target = "_blank";
-            originLink.addEventListener('click', loadDetailsModal);
+            originLink.addEventListener("click", loadDetailsModal);
             originP.appendChild(originLink);
           } else {
             originP.innerHTML += results[i].origin.name;
@@ -1883,13 +1884,13 @@ function displayMultipleCharacters(jsonData){
             urlLink.alt = episodeArray[j];
             urlLink.innerHTML = episodeArray[j];
             // urlLink.target = "_blank";
-            urlLink.addEventListener('click', loadDetailsModal);
+            urlLink.addEventListener("click", loadDetailsModal);
 
             if (j < episodeArray.length - 1) {
               urlLink.innerHTML += ", ";
             };
 
-            episodeList += episodeArray[j].substr(episodeArray[j].lastIndexOf('/') + 1);
+            episodeList += episodeArray[j].substr(episodeArray[j].lastIndexOf("/") + 1);
             if (j < episodeArray.length - 1) {
               episodeList += ",";
             };
@@ -1905,9 +1906,9 @@ function displayMultipleCharacters(jsonData){
           episodeLink.innerHTML = "All Episode(s)"; // episodesURL + episodeList;
           // episodeLink.target = "_blank";
           if (episodeArray.length > 1) {
-            episodeLink.addEventListener('click', getMultipleEpisodes);
+            episodeLink.addEventListener("click", getMultipleEpisodes);
           } else {
-            episodeLink.addEventListener('click', loadDetailsModal);
+            episodeLink.addEventListener("click", loadDetailsModal);
           };
 
 
@@ -1958,10 +1959,10 @@ function getMultipleLocations(e){
   e.preventDefault();
   // console.log(e);
 
-  // txtSearch.value = e.srcElement.text.replace(',', '');
+  // txtSearch.value = e.srcElement.text.replace(",", "");
   // txtExcludeSearch.value = "";
 
-  $('#detailsModal').modal("hide")
+  $("#detailsModal").modal("hide")
 
   while (resultsDiv.firstChild) { // while the value is not null
     resultsDiv.removeChild(resultsDiv.firstChild);
@@ -1991,7 +1992,7 @@ function getMultipleLocations(e){
   .catch(err => {
       console.log(err)
       errorHeader.innerText = err;
-      errorHeader.style.display = 'flex';
+      errorHeader.style.display = "flex";
   });
 
 };
@@ -2024,10 +2025,10 @@ function displayMultipleLocations(jsonData){
   // };
 
   if (results.length > 0) {
-    // resultsHeader.style.display = 'flex';
-    resultsDiv.style.display = 'flex';
-    // moreDiv.style.display = 'flex';
-    // moreLink.style.display = 'flex';
+    // resultsHeader.style.display = "flex";
+    resultsDiv.style.display = "flex";
+    // moreDiv.style.display = "flex";
+    // moreLink.style.display = "flex";
 
     let resultsContainerDiv = document.createElement("div");
     resultsContainerDiv.className = "container";
@@ -2051,7 +2052,7 @@ function displayMultipleLocations(jsonData){
           nameLink.alt = results[i].name;
           nameLink.innerHTML = results[i].name;
           // nameLink.target = "_blank";
-          nameLink.addEventListener('click', loadDetailsModal);
+          nameLink.addEventListener("click", loadDetailsModal);
 
           let dimensionP = document.createElement("p");
           dimensionP.innerHTML = "Dimension: "; // + results[i].dimension;
@@ -2060,7 +2061,7 @@ function displayMultipleLocations(jsonData){
           dimensionLink.alt = results[i].dimension;
           dimensionLink.innerHTML = results[i].dimension;
           // dimensionLink.target = "_blank";
-          dimensionLink.addEventListener('click', searchByDimension);
+          dimensionLink.addEventListener("click", searchByDimension);
 
           let typeP = document.createElement("p");
           typeP.innerHTML = "Type: "; // + results[i].type;
@@ -2069,7 +2070,7 @@ function displayMultipleLocations(jsonData){
           typeLink.alt = results[i].type;
           typeLink.innerHTML = results[i].type;
           // typeLink.target = "_blank";
-          typeLink.addEventListener('click', searchByLocationsType);
+          typeLink.addEventListener("click", searchByLocationsType);
 
 
           let residentsArray = results[i].residents;
@@ -2087,7 +2088,7 @@ function displayMultipleLocations(jsonData){
             urlLink.innerHTML = residentsArray[j];
 
             for (let k = 0; k < arrCharacters.length; k++) {
-              if (residentsArray[j].substr(residentsArray[j].lastIndexOf('/') + 1) == arrCharacters[k].id) {
+              if (residentsArray[j].substr(residentsArray[j].lastIndexOf("/") + 1) == arrCharacters[k].id) {
                 // console.log("character name", arrCharacters[k].name, "it's a match");
                 urlLink.innerHTML = arrCharacters[k].name;
                 break;
@@ -2095,13 +2096,13 @@ function displayMultipleLocations(jsonData){
             };
             
             // urlLink.target = "_blank";
-            urlLink.addEventListener('click', loadDetailsModal);
+            urlLink.addEventListener("click", loadDetailsModal);
 
             if (j < residentsArray.length - 1) {
               urlLink.innerHTML += ", ";
             };
 
-            residentList += residentsArray[j].substr(residentsArray[j].lastIndexOf('/') + 1);
+            residentList += residentsArray[j].substr(residentsArray[j].lastIndexOf("/") + 1);
             if (j < residentsArray.length - 1) {
               residentList += ",";
             };
@@ -2117,9 +2118,9 @@ function displayMultipleLocations(jsonData){
           residentsLink.innerHTML = "All Resident(s)"; // charactersURL + residentList;
           // residentsLink.target = "_blank";
           if (residentsArray.length > 1) {
-            residentsLink.addEventListener('click', getMultipleCharacters);
+            residentsLink.addEventListener("click", getMultipleCharacters);
           } else {
-            residentsLink.addEventListener('click', loadDetailsModal);
+            residentsLink.addEventListener("click", loadDetailsModal);
           };
 
 
@@ -2156,10 +2157,10 @@ function getMultipleEpisodes(e){
   e.preventDefault();
   // console.log(e);
 
-  // txtSearch.value = e.srcElement.text.replace(',', '');
+  // txtSearch.value = e.srcElement.text.replace(",", "");
   // txtExcludeSearch.value = "";
 
-  $('#detailsModal').modal("hide")
+  $("#detailsModal").modal("hide")
 
   while (resultsDiv.firstChild) { // while the value is not null
     resultsDiv.removeChild(resultsDiv.firstChild);
@@ -2189,7 +2190,7 @@ function getMultipleEpisodes(e){
   .catch(err => {
       console.log(err)
       errorHeader.innerText = err;
-      errorHeader.style.display = 'flex';
+      errorHeader.style.display = "flex";
   });
 
 };
@@ -2209,10 +2210,10 @@ function displayMultipleLEpisodes(jsonData){
 
 
   if (results.length > 0) {
-    // resultsHeader.style.display = 'flex';
-    resultsDiv.style.display = 'flex';
-    // moreDiv.style.display = 'flex';
-    // moreLink.style.display = 'flex';
+    // resultsHeader.style.display = "flex";
+    resultsDiv.style.display = "flex";
+    // moreDiv.style.display = "flex";
+    // moreLink.style.display = "flex";
 
     let resultsContainerDiv = document.createElement("div");
     resultsContainerDiv.className = "container";
@@ -2236,7 +2237,7 @@ function displayMultipleLEpisodes(jsonData){
       nameLink.alt = results[i].name;
       nameLink.innerHTML = results[i].name;
       // nameLink.target = "_blank";
-      nameLink.addEventListener('click', loadDetailsModal);
+      nameLink.addEventListener("click", loadDetailsModal);
 
       let episodeP = document.createElement("p");
       episodeP.innerHTML = "Episode: " + results[i].episode;
@@ -2260,7 +2261,7 @@ function displayMultipleLEpisodes(jsonData){
         urlLink.innerHTML = charactersArray[j];
 
         for (let k = 0; k < arrCharacters.length; k++) {
-          if (charactersArray[j].substr(charactersArray[j].lastIndexOf('/') + 1) == arrCharacters[k].id) {
+          if (charactersArray[j].substr(charactersArray[j].lastIndexOf("/") + 1) == arrCharacters[k].id) {
             // console.log("character name", arrCharacters[k].name, "it's a match");
             urlLink.innerHTML = arrCharacters[k].name;
             break;
@@ -2268,13 +2269,13 @@ function displayMultipleLEpisodes(jsonData){
         };
         
         // urlLink.target = "_blank";
-        urlLink.addEventListener('click', loadDetailsModal);
+        urlLink.addEventListener("click", loadDetailsModal);
 
         if (j < charactersArray.length - 1) {
           urlLink.innerHTML += ", ";
         };
 
-        charactersList += charactersArray[j].substr(charactersArray[j].lastIndexOf('/') + 1);
+        charactersList += charactersArray[j].substr(charactersArray[j].lastIndexOf("/") + 1);
         if (j < charactersArray.length - 1) {
           charactersList += ",";
         };
@@ -2290,9 +2291,9 @@ function displayMultipleLEpisodes(jsonData){
       charactersLink.innerHTML = "All Character(s)"; // charactersURL + charactersList;
       // charactersLink.target = "_blank";
       if (charactersArray.length > 1) {
-        charactersLink.addEventListener('click', getMultipleCharacters);
+        charactersLink.addEventListener("click", getMultipleCharacters);
       } else {
-        charactersLink.addEventListener('click', loadDetailsModal);
+        charactersLink.addEventListener("click", loadDetailsModal);
       };
       
       cardBodyDiv.appendChild(nameP);
@@ -2331,7 +2332,7 @@ function searchByCharacterStatus(e){
   ddSearchGender.value = "";
 
 
-  $('#detailsModal').modal("hide")
+  $("#detailsModal").modal("hide")
 
   searchCharacters(e);
 
@@ -2343,12 +2344,12 @@ function searchByCharacterSpecies(e){
 
   txtSearchCharacterName.value = "";
   ddSearchStatus.value = "";
-  txtSearchSpecies.value = e.srcElement.text.replace(',', '');
+  txtSearchSpecies.value = e.srcElement.text.replace(",", "");
   txtSearchCharacterType.value = "";
   ddSearchGender.value = "";
 
 
-  $('#detailsModal').modal("hide")
+  $("#detailsModal").modal("hide")
 
   searchCharacters(e);
 
@@ -2361,11 +2362,11 @@ function searchByCharacterType(e){
   txtSearchCharacterName.value = "";
   ddSearchStatus.value = "";
   txtSearchSpecies.value = "";
-  txtSearchCharacterType.value = e.srcElement.text.replace(',', '');
+  txtSearchCharacterType.value = e.srcElement.text.replace(",", "");
   ddSearchGender.value = "";
 
 
-  $('#detailsModal').modal("hide")
+  $("#detailsModal").modal("hide")
 
   searchCharacters(e);
 
@@ -2382,7 +2383,7 @@ function searchByCharacterGender(e){
   ddSearchGender.value = e.srcElement.text.toLowerCase();
 
 
-  $('#detailsModal').modal("hide")
+  $("#detailsModal").modal("hide")
 
   searchCharacters(e);
 
@@ -2393,11 +2394,11 @@ function searchByLocationType(e){
   // console.log(e);
 
   txtSearchLocationName.value = "";
-  txtSearchLocationType.value = e.srcElement.text.replace(',', '');
+  txtSearchLocationType.value = e.srcElement.text.replace(",", "");
   txtDimension.value = "";
 
 
-  $('#detailsModal').modal("hide")
+  $("#detailsModal").modal("hide")
 
   searchLocations(e);
 
@@ -2410,10 +2411,10 @@ function searchByDimension(e){
 
   txtSearchLocationName.value = "";
   txtSearchLocationType.value = "";
-  txtDimension.value = e.srcElement.text.replace(',', '');
+  txtDimension.value = e.srcElement.text.replace(",", "");
 
 
-  $('#detailsModal').modal("hide")
+  $("#detailsModal").modal("hide")
 
   searchLocations(e);
 
@@ -2426,21 +2427,52 @@ function loadAllLookupArrays(){
 // Fetch that and read results
 // current total number of characters + to get the correct index value(?)
 // used a number higher than the current total number of characters and it worked
-let totalNumberOfCharacters = 700 + 1;
+
+let lastPageOfCharacterResults;
+let totalNumberOfCharacters; // = 700 + 1; // Just over the hishest character id on 09/04/2020
 let charactersIDList = "";
 
-for (let i = 1; i < totalNumberOfCharacters; i++) {
-  charactersIDList += i;
-    if (i < totalNumberOfCharacters - 1) {
-      charactersIDList += ",";
-    };
-};
+fetch(charactersURL)
+.then(result => {
+    // console.log(result);
+    return result.json();
+})
+.then(jsonData => {
+  // console.log(jsonData);
+  // Assumes that the highest character id = record count
+  // totalNumberOfCharacters = jsonData.info.count; // + 1; to account for the index of the array starting at zero -- Not needed
+  // console.log("totalNumberOfCharacters", totalNumberOfCharacters);
+  lastPageOfCharacterResults = charactersURL + paginationURL + jsonData.info.pages;
+  // console.log("lastPageOfCharacterResults", lastPageOfCharacterResults);
 
-// console.log("charactersIDList", charactersIDList);
-// console.log("charactersURL", charactersURL + charactersIDList);
+  return fetch(lastPageOfCharacterResults);
+})
+.then(result => {
+    // console.log(result);
+    return result.json();
+})
+.then(jsonData => {
+  // console.log(jsonData);
+  let results = jsonData.results;
+  // console.log(results);
 
+  // console.log("results.length", results.length);
+  totalNumberOfCharacters = results[results.length - 1].id;
+  // console.log("totalNumberOfCharacters", totalNumberOfCharacters);
 
-fetch(charactersURL + charactersIDList)
+  for (let i = 1; i < totalNumberOfCharacters; i++) {
+    charactersIDList += i;
+      if (i < totalNumberOfCharacters - 1) {
+        charactersIDList += ",";
+      };
+  };
+  
+  // console.log("charactersIDList", charactersIDList);
+  // console.log("charactersURL", charactersURL + charactersIDList);
+
+  // From https://gomakethings.com/how-to-use-the-fetch-method-to-make-multiple-api-calls-with-vanilla-javascript/
+  return fetch(charactersURL + charactersIDList);
+})
 .then(result => {
     // console.log(result);
     return result.json();
@@ -2546,7 +2578,7 @@ for (let i = 0; i < results.length; i++) {
 .catch(err => {
     console.log(err)
     errorHeader.innerText = err;
-    errorHeader.style.display = 'flex';
+    errorHeader.style.display = "flex";
 });
 
 
@@ -2556,21 +2588,51 @@ for (let i = 0; i < results.length; i++) {
 // Fetch that and read results
 // current total number of locations + to get the correct index value(?)
 // used a number higher than the current total number of locations and it worked
-let totalNumberOfLocations = 50 + 1;
+let lastPageOfLocationResults;
+let totalNumberOfLocations; // = 50 + 1; // Just over the hishest location id on 09/04/2020
 let locationIDList = "";
 
-for (let i = 1; i < totalNumberOfLocations; i++) {
-  locationIDList += i;
-    if (i < totalNumberOfLocations - 1) {
-      locationIDList += ",";
-    };
-};
+fetch(locationsURL)
+.then(result => {
+    // console.log(result);
+    return result.json();
+})
+.then(jsonData => {
+  // console.log(jsonData);
+  // Assumes that the highest character id = record count
+  // totalNumberOfLocations = jsonData.info.count; // + 1; to account for the index of the array starting at zero -- Not needed
+  // console.log("totalNumberOfLocations", totalNumberOfLocations);
+  lastPageOfLocationResults = locationsURL + paginationURL + jsonData.info.pages;
+  // console.log("lastPageOfLocationResults", lastPageOfLocationResults);
 
-// console.log("locationIDList", locationIDList);
-// console.log("locationsURL", locationsURL + locationIDList);
+  return fetch(lastPageOfLocationResults);
+})
+.then(result => {
+    // console.log(result);
+    return result.json();
+})
+.then(jsonData => {
+  // console.log(jsonData);
+  let results = jsonData.results;
+  // console.log(results);
 
+  // console.log("results.length", results.length);
+  totalNumberOfLocations = results[results.length - 1].id;
+  // console.log("totalNumberOfLocations", totalNumberOfLocations);
 
-fetch(locationsURL + locationIDList)
+  for (let i = 1; i < totalNumberOfLocations; i++) {
+    locationIDList += i;
+      if (i < totalNumberOfLocations - 1) {
+        locationIDList += ",";
+      };
+  };
+  
+  // console.log("locationIDList", locationIDList);
+  // console.log("locationsURL", locationsURL + locationIDList);
+
+  // From https://gomakethings.com/how-to-use-the-fetch-method-to-make-multiple-api-calls-with-vanilla-javascript/
+  return fetch(locationsURL + locationIDList);
+})
 .then(result => {
     // console.log(result);
     return result.json();
@@ -2659,7 +2721,7 @@ for (let i = 0; i < results.length; i++) {
 .catch(err => {
     console.log(err)
     errorHeader.innerText = err;
-    errorHeader.style.display = 'flex';
+    errorHeader.style.display = "flex";
 });
 
 
@@ -2669,21 +2731,51 @@ for (let i = 0; i < results.length; i++) {
 // Fetch that and read results
 // current total number of episodes + to get the correct index value(?)
 // used a number higher than the current total number of episodes and it worked
-let totalNumberOfEpisodes = 50 + 1;
+let lastPageOfEpisodeResults;
+let totalNumberOfEpisodes; // = 50 + 1;// Just over the hishest episode id on 09/04/2020
 let episodeIDList = "";
 
-for (let i = 1; i < totalNumberOfEpisodes; i++) {
-  episodeIDList += i;
-    if (i < totalNumberOfEpisodes - 1) {
-      episodeIDList += ",";
-    };
-};
+fetch(episodesURL)
+.then(result => {
+    // console.log(result);
+    return result.json();
+})
+.then(jsonData => {
+  // console.log(jsonData);
+  // Assumes that the highest character id = record count
+  // totalNumberOfEpisodes = jsonData.info.count; // + 1; to account for the index of the array starting at zero -- Not needed
+  // console.log("totalNumberOfEpisodes", totalNumberOfEpisodes);
+  lastPageOfEpisodeResults = locationsURL + paginationURL + jsonData.info.pages;
+  // console.log("lastPageOfEpisodeResults", lastPageOfEpisodeResults);
 
-// console.log("episodeIDList", episodeIDList);
-// console.log("episodesURL", episodesURL + episodeIDList);
+  return fetch(lastPageOfEpisodeResults);
+})
+.then(result => {
+    // console.log(result);
+    return result.json();
+})
+.then(jsonData => {
+  // console.log(jsonData);
+  let results = jsonData.results;
+  // console.log(results);
 
+  // console.log("results.length", results.length);
+  totalNumberOfEpisodes = results[results.length - 1].id;
+  // console.log("totalNumberOfEpisodes", totalNumberOfEpisodes);
 
-fetch(episodesURL + episodeIDList)
+  for (let i = 1; i < totalNumberOfEpisodes; i++) {
+    episodeIDList += i;
+      if (i < totalNumberOfEpisodes - 1) {
+        episodeIDList += ",";
+      };
+  };
+  
+  // console.log("episodeIDList", episodeIDList);
+  // console.log("episodesURL", episodesURL + episodeIDList);
+
+  // From https://gomakethings.com/how-to-use-the-fetch-method-to-make-multiple-api-calls-with-vanilla-javascript/
+  return fetch(episodesURL + episodeIDList);
+})
 .then(result => {
     // console.log(result);
     return result.json();
@@ -2707,7 +2799,7 @@ for (let i = 0; i < results.length; i++) {
 .catch(err => {
     console.log(err)
     errorHeader.innerText = err;
-    errorHeader.style.display = 'flex';
+    errorHeader.style.display = "flex";
 });
 
 
@@ -2748,7 +2840,7 @@ for (let i = 0; i < results.length; i++) {
 //   let charactersList = "";
 
 //   for (let i = 0; i < charactersArray.length; i++) {
-//     charactersList += charactersArray[i].substr(charactersArray[i].lastIndexOf('/') + 1);
+//     charactersList += charactersArray[i].substr(charactersArray[i].lastIndexOf("/") + 1);
 //     if (i < charactersArray.length - 1) {
 //       charactersList += ",";
 //     };
@@ -2761,7 +2853,7 @@ for (let i = 0; i < results.length; i++) {
 // .catch(err => {
 //     console.log(err)
 //     errorHeader.innerText = err;
-//     errorHeader.style.display = 'flex';
+//     errorHeader.style.display = "flex";
 // });
 
 
